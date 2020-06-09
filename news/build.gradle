@@ -3,31 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-android {
-    compileOptions {
-        sourceCompatibility Config.javaVersion
-        targetCompatibility Config.javaVersion
-    }
-
-    kotlinOptions {
-        jvmTarget = Config.javaVersion.toString()
-    }
-
-    viewBinding {
-        enabled = true
-    }
-}
-
 dependencies {
     implementation project(':app')
     implementation(project(':presentation'))
 
-    implementation Deps.androidxLifeCycleExtension
-
     implementation Deps.androidxAppCompat
-    implementation Deps.androidxRecyclerView
-    implementation Deps.androidxCardView
-    implementation Deps.androidxConstraintLayout
+
     implementation Deps.androidxNavFragment
     implementation Deps.androidxNavUi
+
+    implementation Deps.androidxConstraintLayout
 }

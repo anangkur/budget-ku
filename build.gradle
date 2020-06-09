@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.3.71'
+        kotlin_version = '1.3.72'
     }
     repositories {
         google()
@@ -11,6 +11,7 @@ buildscript {
     dependencies {
         classpath Deps.toolsGradleAndroid
         classpath Deps.toolsKotlin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -38,6 +39,14 @@ subprojects {
                 compileOptions {
                     sourceCompatibility Config.javaVersion
                     targetCompatibility Config.javaVersion
+                }
+
+                kotlinOptions {
+                    jvmTarget = Config.javaVersion.toString()
+                }
+
+                viewBinding {
+                    enabled = true
                 }
             }
         }

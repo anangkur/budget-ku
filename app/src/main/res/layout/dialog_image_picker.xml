@@ -10,7 +10,7 @@
         <TextView
             style="@style/TextExtraBig"
             android:text="@string/label_select_image_from"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/blackText"
             android:textStyle="bold"/>
 
         <!--button camera-->

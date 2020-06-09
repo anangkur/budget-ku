@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_open_in_browser">Buka di browser</string>
+    <string name="btn_read_more">Baca Selengkapnya..</string>
+    <string name="label_business">Bisnis</string>
+    <string name="label_tech">Teknologi</string>
+    <string name="label_sport">Olahraga</string>
+</resources>

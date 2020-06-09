@@ -5,7 +5,7 @@
         android:id="@+id/wv_original_news"
         style="@style/RelativeDefault"
         android:visibility="gone"/>
-    <com.anangkur.beritaku.base.BaseErrorView
+    <com.anangkur.budgetku.base.BaseErrorView
         android:id="@+id/ev_original_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
