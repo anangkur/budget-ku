@@ -1,0 +1,13 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+dependencies {
+
+    implementation(project(':data'))
+
+    implementation Deps.retrofitConverterGson
+    implementation Deps.retrofit
+    implementation Deps.okhttp
+    implementation Deps.okhttpLoggingInterceptor
+}

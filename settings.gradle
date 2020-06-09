@@ -1,0 +1,8 @@
+rootProject.name='Budget Ku'
+include ':app'
+include ':data'
+include ':local'
+include ':remote'
+include ':domain'
+include ':presentation'
+include ':news'
