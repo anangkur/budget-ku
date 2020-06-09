@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     style="@style/ToolbarDefault"
-    app:titleTextColor="@color/blackText"
+    app:titleTextColor="@color/black"
     app:title="@string/app_name"
     android:elevation="4dp" />

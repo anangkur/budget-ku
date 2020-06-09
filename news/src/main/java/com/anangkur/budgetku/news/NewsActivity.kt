@@ -9,10 +9,14 @@ import com.anangkur.budgetku.R as appR
 
 class NewsActivity: BaseActivity<ActivityNewsBinding, NewsViewModel>() {
 
-    override val mLayout: ActivityNewsBinding
-        get() = ActivityNewsBinding.inflate(layoutInflater)
     override val mViewModel: NewsViewModel
         get() = obtainViewModel(NewsViewModel::class.java)
     override val mToolbar: Toolbar?
         get() = findViewById(appR.id.toolbar)
+    override val mTitleToolbar: String?
+        get() = null
+
+    override fun setupView(): ActivityNewsBinding {
+        return ActivityNewsBinding.inflate(layoutInflater)
+    }
 }

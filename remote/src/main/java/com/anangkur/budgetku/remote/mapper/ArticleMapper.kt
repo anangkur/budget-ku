@@ -1,7 +1,8 @@
 package com.anangkur.budgetku.remote.mapper
 
 import com.anangkur.budgetku.data.model.ArticleEntity
-import com.anangkur.budgetku.remote.model.ArticleModel
+import com.anangkur.budgetku.remote.model.news.ArticleModel
+import java.lang.UnsupportedOperationException
 
 class ArticleMapper: Mapper<ArticleModel, ArticleEntity> {
 
@@ -22,5 +23,9 @@ class ArticleMapper: Mapper<ArticleModel, ArticleEntity> {
             url = type.url,
             urlToImage = type.urlToImage
         )
+    }
+
+    override fun mapToRemote(type: ArticleEntity): ArticleModel {
+        throw UnsupportedOperationException()
     }
 }

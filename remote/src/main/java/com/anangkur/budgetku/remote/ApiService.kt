@@ -1,6 +1,6 @@
 package com.anangkur.budgetku.remote
 
-import com.anangkur.budgetku.remote.model.GetNewsResponse
+import com.anangkur.budgetku.remote.model.news.GetNewsResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

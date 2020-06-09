@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: 'https://raw.githubusercontent.com/JakeWharton/SdkSearch/master/gradle/projectDependencyGraph.gradle'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     defaultConfig {
@@ -13,7 +14,6 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix ".debug"
             debuggable true
         }
         release {
@@ -40,9 +40,16 @@ dependencies {
     implementation Deps.androidxSwipeRefresh
 
     implementation Deps.googleMaterial
+    implementation Deps.googleAuth
+
+    implementation Deps.imagePicker
+    api Deps.imageCropper
 
     implementation Deps.glide
     kapt Deps.glideCompiler
 
     implementation Deps.materialLoadingButton
+
+    implementation Deps.coroutineCore
+    implementation Deps.coroutineAndroid
 }

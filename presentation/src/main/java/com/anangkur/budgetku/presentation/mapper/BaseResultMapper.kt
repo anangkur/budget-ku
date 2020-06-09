@@ -13,4 +13,8 @@ class BaseResultMapper<T>: Mapper<BaseResultView<T>, BaseResult<T>> {
     override fun mapToView(type: BaseResult<T>): BaseResultView<T> {
         return BaseResultView(type.status, type.data, type.message, type.isLoading)
     }
+
+    override fun mapFromView(type: BaseResultView<T>): BaseResult<T> {
+        throw UnsupportedOperationException()
+    }
 }

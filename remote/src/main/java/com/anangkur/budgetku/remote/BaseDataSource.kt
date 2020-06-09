@@ -1,6 +1,6 @@
 package com.anangkur.budgetku.remote
 
-import com.anangkur.budgetku.remote.model.BaseResultModel
+import com.anangkur.budgetku.remote.model.base.BaseResultModel
 import retrofit2.Response
 
 abstract class BaseDataSource {

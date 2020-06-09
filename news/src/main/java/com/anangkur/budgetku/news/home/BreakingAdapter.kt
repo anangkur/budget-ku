@@ -3,7 +3,7 @@ package com.anangkur.budgetku.news.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.anangkur.budgetku.news.databinding.ItemBreakingBinding
-import com.anangkur.budgetku.model.ArticleIntent
+import com.anangkur.budgetku.news.model.ArticleIntent
 import com.anangkur.budgetku.base.BaseAdapter
 import com.anangkur.budgetku.utils.setImageUrl
 

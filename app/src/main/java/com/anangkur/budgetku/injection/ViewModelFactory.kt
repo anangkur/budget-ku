@@ -3,14 +3,18 @@ package com.anangkur.budgetku.injection
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.anangkur.budgetku.domain.GetArticles
+import com.anangkur.budgetku.domain.impl.ArticlesSource
 import com.anangkur.budgetku.domain.model.Article
+import com.anangkur.budgetku.domain.repository.AuthRepository
+import com.anangkur.budgetku.presentation.features.app.SplashViewModel
+import com.anangkur.budgetku.presentation.features.auth.*
 import com.anangkur.budgetku.presentation.features.news.NewsViewModel
 import com.anangkur.budgetku.presentation.mapper.ArticleMapper
 import com.anangkur.budgetku.presentation.mapper.BaseResultMapper
 
 class ViewModelFactory(
-    private val getArticles: GetArticles,
+    private val authRepository: AuthRepository,
+    private val articlesSource: ArticlesSource,
     private val articleMapper: ArticleMapper,
     private val baseResultMapper: BaseResultMapper<List<Article>>
 ): ViewModelProvider.NewInstanceFactory() {
@@ -18,7 +22,14 @@ class ViewModelFactory(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T  =
         with(modelClass) {
             when {
-                isAssignableFrom(NewsViewModel::class.java) -> NewsViewModel(getArticles, articleMapper, baseResultMapper)
+                isAssignableFrom(NewsViewModel::class.java) -> NewsViewModel(articlesSource, articleMapper, baseResultMapper)
+                isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(authRepository)
+                isAssignableFrom(EditPasswordViewModel::class.java) -> EditPasswordViewModel(authRepository)
+                isAssignableFrom(EditProfileViewModel::class.java) -> EditProfileViewModel(authRepository)
+                isAssignableFrom(ForgotPasswordViewModel::class.java) -> ForgotPasswordViewModel(authRepository)
+                isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(authRepository)
+                isAssignableFrom(SignInViewModel::class.java) -> SignInViewModel(authRepository)
+                isAssignableFrom(SignUpViewModel::class.java) -> SignUpViewModel(authRepository)
                 else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }
         } as T
@@ -27,7 +38,8 @@ class ViewModelFactory(
         @Volatile private var INSTANCE: ViewModelFactory? = null
         fun getInstance(context: Context) = INSTANCE ?: synchronized(ViewModelFactory::class.java){
             INSTANCE ?: ViewModelFactory(
-                Injection.provideGetArticle(context),
+                Injection.provideAuthRepository(context),
+                Injection.provideNewsSource(context),
                 ArticleMapper.getInstance(),
                 BaseResultMapper.getInstance()
             ).also { INSTANCE = it }

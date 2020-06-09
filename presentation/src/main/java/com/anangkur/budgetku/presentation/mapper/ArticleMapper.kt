@@ -23,4 +23,8 @@ class ArticleMapper: Mapper<ArticleView, Article> {
             urlToImage = type.urlToImage
         )
     }
+
+    override fun mapFromView(type: ArticleView): Article {
+        throw UnsupportedOperationException()
+    }
 }

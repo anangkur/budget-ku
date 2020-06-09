@@ -3,14 +3,14 @@ package com.anangkur.budgetku.presentation.features.news
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.anangkur.budgetku.domain.GetArticles
+import com.anangkur.budgetku.domain.impl.ArticlesSource
 import com.anangkur.budgetku.domain.model.Article
 import com.anangkur.budgetku.presentation.mapper.ArticleMapper
 import com.anangkur.budgetku.presentation.mapper.BaseResultMapper
 import com.anangkur.budgetku.presentation.model.ArticleView
 
 class NewsViewModel (
-    private val getArticles: GetArticles,
+    private val articlesSource: ArticlesSource,
     private val mapper: ArticleMapper,
     private val baseResultMapper: BaseResultMapper<List<Article>>
 ): ViewModel(){
@@ -20,7 +20,7 @@ class NewsViewModel (
 
     private val triggerTopHeadlineNews = MutableLiveData<Boolean>()
     val topHeadlineNewsLive = Transformations.switchMap(triggerTopHeadlineNews){
-        Transformations.map(getArticles.getTopHeadlinesNews()){
+        Transformations.map(articlesSource.getTopHeadlinesNews()){
             baseResultMapper.mapToView(it)
         }
     }
@@ -30,7 +30,7 @@ class NewsViewModel (
 
     private val triggerBusinessNews = MutableLiveData<Boolean>()
     val businessNewsLive = Transformations.switchMap(triggerTopHeadlineNews){
-        Transformations.map(getArticles.getBusinessNews()){
+        Transformations.map(articlesSource.getBusinessNews()){
             baseResultMapper.mapToView(it)
         }
     }
@@ -40,7 +40,7 @@ class NewsViewModel (
 
     private val triggerTechNews = MutableLiveData<Boolean>()
     val techNewsLive = Transformations.switchMap(triggerTechNews){
-        Transformations.map(getArticles.getTechNews()){
+        Transformations.map(articlesSource.getTechNews()){
             baseResultMapper.mapToView(it)
         }
     }
@@ -50,7 +50,7 @@ class NewsViewModel (
 
     private val triggerSportNews = MutableLiveData<Boolean>()
     val sportNewsLive = Transformations.switchMap(triggerSportNews){
-        Transformations.map(getArticles.getSportNews()){
+        Transformations.map(articlesSource.getSportNews()){
             baseResultMapper.mapToView(it)
         }
     }

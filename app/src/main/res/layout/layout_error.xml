@@ -8,7 +8,7 @@
         android:layout_centerInParent="true">
         <ImageView
             android:id="@+id/iv_error"
-            style="@style/ImageViewError"
+            style="@style/ImageView120"
             android:src="@drawable/ic_problem"
             android:contentDescription="@string/text_todo" />
         <TextView

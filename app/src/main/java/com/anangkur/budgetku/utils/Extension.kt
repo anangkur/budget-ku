@@ -1,13 +1,20 @@
 package com.anangkur.budgetku.utils
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -27,9 +34,17 @@ import com.anangkur.budgetku.base.BaseSpinnerListener
 import com.anangkur.budgetku.base.DialogImagePickerActionListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.esafirm.imagepicker.features.ImagePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.FileOutputStream
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.regex.Pattern
@@ -269,4 +284,71 @@ fun Context.copyToClipboard(text: String){
     val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip = ClipData.newPlainText(Const.LABEL_CLIPBOARD, text)
     clipboard.setPrimaryClip(clip)
+}
+
+fun Activity.cropImage(data: Intent?, fixAspectRatio: Boolean) {
+    val image = ImagePicker.getFirstImageOrNull(data)
+    CropImage.activity(Uri.fromFile(File(image.path)))
+        .setGuidelines(CropImageView.Guidelines.OFF)
+        .setFixAspectRatio(fixAspectRatio)
+        .start(this)
+}
+
+fun Activity.handleImageCropperResult(data: Intent?, resultCode: Int, listener: CompressImageListener) {
+    val image = CropImage.getActivityResult(data)
+    if (resultCode == Activity.RESULT_OK) {
+        compressFileImage(File(image.uri.path?:""), listener)
+    } else {
+        this.showToastShort(image.error.message ?: "")
+    }
+}
+
+fun compressFileImage(imageFile: File, listener: CompressImageListener) {
+    CoroutineScope(Dispatchers.Main).launch{
+        try {
+            listener.progress(true)
+            listener.success(
+                withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+                    suspendCompressFileImage(imageFile)
+                }
+            )
+        } catch (e: Exception) {
+            listener.error(e.message?:"")
+        } finally {
+            listener.progress(false)
+        }
+    }
+}
+
+// image compress
+const val MAX_IMAGE_SIZE = 500.0
+const val COMPRESS_QUALITY = 95
+const val SAMPLE_SIZE = 2
+suspend fun suspendCompressFileImage(imageFile: File): File {
+    Log.d("IMAGE_COMPRESS", "IMAGE_COMPRESS: size: ${imageFile.fileSizeInKB}, sampleSize: ${SAMPLE_SIZE}, quality: $COMPRESS_QUALITY")
+    return if (imageFile.fileSizeInKB > MAX_IMAGE_SIZE) {
+        val options = BitmapFactory.Options()
+        options.inSampleSize = SAMPLE_SIZE
+        val bitmap = BitmapFactory.decodeFile(imageFile.path, options)
+        bitmap.compress(
+            Bitmap.CompressFormat.JPEG,
+            COMPRESS_QUALITY, FileOutputStream(imageFile)
+        )
+        suspendCompressFileImage(imageFile)
+    } else {
+        imageFile
+    }
+}
+
+fun Context.showPreviewImage(url: String){
+    val nagDialog = Dialog(this, android.R.style.Theme_Translucent)
+    nagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    nagDialog.setCancelable(true)
+    nagDialog.setContentView(R.layout.preview_image_popup)
+    val imageView = nagDialog.findViewById<ImageView>(R.id.iv_preview)
+    imageView.setImageUrl(url)
+    nagDialog.findViewById<RelativeLayout>(R.id.rl_main).setOnClickListener {
+        nagDialog.dismiss()
+    }
+    nagDialog.show()
 }

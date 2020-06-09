@@ -8,18 +8,26 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseActivity<V: ViewBinding, T: ViewModel?>: AppCompatActivity(){
 
-    abstract val mLayout: V
+    lateinit var mLayout: V
     abstract val mViewModel: T?
     abstract val mToolbar: Toolbar?
+    abstract val mTitleToolbar: String?
+
+    abstract fun setupView(): V
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mLayout = setupView()
         setContentView(mLayout.root)
 
         setupToolbar(mToolbar)
     }
 
     private fun setupToolbar(toolbar: Toolbar?){
-        toolbar?.let { setSupportActionBar(it) }
+        toolbar?.let {
+            setSupportActionBar(it)
+            title = mTitleToolbar
+            it.setNavigationOnClickListener { onBackPressed() }
+        }
     }
 }

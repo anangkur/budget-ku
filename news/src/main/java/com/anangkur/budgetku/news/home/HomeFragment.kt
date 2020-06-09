@@ -11,8 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.anangkur.budgetku.news.databinding.FragmentHomeBinding
 import com.anangkur.budgetku.*
 import com.anangkur.budgetku.base.BaseFragment
-import com.anangkur.budgetku.mapper.ArticleMapper
-import com.anangkur.budgetku.model.ArticleIntent
+import com.anangkur.budgetku.news.mapper.ArticleMapper
+import com.anangkur.budgetku.news.model.ArticleIntent
 import com.anangkur.budgetku.news.NewsActivity
 import com.anangkur.budgetku.news.R
 import com.anangkur.budgetku.presentation.features.news.NewsViewModel
