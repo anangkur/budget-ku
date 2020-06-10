@@ -333,9 +333,11 @@ class AuthRemoteRepository(
             }else{
                 listener.onSuccess(true)
             }
+            listener.onLoading(false)
         }catch (e: Exception){
             e.printStackTrace()
             listener.onFailed(e.message?:"")
+            listener.onLoading(false)
         }
     }
 

@@ -39,14 +39,13 @@ class SplashActivity: BaseActivity<ActivitySplashBinding, SplashViewModel>(){
 
     private fun openActivity(isLoggedIn: Boolean){
         val handler = Handler()
-        var i: Intent
         handler.postDelayed({
-            i = if (isLoggedIn){
-                intent.setClassName(BuildConfig.APPLICATION_ID, "com.anangkur.budgetku.news.NewsActivity")
+            val intent = if (isLoggedIn){
+                Intent().setClassName(BuildConfig.APPLICATION_ID, "com.anangkur.budgetku.auth.view.userProfile.ProfileActivity")
             }else{
-                intent.setClassName(BuildConfig.APPLICATION_ID, "com.anangkur.budgetku.auth.view.signIn.SignInActivity")
+                Intent().setClassName(BuildConfig.APPLICATION_ID, "com.anangkur.budgetku.auth.view.signIn.SignInActivity")
             }
-            startActivity(i)
+            startActivity(intent)
             finish()
         }, 1000)
     }

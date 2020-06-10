@@ -16,6 +16,7 @@ import com.anangkur.budgetku.auth.view.forgotPassword.ForgotPasswordActivity
 import com.anangkur.budgetku.presentation.features.auth.SignInViewModel
 import com.anangkur.budgetku.utils.*
 import com.anangkur.budgetku.auth.view.signUp.SignUpActivity
+import com.anangkur.budgetku.auth.view.userProfile.ProfileActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -78,10 +79,10 @@ class SignInActivity: BaseActivity<ActivitySignInBinding, SignInViewModel>(), Si
                 setupLoading(it)
             })
             resultSignInLive.observe(this@SignInActivity, Observer {
-                startActivity(intent.setClassName(BuildConfig.APPLICATION_ID, "com.anangkur.budgetku.news.NewsActivity"))
+                ProfileActivity.startActivity(this@SignInActivity)
             })
             successCreateUser.observe(this@SignInActivity, Observer {
-                startActivity(intent.setClassName(BuildConfig.APPLICATION_ID, "com.anangkur.budgetku.news.NewsActivity"))
+                ProfileActivity.startActivity(this@SignInActivity)
             })
             errorSignInLive.observe(this@SignInActivity, Observer {
                 showSnackbarLong(it)

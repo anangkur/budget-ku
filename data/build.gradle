@@ -15,7 +15,6 @@ dependencies {
     implementation Deps.firebaseAuth
     implementation Deps.firebaseConfig
     implementation Deps.firebaseFirestore
-    implementation Deps.firebaseInAppMessaging
     implementation Deps.firebaseMessaging
     implementation Deps.firebaseStorage
 }

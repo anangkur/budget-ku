@@ -12,6 +12,7 @@ import com.anangkur.budgetku.auth.R as authR
 import com.anangkur.budgetku.R
 import com.anangkur.budgetku.auth.databinding.ActivitySignUpBinding
 import com.anangkur.budgetku.auth.view.signIn.SignInActivity
+import com.anangkur.budgetku.auth.view.userProfile.ProfileActivity
 import com.anangkur.budgetku.base.BaseActivity
 import com.anangkur.budgetku.utils.*
 import com.anangkur.budgetku.presentation.features.auth.SignUpViewModel
@@ -70,7 +71,7 @@ class SignUpActivity: BaseActivity<ActivitySignUpBinding, SignUpViewModel>(), Si
                 setupLoadingSignup(it)
             })
             successCreateUser.observe(this@SignUpActivity, Observer {
-                startActivity(intent.setClassName(BuildConfig.APPLICATION_ID, "com.anangkur.budgetku.news.NewsActivity"))
+                ProfileActivity.startActivity(this@SignUpActivity)
             })
             errorSignUpLive.observe(this@SignUpActivity, Observer {
                 showSnackbarLong(it)
