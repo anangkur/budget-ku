@@ -84,7 +84,6 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding, ProfileViewModel>(),
         mLayout.layoutProfile.visible()
         mLayout.tvName.text = data.name
         mLayout.tvEmail.text = data.email
-        mLayout.tvHeightWeight.text = "Height: ${data.height}cm | Weight: ${data.weight}kg"
         mLayout.ivProfile.setImageUrl(data.photo)
         mLayout.ivProfile.setOnClickListener { this.onClickImage(data.photo) }
         setupEditPassword(data.providerName)
