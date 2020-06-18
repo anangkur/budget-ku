@@ -109,7 +109,9 @@ class EditProfileActivity: BaseActivity<ActivityEditProfileBinding, EditProfileV
                 setupLoadingUploadImage(it)
             })
             successUploadImage.observe(this@EditProfileActivity, Observer {
-                editProfile(user!!)
+                editProfile(user!!.apply {
+                    photo = it.toString()
+                })
                 setupImage(it)
             })
         }
