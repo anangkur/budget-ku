@@ -1,0 +1,22 @@
+apply plugin: 'com.android.dynamic-feature'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation project(':app')
+    implementation project(':presentation')
+
+    implementation Deps.androidxAppCompat
+    implementation Deps.androidxConstraintLayout
+
+    implementation Deps.googleMaterial
+
+    implementation Deps.materialLoadingButton
+    implementation Deps.circleImageView
+
+    implementation Deps.googleAuth
+
+    implementation Deps.imagePicker
+    api Deps.imageCropper
+}

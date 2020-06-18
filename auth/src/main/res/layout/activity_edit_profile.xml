@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LinearVerticalDefault">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarDefault"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+        app:titleTextColor="@color/black"
+        android:elevation="4dp"/>
+
+    <androidx.core.widget.NestedScrollView
+        style="@style/NestedScrollDefault"
+        android:layout_marginTop="?actionBarSize"
+        android:layout_above="@id/btn_save">
+        <LinearLayout
+            android:id="@+id/layout_profile"
+            style="@style/LinearVerticalWrap"
+            android:padding="20dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_edit_photo"
+                style="@style/ConstraintWrapAll"
+                android:foreground="@drawable/ripple_button_background_light"
+                android:layout_gravity="center">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_profile"
+                    style="@style/ImageView100"
+                    android:src="@color/gray"
+                    android:layout_centerInParent="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+                <ImageView
+                    style="@style/ImageViewWrapAll"
+                    android:src="@drawable/ic_edit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+                <ProgressBar
+                    android:id="@+id/pb_image_profile"
+                    style="?android:progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_name"
+                style="@style/TextInputLayoutDefault"
+                android:layout_marginTop="20dp">
+                <EditText
+                    android:id="@+id/et_name"
+                    style="@style/EditTextDefault"
+                    android:hint="@string/hint_full_name"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.anangkur.budgetku.base.BaseErrorView
+        android:id="@+id/evEditProfile"
+        style="@style/RelativeDefault"
+        android:gravity="center"
+        android:layout_above="@id/btn_save"
+        android:layout_marginTop="?actionBarSize"
+        android:visibility="gone"/>
+
+    <com.anangkur.materialloadingbutton.MaterialLoadingButton
+        android:id="@+id/btn_save"
+        style="@style/ButtonDefault"
+        app:mlb_cornerRadius="100dp"
+        app:mlb_defaultColor="@color/colorPrimary"
+        app:mlb_textColor="@color/white"
+        app:mlb_textButton="@string/btn_save"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

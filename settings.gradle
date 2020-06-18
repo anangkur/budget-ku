@@ -1,4 +1,5 @@
 rootProject.name='Budget Ku'
+include ':auth'
 include ':app'
 include ':data'
 include ':local'

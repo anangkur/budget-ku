@@ -6,6 +6,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="MaterialTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
     <!-- end of Base application theme. -->
 
     <!--style for linear-->
@@ -18,6 +23,10 @@
         <item name="android:orientation">vertical</item>>
     </style>
 
+    <style name="LinearVerticalWrapAll" parent="LinearVerticalDefault">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
     <style name="LinearVerticalWrap" parent="LinearVerticalDefault">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
@@ -26,6 +35,10 @@
         <item name="android:orientation">horizontal</item>>
     </style>
 
+    <style name="LinearHorizontalWrapAll" parent="LinearHorizontalDefault">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
     <style name="LinearHorizontalWrap" parent="LinearHorizontalDefault">
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -40,6 +53,13 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+    <style name="RelativeWrapH" parent="RelativeDefault">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="RelativeButtonTransparent" parent="RelativeDefault">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+    </style>
     <!--end of style for relative-->
 
     <!--style for constraint-->
@@ -50,15 +70,31 @@
     <style name="ConstraintWrapHeight" parent="ConstraintDefault">
         <item name="android:layout_height">wrap_content</item>
     </style>
+    <style name="ConstraintWrapAll" parent="ConstraintDefault">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
     <!--end of style for constraint-->
 
     <!--style for coordinator-->
+    <style name="CoordinatorDefault">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
     <!--end of style for coordinator-->
 
     <!--style for appbar-->
+    <style name="AppBarCollapsing">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
     <!--end of style for appbar-->
 
     <!--style for collapsing toolbar-->
+    <style name="CollapsingDefault">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
     <!--end of style for collapsing toolbar-->
 
     <!--style for recycler view-->
@@ -76,59 +112,157 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
-
+    <style name="TextSmall">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
     <style name="TextBig">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <style name="TextExtraBig">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <style name="TextSuperExtraBig">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="TextSuperSuperExtraBig">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <!--end of style for base text-->
+
+    <!--style for regular text-->
+    <style name="TextRegularSmall" parent="TextSmall">
+        <item name="android:fontFamily">@font/comfortaa_regular</item>
+    </style>
+    <style name="TextRegularNormal" parent="TextNormal">
+        <item name="android:fontFamily">@font/comfortaa_regular</item>
+    </style>
+    <!--end of style for regular text-->
+
+    <!--style for bold text-->
+    <style name="TextBoldNormal" parent="TextNormal">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+    </style>
+    <style name="TextBoldSmall" parent="TextSmall">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+    </style>
+    <style name="TextBoldBig" parent="TextBig">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+    </style>
+    <style name="TextBoldBigWhite" parent="TextBoldBig">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="TextBoldExtraBig" parent="TextExtraBig">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+    </style>
+    <style name="TextBoldSuperExtraBig" parent="TextSuperExtraBig">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+    </style>
+    <style name="TextBoldSuperSuperExtraBig" parent="TextSuperSuperExtraBig">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+    </style>
+    <style name="TextBoldSuperExtraBigWhite" parent="TextBoldSuperExtraBig">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+    <!--end of style for regular text-->
 
     <!--style for image view-->
     <style name="ImageViewDefault">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
     </style>
+    <style name="ImageView10" parent="ImageViewDefault">
+        <item name="android:layout_width">10dp</item>
+        <item name="android:layout_height">10dp</item>
+    </style>
 
-    <style name="ImageViewError" parent="ImageViewDefault">
+    <style name="ImageView24" parent="ImageViewDefault">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+    </style>
+
+    <style name="ImageView28" parent="ImageViewDefault">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">28dp</item>
+    </style>
+
+    <style name="ImageView80" parent="ImageViewDefault">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+    </style>
+
+    <style name="ImageView48" parent="ImageViewDefault">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+    <style name="ImageView100" parent="ImageViewDefault">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">100dp</item>
+    </style>
+
+    <style name="ImageView120" parent="ImageViewDefault">
         <item name="android:layout_width">120dp</item>
         <item name="android:layout_height">120dp</item>
+    </style>
+
+    <style name="ImageView180" parent="ImageViewDefault">
+        <item name="android:layout_width">180dp</item>
+        <item name="android:layout_height">180dp</item>
+    </style>
+
+    <style name="ImageView40" parent="ImageViewDefault">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
     </style>
 
     <style name="ImageViewHeightRatio" parent="ImageViewDefault">
         <item name="android:layout_height">0dp</item>
         <item name="android:scaleType">centerCrop</item>
     </style>
+
     <style name="ImageViewAllRatio" parent="ImageViewDefault">
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:scaleType">centerCrop</item>
     </style>
+
     <style name="ImageViewWrapAll" parent="ImageViewDefault">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-    <style name="ImageView28" parent="ImageViewDefault">
-        <item name="android:layout_width">28dp</item>
-        <item name="android:layout_height">28dp</item>
-    </style>
     <!--end of style for image view-->
 
     <!--style for text input layout-->
+    <style name="TextInputLayoutDefault">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
     <!--end of style for text input layout-->
 
     <!--style for edit text-->
+    <style name="EditTextDefault">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+    </style>
     <!--end of style for edit text-->
 
     <!--style for view-->
@@ -138,9 +272,6 @@
         <item name="android:background">@color/gray</item>
     </style>
     <!--end of style for view-->
-
-    <!--style for frame-->
-    <!--end of style for frame-->
 
     <!--style for nested scroll-->
     <style name="NestedScrollDefault">
@@ -160,44 +291,76 @@
     <style name="CardWrapHeight" parent="CardDefault">
         <item name="android:layout_height">wrap_content</item>
     </style>
+
+    <style name="CardWrapAll" parent="CardDefault">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
     <!--end of style for nested scroll-->
 
     <!--style for toolbar-->
     <style name="ToolbarDefault">
         <item name="android:layout_height">?actionBarSize</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/white</item>
     </style>
     <!--end of style for toolbar-->
 
     <!--style for fab-->
+    <style name="FABDefault">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
     <!--end of style for fab-->
 
-    <!--style for search-->
-    <!--end of style for search-->
-
     <!--style for view pager-->
+    <style name="ViewPagerDefault">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+    <style name="ViewPagerRatio" parent="ViewPagerDefault">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
     <!--end of style for view pager-->
 
     <!--style for tab layout-->
+    <style name="TabLayoutDefault">
+        <item name="android:layout_height">?actionBarSize</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
     <!--end of style for tab layout-->
 
     <!--style for swipe refresh-->
+    <style name="SwipeRefreshDefault">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
     <!--end of style for swipe refresh-->
 
     <!--style for frame-->
+    <style name="FrameDefault">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
     <!--end of style for frame-->
 
     <!--style for bottom navigation-->
+    <style name="BottomNavigationDefault">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
     <!--end of style for bottom navigation-->
 
-    <!--style for button-->
+    <!--button-->
     <style name="ButtonDefault">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
     </style>
-    <!--end of style for button-->
-
-    <!--style for spinner-->
-    <!--end of style for spinner-->
+    <style name="ButtonWidth280">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">280dp</item>
+    </style>
+    <!--end of button-->
 </resources>

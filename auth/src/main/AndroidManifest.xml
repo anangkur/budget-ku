@@ -1,0 +1,25 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.anangkur.budgetku.auth">
+
+    <dist:module
+        dist:instant="false"
+        dist:title="@string/title_auth">
+        <dist:delivery>
+            <dist:install-time />
+        </dist:delivery>
+        <dist:fusing dist:include="true" />
+    </dist:module>
+
+    <application>
+        <activity android:name=".view.signIn.SignInActivity"/>
+        <activity android:name=".view.signUp.SignUpActivity"/>
+        <activity android:name=".view.forgotPassword.ForgotPasswordActivity"/>
+        <activity android:name=".view.editPassword.EditPasswordActivity"/>
+        <activity android:name=".view.editProfile.EditProfileActivity"/>
+        <activity android:name=".view.userProfile.ProfileActivity"/>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+    </application>
+</manifest>

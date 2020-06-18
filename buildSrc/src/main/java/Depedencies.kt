@@ -26,22 +26,37 @@ object Versions {
     const val recyclerViewVersion = "1.1.0"
     const val swipeRefreshVersion = "1.0.0"
     const val cardViewVersion = "1.0.0"
+    const val coreVersion = "1.3.0"
+    const val googleAuthVersion = "18.0.0"
 
     const val navComponentVersion = "2.3.0-alpha06"
 
     const val roomVersion = "2.2.3"
     const val lifecycleVersion= "2.2.0"
 
+    const val kotlinxVersion = "1.3.1"
+
     const val glideVersion = "4.10.0"
+    const val coilVersion = "0.11.0"
 
     const val retrofitVersion = "2.6.1"
     const val okhttp3Version = "3.12.0"
 
     const val multilineCollapsingVersion= "27.1.1"
-
     const val materialLoadingButtonVersion= "0.0.1"
+    const val circleImageViewVersion = "3.1.0"
+    const val imagePickerVersion = "2.2.0"
+    const val imageCropperVersion = "2.8.0"
 
     const val chuckVersion= "1.1.0"
+
+    const val firebaseAnalyticsVersion = "17.3.0"
+    const val firebaseAuthVersion = "19.3.0"
+    const val firebaseFirestoreVersion = "21.4.2"
+    const val firebaseMessagingVersion = "20.1.4"
+    const val firebaseStorageVersion = "19.1.1"
+    const val firebaseInAppMessagingVersion = "19.0.4"
+    const val firebaseRemoteConfigVersion = "19.1.3"
 }
 
 object Deps {
@@ -55,6 +70,7 @@ object Deps {
     const val androidxAppCompat = "androidx.appcompat:appcompat:${Versions.appCompatVersion}"
     const val androidxSwipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshVersion}"
     const val androidxCardView = "androidx.cardview:cardview:${Versions.cardViewVersion}"
+    const val androidxCore = "androidx.core:core-ktx:${Versions.coreVersion}"
 
     // navigation component
     const val androidxNavFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navComponentVersion}"
@@ -65,6 +81,10 @@ object Deps {
     const val androidxLifeCycleExtension = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycleVersion}"
     const val androidxViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleVersion}"
     const val androidxLivedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleVersion}"
+
+    // coroutine
+    const val coroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinxVersion}"
+    const val coroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinxVersion}"
 
     // room
     const val androidxRoom = "androidx.room:room-ktx:${Versions.roomVersion}"
@@ -78,10 +98,13 @@ object Deps {
 
     // google material
     const val googleMaterial = "com.google.android.material:material:${Versions.materialVersion}"
+    const val googleAuth = "com.google.android.gms:play-services-auth:${Versions.googleAuthVersion}"
 
     // glide
     const val glide = "com.github.bumptech.glide:glide:${Versions.glideVersion}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glideVersion}"
+
+    const val coil = "io.coil-kt:coil:${Versions.coilVersion}"
 
     // retrofit
     const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofitVersion}"
@@ -92,6 +115,9 @@ object Deps {
     // others
     const val materialLoadingButton = "com.github.anangkur:Material-Loading-Button:${Versions.materialLoadingButtonVersion}"
     const val multilineCollapsingToolbar = "net.opacapp:multiline-collapsingtoolbar:${Versions.multilineCollapsingVersion}"
+    const val circleImageView = "de.hdodenhof:circleimageview:${Versions.circleImageViewVersion}"
+    const val imagePicker = "com.github.esafirm.android-image-picker:imagepicker:${Versions.imagePickerVersion}"
+    const val imageCropper = "com.theartofdev.edmodo:android-image-cropper:${Versions.imageCropperVersion}"
 
     // chuck
     const val chuck = "com.readystatesoftware.chuck:library:${Versions.chuckVersion}"
@@ -100,4 +126,13 @@ object Deps {
     // tools
     const val toolsGradleAndroid = "com.android.tools.build:gradle:${Versions.gradleAndroid}"
     const val toolsKotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinVersion}"
+
+    // firebase
+    const val firebaseAnalytics = "com.google.firebase:firebase-analytics:${Versions.firebaseAnalyticsVersion}"
+    const val firebaseAuth = "com.google.firebase:firebase-auth:${Versions.firebaseAuthVersion}"
+    const val firebaseFirestore = "com.google.firebase:firebase-firestore-ktx:${Versions.firebaseFirestoreVersion}"
+    const val firebaseMessaging = "com.google.firebase:firebase-messaging:${Versions.firebaseMessagingVersion}"
+    const val firebaseStorage = "com.google.firebase:firebase-storage:${Versions.firebaseStorageVersion}"
+    const val firebaseInAppMessaging = "com.google.firebase:firebase-inappmessaging-display:${Versions.firebaseInAppMessagingVersion}"
+    const val firebaseConfig = "com.google.firebase:firebase-config:${Versions.firebaseRemoteConfigVersion}"
 }

@@ -10,7 +10,7 @@
         <TextView
             style="@style/TextExtraBig"
             android:text="@string/label_select_image_from"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/black"
             android:textStyle="bold"/>
 
         <!--button camera-->
@@ -30,7 +30,7 @@
                 style="@style/TextBig"
                 android:layout_width="match_parent"
                 android:text="@string/btn_camera"
-                android:textColor="@color/blackText"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginStart="20dp"/>
         </LinearLayout>
@@ -51,7 +51,7 @@
                 style="@style/TextBig"
                 android:layout_width="match_parent"
                 android:text="@string/btn_gallery"
-                android:textColor="@color/blackText"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginStart="20dp"/>
         </LinearLayout>
