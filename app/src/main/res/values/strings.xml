@@ -13,4 +13,5 @@
     <string name="text_todo">TODO</string>
 
     <string name="error_default">Terjadi kesalahan</string>
+    <string name="title_budget">budget</string>
 </resources>
