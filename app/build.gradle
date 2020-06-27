@@ -45,8 +45,7 @@ dependencies {
     implementation Deps.imagePicker
     api Deps.imageCropper
 
-    implementation Deps.glide
-    kapt Deps.glideCompiler
+    implementation Deps.coil
 
     implementation Deps.materialLoadingButton
 

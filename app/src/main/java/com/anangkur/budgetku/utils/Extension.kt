@@ -28,12 +28,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import coil.api.load
 import com.anangkur.budgetku.R
 import com.anangkur.budgetku.injection.ViewModelFactory
 import com.anangkur.budgetku.base.BaseSpinnerListener
 import com.anangkur.budgetku.base.DialogImagePickerActionListener
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.esafirm.imagepicker.features.ImagePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -76,29 +75,9 @@ fun Context.showToastShort(message: String){
 }
 
 fun ImageView.setImageUrl(url: String){
-    Glide.with(this)
-        .load(url)
-        .apply(RequestOptions().error(R.color.gray))
-        .apply(RequestOptions().placeholder(
-            createCircularProgressDrawable(
-                this.context
-            )
-        ))
-        .apply(RequestOptions().centerCrop())
-        .into(this)
-}
-
-fun ImageView.setImageUrlDarkBg(url: String){
-    Glide.with(this)
-        .load(url)
-        .apply(RequestOptions().error(R.color.gray))
-        .apply(RequestOptions().placeholder(
-            createCircularProgressDrawableLight(
-                this.context
-            )
-        ))
-        .apply(RequestOptions().centerCrop())
-        .into(this)
+    this.load(url) {
+        placeholder(R.color.gray)
+    }
 }
 
 fun hideSoftKeyboard(activity: Activity) {
