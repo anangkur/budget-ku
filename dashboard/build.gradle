@@ -5,12 +5,4 @@ apply plugin: 'kotlin-android-extensions'
 dependencies {
     implementation project(':app')
     implementation project(':presentation')
-
-    implementation Deps.androidxAppCompat
-    implementation Deps.androidxConstraintLayout
-
-    implementation Deps.googleMaterial
-
-    implementation Deps.circleImageView
-    implementation Deps.materialLoadingButton
 }

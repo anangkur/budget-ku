@@ -32,23 +32,18 @@ dependencies {
     implementation(project(':local'))
     implementation(project(':remote'))
 
-    implementation Deps.androidxAppCompat
-    implementation Deps.androidxCardView
-    implementation Deps.androidxConstraintLayout
-    implementation Deps.androidxRecyclerView
-    implementation Deps.androidxLifeCycleExtension
-    implementation Deps.androidxSwipeRefresh
+    api Deps.androidxAppCompat
+    api Deps.androidxConstraintLayout
 
-    implementation Deps.googleMaterial
-    implementation Deps.googleAuth
+    api Deps.googleMaterial
 
-    implementation Deps.imagePicker
+    api Deps.imagePicker
     api Deps.imageCropper
+    api Deps.circleImageView
 
     implementation Deps.coil
 
-    implementation Deps.materialLoadingButton
+    api Deps.materialLoadingButton
 
-    implementation Deps.coroutineCore
-    implementation Deps.coroutineAndroid
+    implementation Deps.androidxLifeCycleExtension
 }

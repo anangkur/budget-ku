@@ -7,19 +7,18 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import com.anangkur.budgetku.BuildConfig
-import com.anangkur.budgetku.auth.R as authR
 import com.anangkur.budgetku.R
 import com.anangkur.budgetku.auth.databinding.ActivitySignUpBinding
 import com.anangkur.budgetku.auth.view.signIn.SignInActivity
-import com.anangkur.budgetku.auth.view.userProfile.ProfileActivity
 import com.anangkur.budgetku.base.BaseActivity
-import com.anangkur.budgetku.utils.*
 import com.anangkur.budgetku.presentation.features.auth.SignUpViewModel
+import com.anangkur.budgetku.utils.*
+import com.anangkur.budgetku.utils.Navigation.goToHomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.anangkur.budgetku.auth.R as authR
 
 class SignUpActivity: BaseActivity<ActivitySignUpBinding, SignUpViewModel>(), SignUpActionListener {
 
@@ -71,7 +70,7 @@ class SignUpActivity: BaseActivity<ActivitySignUpBinding, SignUpViewModel>(), Si
                 setupLoadingSignup(it)
             })
             successCreateUser.observe(this@SignUpActivity, Observer {
-                ProfileActivity.startActivity(this@SignUpActivity)
+                goToHomeActivity()
             })
             errorSignUpLive.observe(this@SignUpActivity, Observer {
                 showSnackbarLong(it)

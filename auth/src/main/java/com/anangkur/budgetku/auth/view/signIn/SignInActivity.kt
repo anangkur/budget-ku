@@ -7,20 +7,19 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import com.anangkur.budgetku.BuildConfig
 import com.anangkur.budgetku.R
-import com.anangkur.budgetku.auth.R as authR
 import com.anangkur.budgetku.auth.databinding.ActivitySignInBinding
-import com.anangkur.budgetku.base.BaseActivity
 import com.anangkur.budgetku.auth.view.forgotPassword.ForgotPasswordActivity
+import com.anangkur.budgetku.auth.view.signUp.SignUpActivity
+import com.anangkur.budgetku.base.BaseActivity
 import com.anangkur.budgetku.presentation.features.auth.SignInViewModel
 import com.anangkur.budgetku.utils.*
-import com.anangkur.budgetku.auth.view.signUp.SignUpActivity
-import com.anangkur.budgetku.auth.view.userProfile.ProfileActivity
+import com.anangkur.budgetku.utils.Navigation.goToHomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.anangkur.budgetku.auth.R as authR
 
 class SignInActivity: BaseActivity<ActivitySignInBinding, SignInViewModel>(), SignInActionListener {
 
@@ -79,10 +78,10 @@ class SignInActivity: BaseActivity<ActivitySignInBinding, SignInViewModel>(), Si
                 setupLoading(it)
             })
             resultSignInLive.observe(this@SignInActivity, Observer {
-                ProfileActivity.startActivity(this@SignInActivity)
+                goToHomeActivity()
             })
             successCreateUser.observe(this@SignInActivity, Observer {
-                ProfileActivity.startActivity(this@SignInActivity)
+                goToHomeActivity()
             })
             errorSignInLive.observe(this@SignInActivity, Observer {
                 showSnackbarLong(it)
