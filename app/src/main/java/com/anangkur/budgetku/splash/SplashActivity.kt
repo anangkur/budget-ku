@@ -1,20 +1,18 @@
 package com.anangkur.budgetku.splash
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import com.anangkur.budgetku.BuildConfig
 import com.anangkur.budgetku.base.BaseActivity
 import com.anangkur.budgetku.databinding.ActivitySplashBinding
 import com.anangkur.budgetku.presentation.features.app.SplashViewModel
+import com.anangkur.budgetku.utils.Navigation.goToHomeActivity
+import com.anangkur.budgetku.utils.Navigation.goToSignInActivity
 import com.anangkur.budgetku.utils.gone
 import com.anangkur.budgetku.utils.obtainViewModel
 import com.anangkur.budgetku.utils.showToastShort
 import com.anangkur.budgetku.utils.visible
-import com.google.android.gms.tasks.Task
 
 class SplashActivity: BaseActivity<ActivitySplashBinding, SplashViewModel>(){
 
@@ -40,12 +38,11 @@ class SplashActivity: BaseActivity<ActivitySplashBinding, SplashViewModel>(){
     private fun openActivity(isLoggedIn: Boolean){
         val handler = Handler()
         handler.postDelayed({
-            val intent = if (isLoggedIn){
-                Intent().setClassName(BuildConfig.APPLICATION_ID, "com.anangkur.budgetku.auth.view.userProfile.ProfileActivity")
+            if (isLoggedIn){
+                goToHomeActivity()
             }else{
-                Intent().setClassName(BuildConfig.APPLICATION_ID, "com.anangkur.budgetku.auth.view.signIn.SignInActivity")
+                goToSignInActivity()
             }
-            startActivity(intent)
             finish()
         }, 1000)
     }

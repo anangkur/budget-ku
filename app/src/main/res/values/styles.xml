@@ -153,6 +153,9 @@
     <style name="TextRegularNormal" parent="TextNormal">
         <item name="android:fontFamily">@font/comfortaa_regular</item>
     </style>
+    <style name="TextRegularBig" parent="TextBig">
+        <item name="android:fontFamily">@font/comfortaa_regular</item>
+    </style>
     <!--end of style for regular text-->
 
     <!--style for bold text-->
@@ -361,6 +364,10 @@
     <style name="ButtonWidth280">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">280dp</item>
+    </style>
+    <style name="ButtonSmall">
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">120dp</item>
     </style>
     <!--end of button-->
 </resources>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="label_hi">Hi,</string>
+    <string name="btn_edit_profile">Edit Profile</string>
+    <string name="dummy_date">Saturday, Jun 6 2020</string>
+    <string name="label_on_going_project">On Going Project</string>
+    <string name="dummy_spend_percentage">Spend 50%</string>
+    <string name="label_period">Period</string>
+    <string name="dummy_period">May 2 2020 - May 4 2020</string>
+</resources>
