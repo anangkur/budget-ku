@@ -1,3 +1,5 @@
+include ':dashboard'
+include ':budget'
 rootProject.name='Budget Ku'
 include ':auth'
 include ':app'
