@@ -5,10 +5,11 @@ import androidx.appcompat.widget.Toolbar
 import com.anangkur.budgetku.base.BaseActivity
 import com.anangkur.budgetku.dashboard.R
 import com.anangkur.budgetku.dashboard.databinding.ActivityHomeBinding
+import com.anangkur.budgetku.utils.Navigation.goToAddProjectActivity
 import com.anangkur.budgetku.utils.Navigation.goToDetailProjectActivity
 import com.anangkur.budgetku.R as appR
 
-class HomeActivity : BaseActivity<ActivityHomeBinding, Nothing>() {
+class HomeActivity : BaseActivity<ActivityHomeBinding, Nothing>(), HomeActivityActionListener {
 
     override val mViewModel: Nothing?
         get() = null
@@ -24,6 +25,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, Nothing>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mLayout.btnAddProject.setOnClickListener { goToDetailProjectActivity() }
+        mLayout.btnAddProject.setOnClickListener { this.onClickAddProject() }
+    }
+
+    override fun onClickAddProject() {
+        goToAddProjectActivity()
     }
 }

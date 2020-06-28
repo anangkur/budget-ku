@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/RelativeDefault"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarDefault"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+        app:titleTextColor="@color/black"
+        android:background="@color/white"
+        android:elevation="4dp"/>
+
+    <androidx.core.widget.NestedScrollView
+        style="@style/NestedScrollDefault"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/btn_save">
+        <LinearLayout
+            style="@style/LinearVerticalDefault">
+            <LinearLayout
+                style="@style/LinearVerticalWrap"
+                android:padding="20dp">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_title"
+                    style="@style/TextInputLayoutDefault">
+                    <EditText
+                        android:id="@+id/et_title"
+                        style="@style/EditTextDefault"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/hint_project_title"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <View
+                style="@style/ViewLine"
+                android:layout_width="match_parent"/>
+
+            <LinearLayout
+                style="@style/LinearVerticalWrap"
+                android:padding="20dp">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_start_date"
+                    style="@style/TextInputLayoutDefault">
+                    <EditText
+                        android:id="@+id/et_start_date"
+                        style="@style/EditTextDefault"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/hint_start_date"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_end_date"
+                    style="@style/TextInputLayoutDefault">
+                    <EditText
+                        android:id="@+id/et_end_date"
+                        style="@style/EditTextDefault"
+                        android:layout_marginTop="20dp"
+                        android:hint="@string/hint_end_date"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <View
+                style="@style/ViewLine"
+                android:layout_width="match_parent"/>
+
+            <LinearLayout
+                style="@style/LinearVerticalWrap"
+                android:layout_marginTop="20dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_category"
+                    style="@style/RecyclerWrapHeight"/>
+                <com.anangkur.materialloadingbutton.MaterialLoadingButton
+                    android:id="@+id/btn_add_category"
+                    style="@style/ButtonDefault"
+                    android:layout_margin="20dp"
+                    app:mlb_cornerRadius="100dp"
+                    app:mlb_textButton="@string/btn_add_category"
+                    app:mlb_textColor="@color/colorPrimary"
+                    app:mlb_strokeColor="@color/colorPrimary"
+                    app:mlb_defaultColor="@color/white"
+                    app:mlb_strokeWidth="1dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.anangkur.materialloadingbutton.MaterialLoadingButton
+        android:id="@+id/btn_save"
+        style="@style/ButtonDefault"
+        android:layout_alignParentBottom="true"
+        app:mlb_defaultColor="@color/colorPrimary"
+        app:mlb_textColor="@color/white"
+        app:mlb_cornerRadius="100dp"
+        app:mlb_textButton="@string/btn_save"/>
+
+</RelativeLayout>
