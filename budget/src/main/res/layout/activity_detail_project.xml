@@ -87,6 +87,21 @@
                         android:layout_marginTop="10dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <com.anangkur.materialloadingbutton.MaterialLoadingButton
+                android:id="@+id/btn_add_spend"
+                style="@style/ButtonSmall"
+                app:mlb_textColor="@color/white"
+                app:mlb_defaultColor="@color/colorPrimary"
+                app:mlb_strokeColor="@color/white"
+                app:mlb_strokeWidth="0.6dp"
+                app:mlb_cornerRadius="20dp"
+                app:mlb_textButton="@string/btn_add_spend"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintTop_toTopOf="@id/tv_label_total_budget"
+                app:layout_constraintBottom_toBottomOf="@id/tv_total_budget"
+                app:layout_constraintLeft_toRightOf="@id/tv_total_budget"
+                app:layout_constraintRight_toRightOf="@id/card_remaining"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </RelativeLayout>

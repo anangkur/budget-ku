@@ -8,6 +8,7 @@ object Navigation {
     private const val SIGN_IN_ACTIVITY = "com.anangkur.budgetku.auth.view.signIn"
     private const val HOME_ACTIVITY = "com.anangkur.budgetku.dashboard.view.HomeActivity"
     private const val DETAIL_PROJECT_ACTIVITY = "com.anangkur.budgetku.budget.view.DetailProjectActivity"
+    private const val DETAIL_SPEND_ACTIVITY = "com.anangkur.budgetku.budget.view.DetailSpendActivity"
 
     fun Activity.goToHomeActivity() {
         startActivity(Intent(this, Class.forName(HOME_ACTIVITY)))
@@ -23,5 +24,9 @@ object Navigation {
 
     fun Activity.goToDetailProjectActivity() {
         startActivity(Intent(this, Class.forName(DETAIL_PROJECT_ACTIVITY)))
+    }
+
+    fun Activity.goToDetailSpendActivity() {
+        startActivity(Intent(this, Class.forName(DETAIL_SPEND_ACTIVITY)))
     }
 }

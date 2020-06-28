@@ -4,4 +4,6 @@
     <string name="label_total_budget">Total Budget</string>
     <string name="label_total_spend">Total Spend</string>
     <string name="toolbar_monthly_budget">Monthly Budget</string>
+    <string name="toolbar_detail_spend">Detail Spend</string>
+    <string name="btn_add_spend">Add Spend</string>
 </resources>
