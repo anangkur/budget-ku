@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/RelativeDefault"
+    android:background="@color/colorPrimary">
+
+    <RelativeLayout
+        style="@style/RelativeDefault">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/layout_toolbar_back"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/ConstraintWrapHeight"
+            android:layout_below="@id/toolbar"
+            android:padding="20dp">
+            <TextView
+                android:id="@+id/tv_label_total_budget"
+                style="@style/TextRegularNormal"
+                android:text="@string/label_total_budget"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                android:id="@+id/tv_total_budget"
+                style="@style/TextBoldExtraBig"
+                android:text="@string/dummy_remaining"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/tv_label_total_budget"
+                app:layout_constraintLeft_toLeftOf="@id/tv_label_total_budget"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_spend"
+                style="@style/CardWrapHeight"
+                android:layout_width="0dp"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="10dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_total_budget"
+                app:layout_constraintLeft_toLeftOf="@id/tv_label_total_budget"
+                app:layout_constraintRight_toLeftOf="@id/card_remaining">
+                <LinearLayout
+                    style="@style/LinearVerticalWrap"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="14dp">
+                    <ImageView
+                        style="@style/ImageViewWrapAll"
+                        android:src="@drawable/ic_spend"/>
+                    <TextView
+                        style="@style/TextRegularSmall"
+                        android:text="@string/label_total_spend"
+                        android:layout_marginTop="10dp"/>
+                    <TextView
+                        style="@style/TextRegularSmall"
+                        tools:text="@string/dummy_remaining"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_remaining"
+                style="@style/CardWrapHeight"
+                android:layout_width="0dp"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintTop_toTopOf="@id/card_spend"
+                app:layout_constraintLeft_toRightOf="@id/card_spend"
+                app:layout_constraintRight_toRightOf="parent">
+                <LinearLayout
+                    style="@style/LinearVerticalWrap"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="14dp">
+                    <ImageView
+                        style="@style/ImageViewWrapAll"
+                        android:src="@drawable/ic_remaining"/>
+                    <TextView
+                        style="@style/TextRegularSmall"
+                        android:text="@string/label_remaining"
+                        android:layout_marginTop="10dp"/>
+                    <TextView
+                        style="@style/TextRegularSmall"
+                        tools:text="@string/dummy_remaining"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+    <include layout="@layout/bottom_sheet_budget"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="label_remaining">Remaining</string>
+    <string name="dummy_remaining">Rp. 2.000.000</string>
+    <string name="label_total_budget">Total Budget</string>
+    <string name="label_total_spend">Total Spend</string>
+    <string name="toolbar_monthly_budget">Monthly Budget</string>
+</resources>

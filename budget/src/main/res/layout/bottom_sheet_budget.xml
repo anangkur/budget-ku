@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/RelativeDefault"
+    android:padding="20dp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="20dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="360dp">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_budget"
+        style="@style/RecyclerDefault"
+        tools:listitem="@layout/item_budget"/>
+
+</androidx.cardview.widget.CardView>
