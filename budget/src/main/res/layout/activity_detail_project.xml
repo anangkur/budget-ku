@@ -9,9 +9,12 @@
     <RelativeLayout
         style="@style/RelativeDefault">
 
-        <include
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            layout="@layout/layout_toolbar_back"/>
+            style="@style/ToolbarDefault"
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+            app:titleTextColor="@color/white"
+            android:background="@color/colorPrimary"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             style="@style/ConstraintWrapHeight"

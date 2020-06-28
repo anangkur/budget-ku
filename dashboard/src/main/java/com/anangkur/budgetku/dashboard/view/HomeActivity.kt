@@ -3,8 +3,9 @@ package com.anangkur.budgetku.dashboard.view
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.anangkur.budgetku.base.BaseActivity
+import com.anangkur.budgetku.dashboard.R
 import com.anangkur.budgetku.dashboard.databinding.ActivityHomeBinding
-import com.anangkur.budgetku.utils.Navigation.goToNewsActivity
+import com.anangkur.budgetku.utils.Navigation.goToDetailProjectActivity
 import com.anangkur.budgetku.R as appR
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, Nothing>() {
@@ -12,7 +13,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, Nothing>() {
     override val mViewModel: Nothing?
         get() = null
     override val mToolbar: Toolbar?
-        get() = findViewById(appR.id.toolbar)
+        get() = findViewById(R.id.toolbar)
     override val mTitleToolbar: String?
         get() = getString(appR.string.app_name)
 
@@ -23,6 +24,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, Nothing>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mLayout.btnAddProject.setOnClickListener { goToNewsActivity() }
+        mLayout.btnAddProject.setOnClickListener { goToDetailProjectActivity() }
     }
 }

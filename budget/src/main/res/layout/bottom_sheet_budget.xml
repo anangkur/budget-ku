@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/RelativeDefault"
     android:padding="20dp"
-    app:cardUseCompatPadding="true"
     app:cardCornerRadius="20dp"
+    android:layout_marginBottom="-20dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     app:behavior_hideable="false"
     app:behavior_peekHeight="360dp">

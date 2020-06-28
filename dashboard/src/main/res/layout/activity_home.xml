@@ -5,9 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/LinearVerticalDefault">
 
-    <include
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar"/>
+        style="@style/ToolbarDefault"
+        app:titleTextColor="@color/black"
+        app:title="@string/app_name"
+        android:elevation="4dp" />
 
     <androidx.core.widget.NestedScrollView
         style="@style/NestedScrollDefault"
