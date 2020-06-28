@@ -15,4 +15,19 @@
     <string name="error_default">Terjadi kesalahan</string>
     <string name="title_budget">budget</string>
     <string name="title_dashboard">dashboard</string>
+
+    <string name="calc_dialog_clear">Clear</string>
+    <string name="calc_dialog_cancel">Cancel</string>
+    <string name="calc_dialog_ok">OK</string>
+
+    <string name="calc_answer">Ans</string>
+
+    <string-array name="calc_dialog_errors">
+        <item>Division by zero</item>
+        <item>Out of bounds</item>
+        <item>Result must be positive</item>
+        <item>Result must be negative</item>
+    </string-array>
+
+    <string name="calc_dialog_erase">Erase</string>
 </resources>

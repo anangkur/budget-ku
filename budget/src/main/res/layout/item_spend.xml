@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    style="@style/LinearVerticalWrap"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/ConstraintWrapHeight"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/iv_spend"
+            style="@style/ImageView40"
+            tools:src="@color/gray"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_spend_category"
+            style="@style/TextBoldNormal"
+            tools:text="@string/app_name"
+            android:layout_marginStart="20dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="@id/iv_spend"
+            app:layout_constraintBottom_toTopOf="@id/tv_spend_date"
+            app:layout_constraintLeft_toRightOf="@id/iv_spend"/>
+
+        <TextView
+            android:id="@+id/tv_spend_date"
+            style="@style/TextRegularSmall"
+            tools:text="Today, 08:00"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@id/tv_spend_category"
+            app:layout_constraintBottom_toBottomOf="@id/iv_spend"
+            app:layout_constraintLeft_toLeftOf="@id/tv_spend_category"/>
+
+        <TextView
+            android:id="@+id/tv_spend"
+            style="@style/TextBoldBig"
+            android:layout_width="0dp"
+            android:text="@string/dummy_remaining"
+            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tv_spend_category"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        style="@style/ViewLine"/>
+</LinearLayout>

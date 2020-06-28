@@ -1,0 +1,24 @@
+<resources>
+    <string name="label_remaining">Remaining</string>
+    <string name="dummy_remaining">Rp. 2.000.000</string>
+    <string name="label_total_budget">Total Budget</string>
+    <string name="label_total_spend">Total Spend</string>
+    <string name="toolbar_monthly_budget">Monthly Budget</string>
+    <string name="toolbar_detail_spend">Detail Spend</string>
+    <string name="btn_add_spend">Add Spend</string>
+    <string name="label_project_title">Project Title</string>
+    <string name="hint_project_title">Project Title</string>
+    <string name="label_start_date">Start Date</string>
+    <string name="hint_start_date">Start Date</string>
+    <string name="label_end_date">End Date</string>
+    <string name="hint_end_date">End Date</string>
+    <string name="btn_add_category">Add Category</string>
+    <string name="btn_save">Save</string>
+    <string name="toolbar_add_project">Add Project</string>
+    <string name="label_select_category">Select Category</string>
+    <string name="label_budget">Budget</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="hint_budget">Budget</string>
+    <string name="hint_spend">Spend</string>
+    <string name="hint_category">Category</string>
+</resources>

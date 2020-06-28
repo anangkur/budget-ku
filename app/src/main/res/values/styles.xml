@@ -370,4 +370,101 @@
         <item name="android:layout_width">120dp</item>
     </style>
     <!--end of button-->
+
+    <public name="CalcDialogStyle" type="style"/>
+    <style name="CalcDialogStyle">
+        <item name="calcDialogMaxWidth">400dp</item>
+        <item name="calcDialogMaxHeight">500dp</item>
+        <item name="calcButtonTextClear">@string/calc_dialog_clear</item>
+        <item name="calcButtonTextCancel">@string/calc_dialog_cancel</item>
+        <item name="calcButtonTextOk">@string/calc_dialog_ok</item>
+        <item name="calcButtonTexts">@array/calc_dialog_btn_texts</item>
+        <item name="calcBackgroundColor">?colorBackgroundFloating</item>
+        <item name="calcHeaderColor">?calcBackgroundColor</item>
+        <item name="calcHeaderElevation">2dp</item>
+        <item name="calcHeaderElevationColor">#33000000</item>
+        <item name="calcValueStyle">@style/CalcValueStyle</item>
+        <item name="calcExpressionScrollViewStyle">@style/CalcExpressionScrollViewStyle</item>
+        <item name="calcExpressionStyle">@style/CalcExpressionStyle</item>
+        <item name="calcDigitBtnStyle">@style/CalcNumberBtnStyle</item>
+        <item name="calcDigitBtnColor">@android:color/transparent</item>
+        <item name="calcOperationBtnStyle">@style/CalcOperationBtnStyle</item>
+        <item name="calcOperationBtnColor">@color/calc_operation_btn_color</item>
+        <item name="calcAnswerBtnStyle">@style/CalcAnswerBtnStyle</item>
+        <item name="calcEraseBtnStyle">@style/CalcEraseBtnStyle</item>
+        <item name="calcDividerColor">@color/calc_divider_color</item>
+        <item name="calcDialogButtonStyle">@style/CalcDialogButtonStyle</item>
+        <item name="calcErrors">@array/calc_dialog_errors</item>
+    </style>
+
+    <public name="CalcValueStyle" type="style"/>
+    <style name="CalcValueStyle">
+        <item name="android:layout_height">64dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="autoSizeMaxTextSize">24sp</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeStepGranularity">1sp</item>
+    </style>
+
+    <public name="CalcExpressionStyle" type="style"/>
+    <style name="CalcExpressionStyle">
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body2</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_gravity">end</item>
+    </style>
+
+    <public name="CalcExpressionScrollViewStyle" type="style"/>
+    <style name="CalcExpressionScrollViewStyle">
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <public name="CalcNumberBtnStyle" type="style"/>
+    <style name="CalcNumberBtnStyle">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline5</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <public name="CalcOperationBtnStyle" type="style"/>
+    <style name="CalcOperationBtnStyle">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline5</item>
+    </style>
+
+    <public name="CalcAnswerBtnStyle" type="style"/>
+    <style name="CalcAnswerBtnStyle">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body1</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <public name="CalcEraseBtnStyle" type="style"/>
+    <style name="CalcEraseBtnStyle">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:src">@drawable/calc_ic_backspace</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:contentDescription">@string/calc_dialog_erase</item>
+    </style>
+
+    <public name="CalcDialogButtonStyle" type="style"/>
+    <style name="CalcDialogButtonStyle"
+        parent="Widget.MaterialComponents.Button.TextButton.Dialog"/>
 </resources>

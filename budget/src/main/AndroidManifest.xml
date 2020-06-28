@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.anangkur.budgetku.budget">
@@ -8,6 +9,14 @@
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>
+
         <dist:fusing dist:include="true" />
     </dist:module>
+
+    <application>
+        <activity android:name=".view.addProject.AddProjectActivity" />
+        <activity android:name=".view.detailSpend.DetailSpendActivity" />
+        <activity android:name=".view.detailProject.DetailProjectActivity" />
+    </application>
+
 </manifest>
