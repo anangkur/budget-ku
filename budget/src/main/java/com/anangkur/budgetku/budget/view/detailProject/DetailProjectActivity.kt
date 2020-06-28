@@ -1,12 +1,17 @@
-package com.anangkur.budgetku.budget.view
+package com.anangkur.budgetku.budget.view.detailProject
 
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.anangkur.budgetku.base.BaseActivity
 import com.anangkur.budgetku.budget.R
 import com.anangkur.budgetku.budget.databinding.ActivityDetailProjectBinding
+import com.anangkur.budgetku.budget.utils.showAddSpendDialog
+import com.anangkur.budgetku.budget.view.detailSpend.DetailSpendActivity
+import com.anangkur.budgetku.utils.currencyFormatToRupiah
+import java.math.BigDecimal
 
-class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, Nothing>(), DetailProjectActionListener {
+class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, Nothing>(),
+    DetailProjectActionListener {
 
     override val mViewModel: Nothing?
         get() = null
@@ -20,7 +25,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, Nothing
     }
 
     override fun onClickAddSpend() {
-        DetailSpendActivity.startActivity(this)
+        showAddSpendDialog()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

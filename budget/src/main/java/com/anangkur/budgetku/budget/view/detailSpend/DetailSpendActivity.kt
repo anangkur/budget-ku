@@ -1,4 +1,4 @@
-package com.anangkur.budgetku.budget.view
+package com.anangkur.budgetku.budget.view.detailSpend
 
 import android.content.Context
 import android.content.Intent

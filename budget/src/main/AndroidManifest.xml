@@ -14,9 +14,9 @@
     </dist:module>
 
     <application>
-        <activity android:name=".view.AddProjectActivity"></activity>
-        <activity android:name=".view.DetailSpendActivity" />
-        <activity android:name=".view.DetailProjectActivity" />
+        <activity android:name=".view.addProject.AddProjectActivity" />
+        <activity android:name=".view.detailSpend.DetailSpendActivity" />
+        <activity android:name=".view.detailProject.DetailProjectActivity" />
     </application>
 
 </manifest>

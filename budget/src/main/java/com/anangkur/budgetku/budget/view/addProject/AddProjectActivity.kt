@@ -1,4 +1,4 @@
-package com.anangkur.budgetku.budget.view
+package com.anangkur.budgetku.budget.view.addProject
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,8 @@ import com.anangkur.budgetku.budget.R
 import com.anangkur.budgetku.budget.databinding.ActivityAddProjectBinding
 import com.anangkur.budgetku.budget.utils.showAddCategoryDialog
 
-class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, Nothing>(), AddProjectActionListener {
+class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, Nothing>(),
+    AddProjectActionListener {
 
     companion object {
         fun startActivity(context: Context) {

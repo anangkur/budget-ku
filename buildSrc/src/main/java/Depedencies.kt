@@ -47,6 +47,7 @@ object Versions {
     const val circleImageViewVersion = "3.1.0"
     const val imagePickerVersion = "2.2.0"
     const val imageCropperVersion = "2.8.0"
+    const val calculatorDialogVersion = "2.2.0"
 
     const val chuckVersion= "1.1.0"
 
@@ -118,6 +119,7 @@ object Deps {
     const val circleImageView = "de.hdodenhof:circleimageview:${Versions.circleImageViewVersion}"
     const val imagePicker = "com.github.esafirm.android-image-picker:imagepicker:${Versions.imagePickerVersion}"
     const val imageCropper = "com.theartofdev.edmodo:android-image-cropper:${Versions.imageCropperVersion}"
+    const val calculatorDialog = "com.maltaisn:calcdialog:${Versions.calculatorDialogVersion}"
 
     // chuck
     const val chuck = "com.readystatesoftware.chuck:library:${Versions.chuckVersion}"

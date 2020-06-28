@@ -7,9 +7,9 @@ object Navigation {
     private const val NEWS_ACTIVITY = "com.anangkur.budgetku.news.NewsActivity"
     private const val SIGN_IN_ACTIVITY = "com.anangkur.budgetku.auth.view.signIn"
     private const val HOME_ACTIVITY = "com.anangkur.budgetku.dashboard.view.HomeActivity"
-    private const val DETAIL_PROJECT_ACTIVITY = "com.anangkur.budgetku.budget.view.DetailProjectActivity"
-    private const val DETAIL_SPEND_ACTIVITY = "com.anangkur.budgetku.budget.view.DetailSpendActivity"
-    private const val ADD_PROJECT_ACTIVITY = "com.anangkur.budgetku.budget.view.AddProjectActivity"
+    private const val DETAIL_PROJECT_ACTIVITY = "com.anangkur.budgetku.budget.view.detailProject.DetailProjectActivity"
+    private const val DETAIL_SPEND_ACTIVITY = "com.anangkur.budgetku.budget.view.detailSpend.DetailSpendActivity"
+    private const val ADD_PROJECT_ACTIVITY = "com.anangkur.budgetku.budget.view.addProject.AddProjectActivity"
 
     fun Activity.goToHomeActivity() {
         startActivity(Intent(this, Class.forName(HOME_ACTIVITY)))

@@ -19,4 +19,6 @@
     <string name="label_budget">Budget</string>
     <string name="btn_cancel">Cancel</string>
     <string name="hint_budget">Budget</string>
+    <string name="hint_spend">Spend</string>
+    <string name="hint_category">Category</string>
 </resources>

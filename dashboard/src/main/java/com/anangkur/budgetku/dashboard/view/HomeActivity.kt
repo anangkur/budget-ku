@@ -29,6 +29,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, Nothing>(), HomeActivityA
     }
 
     override fun onClickAddProject() {
-        goToAddProjectActivity()
+        goToDetailProjectActivity()
     }
 }
