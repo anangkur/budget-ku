@@ -8,6 +8,7 @@ import com.anangkur.budgetku.domain.model.Article
 import com.anangkur.budgetku.domain.repository.AuthRepository
 import com.anangkur.budgetku.presentation.features.app.SplashViewModel
 import com.anangkur.budgetku.presentation.features.auth.*
+import com.anangkur.budgetku.presentation.features.dashboard.HomeViewModel
 import com.anangkur.budgetku.presentation.features.news.NewsViewModel
 import com.anangkur.budgetku.presentation.mapper.ArticleMapper
 import com.anangkur.budgetku.presentation.mapper.BaseResultMapper
@@ -30,6 +31,7 @@ class ViewModelFactory(
                 isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(authRepository)
                 isAssignableFrom(SignInViewModel::class.java) -> SignInViewModel(authRepository)
                 isAssignableFrom(SignUpViewModel::class.java) -> SignUpViewModel(authRepository)
+                isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel()
                 else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }
         } as T

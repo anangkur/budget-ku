@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/LinearVerticalDefault">
+    style="@style/LinearVerticalDefault"
+    android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -91,12 +92,11 @@
 
     <com.anangkur.materialloadingbutton.MaterialLoadingButton
         android:id="@+id/btn_add_project"
-        style="@style/ButtonWidth280"
+        style="@style/ButtonMedium"
         app:mlb_cornerRadius="100dp"
         app:mlb_defaultColor="@color/colorPrimary"
         app:mlb_textColor="@color/white"
         app:mlb_textButton="Add Project"
-        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"/>
 

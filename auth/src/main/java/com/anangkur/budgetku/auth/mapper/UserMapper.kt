@@ -16,9 +16,7 @@ class UserMapper: Mapper<UserIntent, UserView> {
             userId = type.userId,
             name = type.name,
             firebaseToken = type.firebaseToken,
-            weight = type.weight,
             email = type.email,
-            height = type.height,
             photo = type.photo,
             providerName = type.providerName
         )
@@ -29,9 +27,7 @@ class UserMapper: Mapper<UserIntent, UserView> {
             userId = type.userId,
             name = type.name,
             firebaseToken = type.firebaseToken,
-            weight = type.weight,
             email = type.email,
-            height = type.height,
             photo = type.photo,
             providerName = type.providerName
         )
