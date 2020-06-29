@@ -369,6 +369,10 @@
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_width">120dp</item>
     </style>
+    <style name="ButtonMedium">
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_width">200dp</item>
+    </style>
     <!--end of button-->
 
     <public name="CalcDialogStyle" type="style"/>

@@ -9,6 +9,7 @@ import com.anangkur.budgetku.dashboard.R
 import com.anangkur.budgetku.dashboard.databinding.ActivityHomeBinding
 import com.anangkur.budgetku.dashboard.mapper.ItemProjectMapper
 import com.anangkur.budgetku.dashboard.mapper.UserMapper
+import com.anangkur.budgetku.dashboard.model.ItemProjectIntent
 import com.anangkur.budgetku.dashboard.model.UserIntent
 import com.anangkur.budgetku.presentation.features.dashboard.HomeViewModel
 import com.anangkur.budgetku.utils.Navigation.goToAddProjectActivity
@@ -48,11 +49,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
     }
 
     override fun onClickAddProject() {
-        goToDetailProjectActivity()
+        goToAddProjectActivity()
     }
 
     override fun onClickEditProfile() {
         goToProfileActivity()
+    }
+
+    override fun onClickItem(data: ItemProjectIntent) {
+        goToDetailProjectActivity()
     }
 
     private fun observeViewModel() {

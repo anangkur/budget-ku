@@ -92,12 +92,11 @@
 
     <com.anangkur.materialloadingbutton.MaterialLoadingButton
         android:id="@+id/btn_add_project"
-        style="@style/ButtonWidth280"
+        style="@style/ButtonMedium"
         app:mlb_cornerRadius="100dp"
         app:mlb_defaultColor="@color/colorPrimary"
         app:mlb_textColor="@color/white"
         app:mlb_textButton="Add Project"
-        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"/>
 
