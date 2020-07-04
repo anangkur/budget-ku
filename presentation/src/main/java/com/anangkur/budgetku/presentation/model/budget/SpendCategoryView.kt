@@ -1,4 +1,4 @@
-package com.anangkur.budgetku.presentation.model
+package com.anangkur.budgetku.presentation.model.budget
 
 data class SpendCategoryView(
     val image: String,

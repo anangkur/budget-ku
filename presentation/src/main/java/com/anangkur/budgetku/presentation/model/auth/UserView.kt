@@ -1,4 +1,4 @@
-package com.anangkur.budgetku.presentation.model
+package com.anangkur.budgetku.presentation.model.auth
 
 data class UserView(
     var userId: String = "",

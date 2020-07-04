@@ -61,10 +61,10 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
     private fun observeViewModel() {
         mViewModel.apply {
             listSpendCategoryPublicObserver.observe(this@DetailProjectActivity, Observer {
-                spendCategoryAdapter.setRecyclerData(it.map { item -> spendCategoryMapper.mapToUiModel(item) })
+                spendCategoryAdapter.setRecyclerData(it.map { item -> spendCategoryMapper.mapToIntent(item) })
             })
             budgetPublicObserver.observe(this@DetailProjectActivity, Observer {
-                setupBudgetView(budgetMapper.mapToUiModel(it))
+                setupBudgetView(budgetMapper.mapToIntent(it))
             })
         }
     }

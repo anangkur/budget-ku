@@ -2,7 +2,7 @@ package com.anangkur.budgetku.news.mapper
 
 import com.anangkur.budgetku.mapper.Mapper
 import com.anangkur.budgetku.news.model.ArticleIntent
-import com.anangkur.budgetku.presentation.model.ArticleView
+import com.anangkur.budgetku.presentation.model.news.ArticleView
 
 class ArticleMapper:
     Mapper<ArticleIntent, ArticleView> {

@@ -7,7 +7,7 @@ import com.anangkur.budgetku.domain.impl.ArticlesSource
 import com.anangkur.budgetku.domain.model.Article
 import com.anangkur.budgetku.presentation.mapper.ArticleMapper
 import com.anangkur.budgetku.presentation.mapper.BaseResultMapper
-import com.anangkur.budgetku.presentation.model.ArticleView
+import com.anangkur.budgetku.presentation.model.news.ArticleView
 
 class NewsViewModel (
     private val articlesSource: ArticlesSource,

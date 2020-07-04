@@ -3,8 +3,8 @@ package com.anangkur.budgetku.presentation.features.dashboard
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.anangkur.budgetku.presentation.model.ItemProjectView
-import com.anangkur.budgetku.presentation.model.UserView
+import com.anangkur.budgetku.presentation.model.dashboard.ItemProjectView
+import com.anangkur.budgetku.presentation.model.auth.UserView
 
 class HomeViewModel: ViewModel() {
     private val listProjectInternalSetter = MutableLiveData<List<ItemProjectView>>()

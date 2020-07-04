@@ -6,7 +6,7 @@ import com.anangkur.budgetku.domain.BaseFirebaseListener
 import com.anangkur.budgetku.domain.model.User
 import com.anangkur.budgetku.domain.repository.AuthRepository
 import com.anangkur.budgetku.presentation.mapper.UserMapper
-import com.anangkur.budgetku.presentation.model.UserView
+import com.anangkur.budgetku.presentation.model.auth.UserView
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.CoroutineScope

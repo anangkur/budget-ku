@@ -3,8 +3,8 @@ package com.anangkur.budgetku.presentation.features.budget
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.anangkur.budgetku.presentation.model.BudgetView
-import com.anangkur.budgetku.presentation.model.SpendCategoryView
+import com.anangkur.budgetku.presentation.model.budget.BudgetView
+import com.anangkur.budgetku.presentation.model.budget.SpendCategoryView
 
 class DetailProjectViewModel : ViewModel() {
 
@@ -29,10 +29,12 @@ class DetailProjectViewModel : ViewModel() {
     val budgetPublicObserver: LiveData<BudgetView> = budgetInternalSetter
 
     fun createDummyBudget() {
-        budgetInternalSetter.postValue(BudgetView(
-            totalSpend = 2000000,
-            totalRemaining = 1000000,
-            totalBudget = 3000000
-        ))
+        budgetInternalSetter.postValue(
+            BudgetView(
+                totalSpend = 2000000,
+                totalRemaining = 1000000,
+                totalBudget = 3000000
+            )
+        )
     }
 }

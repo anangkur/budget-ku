@@ -1,4 +1,4 @@
-package com.anangkur.budgetku.presentation.model
+package com.anangkur.budgetku.presentation.model.news
 
 data class ArticleView(
     val id: Int = 0,

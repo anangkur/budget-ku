@@ -1,7 +1,8 @@
 package com.anangkur.budgetku.budget.mapper
 
 import com.anangkur.budgetku.budget.model.BudgetUiModel
-import com.anangkur.budgetku.presentation.model.BudgetView
+import com.anangkur.budgetku.mapper.Mapper
+import com.anangkur.budgetku.presentation.model.budget.BudgetView
 
 class BudgetMapper : Mapper<BudgetUiModel, BudgetView> {
 
@@ -10,19 +11,19 @@ class BudgetMapper : Mapper<BudgetUiModel, BudgetView> {
         fun getInstance() = INSTANCE ?: BudgetMapper()
     }
 
-    override fun mapFromUiModel(data: BudgetUiModel): BudgetView {
+    override fun mapFromIntent(type: BudgetUiModel): BudgetView {
         return BudgetView(
-            totalBudget = data.totalBudget,
-            totalRemaining = data.totalRemaining,
-            totalSpend = data.totalSpend
+            totalBudget = type.totalBudget,
+            totalRemaining = type.totalRemaining,
+            totalSpend = type.totalSpend
         )
     }
 
-    override fun mapToUiModel(data: BudgetView): BudgetUiModel {
+    override fun mapToIntent(type: BudgetView): BudgetUiModel {
         return BudgetUiModel(
-            totalBudget = data.totalBudget,
-            totalRemaining = data.totalRemaining,
-            totalSpend = data.totalSpend
+            totalBudget = type.totalBudget,
+            totalRemaining = type.totalRemaining,
+            totalSpend = type.totalSpend
         )
     }
 }

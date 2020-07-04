@@ -1,7 +1,7 @@
 package com.anangkur.budgetku.presentation.mapper
 
 import com.anangkur.budgetku.domain.model.User
-import com.anangkur.budgetku.presentation.model.UserView
+import com.anangkur.budgetku.presentation.model.auth.UserView
 
 class UserMapper: Mapper<UserView, User> {
 

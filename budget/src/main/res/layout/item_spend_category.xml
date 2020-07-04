@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ConstraintWrapHeight"
     android:paddingVertical="12dp"
-    android:paddingHorizontal="20dp">
+    android:paddingHorizontal="20dp"
+    android:foreground="?selectableItemBackground">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_budget"
         style="@style/ImageView40"
