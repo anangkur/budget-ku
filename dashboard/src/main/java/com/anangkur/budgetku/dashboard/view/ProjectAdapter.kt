@@ -6,9 +6,11 @@ import com.anangkur.budgetku.base.BaseAdapter
 import com.anangkur.budgetku.dashboard.databinding.ItemProjectBinding
 import com.anangkur.budgetku.dashboard.model.ItemProjectIntent
 
-class ProjectAdapter: BaseAdapter<ItemProjectBinding, ItemProjectIntent>() {
+class ProjectAdapter(
+    private val listener: HomeActivityActionListener
+): BaseAdapter<ItemProjectBinding, ItemProjectIntent>() {
     override fun bindView(parent: ViewGroup): ItemProjectBinding {
-        return ItemProjectBinding.inflate(LayoutInflater.from(parent.context))
+        return ItemProjectBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     }
 
     override fun bind(data: ItemProjectIntent, itemView: ItemProjectBinding, position: Int) {
@@ -17,6 +19,8 @@ class ProjectAdapter: BaseAdapter<ItemProjectBinding, ItemProjectIntent>() {
             tvSpendPercentage.text = data.spendPercentage
             tvPeriod.text = data.period
             pbProject.progress = data.progress ?: 0
+
+            root.setOnClickListener { listener.onClickItem(data) }
         }
     }
 }
