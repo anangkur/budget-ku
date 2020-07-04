@@ -11,46 +11,16 @@ class HomeViewModel: ViewModel() {
     val listProjectPublicObserver: LiveData<List<ItemProjectView>> = listProjectInternalSetter
     fun createDummyListProject() {
         val listProject = ArrayList<ItemProjectView>()
-        listProject.add(
-            ItemProjectView(
-                title = "Dummy Project",
-                period = "20 Jun 2020 - 20 Jul 2020",
-                progress = 50,
-                spendPercentage = "Spend 50%"
+        for (i in 0 until 10) {
+            listProject.add(
+                ItemProjectView(
+                    title = "Dummy Project",
+                    period = "20 Jun 2020 - 20 Jul 2020",
+                    progress = 50,
+                    spendPercentage = "Spend 50%"
+                )
             )
-        )
-        listProject.add(
-            ItemProjectView(
-                title = "Dummy Project",
-                period = "20 Jun 2020 - 20 Jul 2020",
-                progress = 50,
-                spendPercentage = "Spend 50%"
-            )
-        )
-        listProject.add(
-            ItemProjectView(
-                title = "Dummy Project",
-                period = "20 Jun 2020 - 20 Jul 2020",
-                progress = 50,
-                spendPercentage = "Spend 50%"
-            )
-        )
-        listProject.add(
-            ItemProjectView(
-                title = "Dummy Project",
-                period = "20 Jun 2020 - 20 Jul 2020",
-                progress = 50,
-                spendPercentage = "Spend 50%"
-            )
-        )
-        listProject.add(
-            ItemProjectView(
-                title = "Dummy Project",
-                period = "20 Jun 2020 - 20 Jul 2020",
-                progress = 50,
-                spendPercentage = "Spend 50%"
-            )
-        )
+        }
         listProjectInternalSetter.postValue(listProject)
     }
 
