@@ -17,6 +17,7 @@
             android:background="@color/colorPrimary"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_budget"
             style="@style/ConstraintWrapHeight"
             android:layout_below="@id/toolbar"
             android:padding="20dp">
@@ -54,11 +55,14 @@
                     <TextView
                         style="@style/TextRegularSmall"
                         android:text="@string/label_total_spend"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/red"/>
                     <TextView
-                        style="@style/TextRegularSmall"
+                        android:id="@+id/tv_total_spend"
+                        style="@style/TextBoldBig"
                         tools:text="@string/dummy_remaining"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/red"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -80,11 +84,14 @@
                     <TextView
                         style="@style/TextRegularSmall"
                         android:text="@string/label_remaining"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/colorPrimary"/>
                     <TextView
-                        style="@style/TextRegularSmall"
+                        android:id="@+id/tv_total_remaining"
+                        style="@style/TextBoldBig"
                         tools:text="@string/dummy_remaining"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -106,6 +113,8 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/bottom_sheet_budget"/>
+    <include
+        android:id="@+id/bottom_sheet_budget"
+        layout="@layout/bottom_sheet_budget"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

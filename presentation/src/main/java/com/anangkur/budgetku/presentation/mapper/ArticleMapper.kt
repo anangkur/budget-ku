@@ -1,7 +1,7 @@
 package com.anangkur.budgetku.presentation.mapper
 
 import com.anangkur.budgetku.domain.model.Article
-import com.anangkur.budgetku.presentation.model.ArticleView
+import com.anangkur.budgetku.presentation.model.news.ArticleView
 
 class ArticleMapper: Mapper<ArticleView, Article> {
 

@@ -18,6 +18,8 @@ import com.anangkur.budgetku.utils.Navigation.goToProfileActivity
 import com.anangkur.budgetku.utils.obtainViewModel
 import com.anangkur.budgetku.utils.setImageUrl
 import com.anangkur.budgetku.utils.setupRecyclerViewLinear
+import java.text.SimpleDateFormat
+import java.util.*
 import com.anangkur.budgetku.R as appR
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeActivityActionListener {
@@ -41,6 +43,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setupDateView(Calendar.getInstance().time)
         setupRecyclerProject()
         setupClickListener()
         observeViewModel()
@@ -77,11 +80,16 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
     }
 
     private fun setupRecyclerProject() {
-        projectAdapter = ProjectAdapter()
+        projectAdapter = ProjectAdapter(this)
         mLayout.recyclerProject.apply {
             setupRecyclerViewLinear(this@HomeActivity, RecyclerView.VERTICAL)
             adapter = projectAdapter
         }
+    }
+
+    private fun setupDateView(date: Date) {
+        val dateFormat = SimpleDateFormat("EEEE, MMM dd yyyy", Locale.getDefault())
+        mLayout.tvDate.text = dateFormat.format(date)
     }
 
     private fun setupClickListener() {

@@ -7,7 +7,7 @@
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="20dp"
     app:cardBackgroundColor="@color/white"
-    android:layout_marginTop="10dp"
+    android:foreground="?selectableItemBackground"
     android:elevation="4dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/ConstraintWrapHeight"

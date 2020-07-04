@@ -8,7 +8,7 @@
         style="@style/ConstraintWrapHeight"
         android:padding="20dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_spend"
             style="@style/ImageView40"
             tools:src="@color/gray"

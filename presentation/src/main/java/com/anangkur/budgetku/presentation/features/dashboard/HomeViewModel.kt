@@ -3,54 +3,24 @@ package com.anangkur.budgetku.presentation.features.dashboard
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.anangkur.budgetku.presentation.model.ItemProjectView
-import com.anangkur.budgetku.presentation.model.UserView
+import com.anangkur.budgetku.presentation.model.dashboard.ItemProjectView
+import com.anangkur.budgetku.presentation.model.auth.UserView
 
 class HomeViewModel: ViewModel() {
     private val listProjectInternalSetter = MutableLiveData<List<ItemProjectView>>()
     val listProjectPublicObserver: LiveData<List<ItemProjectView>> = listProjectInternalSetter
     fun createDummyListProject() {
         val listProject = ArrayList<ItemProjectView>()
-        listProject.add(
-            ItemProjectView(
-                title = "Dummy Project",
-                period = "20 Jun 2020 - 20 Jul 2020",
-                progress = 50,
-                spendPercentage = "Spend 50%"
+        for (i in 0 until 10) {
+            listProject.add(
+                ItemProjectView(
+                    title = "Dummy Project",
+                    period = "20 Jun 2020 - 20 Jul 2020",
+                    progress = 50,
+                    spendPercentage = "Spend 50%"
+                )
             )
-        )
-        listProject.add(
-            ItemProjectView(
-                title = "Dummy Project",
-                period = "20 Jun 2020 - 20 Jul 2020",
-                progress = 50,
-                spendPercentage = "Spend 50%"
-            )
-        )
-        listProject.add(
-            ItemProjectView(
-                title = "Dummy Project",
-                period = "20 Jun 2020 - 20 Jul 2020",
-                progress = 50,
-                spendPercentage = "Spend 50%"
-            )
-        )
-        listProject.add(
-            ItemProjectView(
-                title = "Dummy Project",
-                period = "20 Jun 2020 - 20 Jul 2020",
-                progress = 50,
-                spendPercentage = "Spend 50%"
-            )
-        )
-        listProject.add(
-            ItemProjectView(
-                title = "Dummy Project",
-                period = "20 Jun 2020 - 20 Jul 2020",
-                progress = 50,
-                spendPercentage = "Spend 50%"
-            )
-        )
+        }
         listProjectInternalSetter.postValue(listProject)
     }
 

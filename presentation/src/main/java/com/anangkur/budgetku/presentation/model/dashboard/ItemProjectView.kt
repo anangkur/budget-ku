@@ -1,4 +1,4 @@
-package com.anangkur.budgetku.presentation.model
+package com.anangkur.budgetku.presentation.model.dashboard
 
 data class ItemProjectView(
     val title: String? = "",

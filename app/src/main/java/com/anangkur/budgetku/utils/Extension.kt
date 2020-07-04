@@ -77,6 +77,7 @@ fun Context.showToastShort(message: String){
 fun ImageView.setImageUrl(url: String){
     this.load(url) {
         placeholder(R.color.gray)
+        error(R.color.gray)
     }
 }
 

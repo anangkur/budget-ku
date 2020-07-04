@@ -2,7 +2,7 @@ package com.anangkur.budgetku.auth.mapper
 
 import com.anangkur.budgetku.auth.model.UserIntent
 import com.anangkur.budgetku.mapper.Mapper
-import com.anangkur.budgetku.presentation.model.UserView
+import com.anangkur.budgetku.presentation.model.auth.UserView
 
 class UserMapper: Mapper<UserIntent, UserView> {
 

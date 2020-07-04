@@ -2,7 +2,7 @@ package com.anangkur.budgetku.dashboard.mapper
 
 import com.anangkur.budgetku.dashboard.model.ItemProjectIntent
 import com.anangkur.budgetku.mapper.Mapper
-import com.anangkur.budgetku.presentation.model.ItemProjectView
+import com.anangkur.budgetku.presentation.model.dashboard.ItemProjectView
 
 class ItemProjectMapper: Mapper<ItemProjectIntent, ItemProjectView> {
 
