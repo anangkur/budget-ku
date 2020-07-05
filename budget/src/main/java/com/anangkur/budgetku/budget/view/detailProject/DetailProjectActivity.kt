@@ -1,7 +1,7 @@
 package com.anangkur.budgetku.budget.view.detailProject
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.ViewTreeObserver
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -11,17 +11,25 @@ import com.anangkur.budgetku.budget.databinding.ActivityDetailProjectBinding
 import com.anangkur.budgetku.budget.mapper.BudgetMapper
 import com.anangkur.budgetku.budget.mapper.SpendCategoryMapper
 import com.anangkur.budgetku.budget.model.BudgetUiModel
+import com.anangkur.budgetku.budget.model.CategoryUiModel
 import com.anangkur.budgetku.budget.model.SpendCategoryUiModel
+import com.anangkur.budgetku.budget.utils.AddSpendDialogActionListener
+import com.anangkur.budgetku.budget.utils.AddSpendDialog
 import com.anangkur.budgetku.budget.utils.showAddSpendDialog
 import com.anangkur.budgetku.budget.view.detailSpend.DetailSpendActivity
+import com.anangkur.budgetku.budget.view.selectCategory.SelectCategoryActivity
+import com.anangkur.budgetku.calcDialog.AddSpendValueListener
+import com.anangkur.budgetku.calcDialog.CalcDialog
 import com.anangkur.budgetku.presentation.features.budget.DetailProjectViewModel
 import com.anangkur.budgetku.utils.currencyFormatToRupiah
 import com.anangkur.budgetku.utils.obtainViewModel
 import com.anangkur.budgetku.utils.setupRecyclerViewLinear
+import com.anangkur.budgetku.utils.showToastShort
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import java.math.BigDecimal
 
 class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailProjectViewModel>(),
-    DetailProjectActionListener {
+    DetailProjectActionListener, AddSpendDialogActionListener {
 
     override val mViewModel: DetailProjectViewModel
         get() = obtainViewModel(DetailProjectViewModel::class.java)
@@ -31,6 +39,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
         get() = getString(R.string.toolbar_monthly_budget)
 
     private lateinit var spendCategoryAdapter: SpendCategoryAdapter
+    private var addSpendDialog: AddSpendDialog? = null
 
     private val budgetMapper = BudgetMapper.getInstance()
     private val spendCategoryMapper = SpendCategoryMapper.getInstance()
@@ -40,7 +49,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
     }
 
     override fun onClickAddSpend() {
-        showAddSpendDialog()
+        addSpendDialog = showAddSpendDialog(addSpendDialog, this)
     }
 
     override fun onClickSpendCategory(data: SpendCategoryUiModel) {
@@ -56,6 +65,16 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
         mViewModel.createDummyBudget()
         mViewModel.createDummyListSpendCategory()
         mLayout.btnAddSpend.setOnClickListener { this.onClickAddSpend() }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == SelectCategoryActivity.SELECT_CATEGORY_REQ_CODE
+            && resultCode == SelectCategoryActivity.SELECT_CATEGORY_RES_CODE) {
+            val category = data?.getParcelableExtra<CategoryUiModel>(SelectCategoryActivity.EXTRA_CATEGORY)
+            category?.let { addSpendDialog?.setCategory(it) }
+        }
     }
 
     private fun observeViewModel() {
@@ -93,5 +112,24 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
             val bottomSheetBehaviour = BottomSheetBehavior.from(mLayout.bottomSheetBudget.bottomSheetBudget)
             bottomSheetBehaviour.peekHeight = parentHeight - (constraintBudgetHeight + toolbarHeight)
         }
+    }
+
+    override fun onClickSpend(dialog: AddSpendDialog) {
+        val calcDialog = CalcDialog(object : AddSpendValueListener {
+            override fun setValue(value: BigDecimal) {
+                val stringSpend = value.toDouble().currencyFormatToRupiah()
+                dialog.setSpendValue(stringSpend)
+            }
+        })
+        calcDialog.settings.isExpressionShown = true
+        calcDialog.show(supportFragmentManager, "calc_dialog")
+    }
+
+    override fun onClickSave(dialog: AddSpendDialog) {
+        dialog.dismiss()
+    }
+
+    override fun onClickCategory() {
+        SelectCategoryActivity.startActivity(this)
     }
 }

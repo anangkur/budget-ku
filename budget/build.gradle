@@ -5,4 +5,5 @@ apply plugin: 'kotlin-android-extensions'
 dependencies {
     implementation project(':app')
     implementation project(':presentation')
+    implementation Deps.expandableView
 }
