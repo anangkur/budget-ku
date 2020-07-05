@@ -26,7 +26,8 @@
             style="@style/CardWrapHeight"
             android:layout_marginTop="10dp"
             app:cardUseCompatPadding="true"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="10dp"
+            android:foreground="?selectableItemBackground">
             <RelativeLayout
                 style="@style/RelativeWrapH"
                 android:padding="10dp">

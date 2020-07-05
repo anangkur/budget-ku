@@ -24,6 +24,7 @@ import com.anangkur.budgetku.calcDialog.CalcDialog
 import com.anangkur.budgetku.presentation.features.budget.DetailProjectViewModel
 import com.anangkur.budgetku.utils.currencyFormatToRupiah
 import com.anangkur.budgetku.utils.obtainViewModel
+import com.anangkur.budgetku.utils.setupRecyclerViewLinear
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.math.BigDecimal
 
@@ -101,7 +102,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
 
     private fun setupSpendCategoryAdapter() {
         spendCategoryAdapter = SpendCategoryAdapter(this)
-        mLayout.bottomSheetBudget.recyclerBudget.apply {
+        mLayout.recyclerBudget.apply {
             setupRecyclerViewLinear(this@DetailProjectActivity, RecyclerView.VERTICAL)
             adapter = spendCategoryAdapter
         }
@@ -112,7 +113,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
             val constraintBudgetHeight = mLayout.constraintBudget.height
             val parentHeight = mLayout.root.height
             val toolbarHeight = mLayout.toolbar.height
-            val bottomSheetBehaviour = BottomSheetBehavior.from(mLayout.bottomSheetBudget.bottomSheetBudget)
+            val bottomSheetBehaviour = BottomSheetBehavior.from(mLayout.bottomSheetBudget)
             bottomSheetBehaviour.peekHeight = parentHeight - (constraintBudgetHeight + toolbarHeight)
         }
     }

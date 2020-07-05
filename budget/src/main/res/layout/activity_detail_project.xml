@@ -113,8 +113,24 @@
 
     </RelativeLayout>
 
-    <include
+    <androidx.cardview.widget.CardView
         android:id="@+id/bottom_sheet_budget"
-        layout="@layout/bottom_sheet_budget"/>
+        style="@style/RelativeDefault"
+        android:padding="20dp"
+        app:cardCornerRadius="20dp"
+        android:layout_marginBottom="-20dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="320dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_budget"
+            style="@style/RecyclerDefault"
+            android:paddingBottom="20dp"
+            android:clipToPadding="false"
+            tools:listitem="@layout/item_spend_category"
+            tools:itemCount="20"/>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
