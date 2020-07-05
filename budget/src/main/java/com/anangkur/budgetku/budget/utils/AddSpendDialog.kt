@@ -4,8 +4,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.appcompat.app.AlertDialog
 import com.anangkur.budgetku.budget.R as BUDGET_R
 import com.anangkur.budgetku.R as APP_R
@@ -35,9 +33,9 @@ class AddSpendDialog(
         setSpendValue(defaultValue)
         setCategoryNull()
 
-        mLayout.btnSave.setOnClickListener { addSpendDialogActionListener.onClickSave(this) }
         mLayout.etSpend.setOnClickListener { addSpendDialogActionListener.onClickSpend(this, defaultValue) }
         mLayout.cardSelectedCategory.setOnClickListener { addSpendDialogActionListener.onClickCategory() }
+        mLayout.btnSave.setOnClickListener { addSpendDialogActionListener.onClickSave(this@AddSpendDialog) }
     }
 
     fun setSpendValue(value: Double) {
@@ -53,17 +51,39 @@ class AddSpendDialog(
         }
     }
 
-    fun setButtonSaveEnable() {
-        mLayout.btnSave.apply {
-            setColor(APP_R.color.colorPrimary)
-            enable()
+    private fun setButtonSaveEnable() {
+        mLayout.tvError.gone()
+    }
+
+    private fun setButtonSaveDisable(errorMessage: String) {
+        mLayout.tvError.apply {
+            text = errorMessage
+            visible()
         }
     }
 
-    fun setButtonSaveDisable() {
-        mLayout.btnSave.apply {
-            setColor(APP_R.color.gray)
-            enable()
+    fun setupButtonSaveEnable(isCategoryNullOrEmpty: Boolean, isValueNullOrEmpty: Boolean): Boolean {
+        return when {
+            isValueNullOrEmpty -> {
+                setButtonSaveDisable(context.getString(BUDGET_R.string.error_value_null_or_empty))
+                false
+            }
+            isCategoryNullOrEmpty -> {
+                setButtonSaveDisable(context.getString(BUDGET_R.string.error_category_null_or_empty))
+                false
+            }
+            else -> {
+                setButtonSaveEnable()
+                true
+            }
+        }
+    }
+
+    fun setupButtonSaveLoading(isLoading: Boolean) {
+        if (isLoading) {
+            mLayout.btnSave.showProgress()
+        } else {
+            mLayout.btnSave.hideProgress()
         }
     }
     
@@ -72,15 +92,5 @@ class AddSpendDialog(
             ivCategory.gone()
             tvCategory.text = context.getString(BUDGET_R.string.label_select_category)
         }
-    }
-
-    private fun setupTextWatcher() {
-        mLayout.etSpend.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
     }
 }

@@ -76,6 +76,10 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
             val category = data?.getParcelableExtra<CategoryUiModel>(SelectCategoryActivity.EXTRA_CATEGORY)
             category?.let {
                 mViewModel.category = categoryMapper.mapFromIntent(it)
+                addSpendDialog?.setupButtonSaveEnable(
+                    isValueNullOrEmpty = mViewModel.spendValue <= 0.0,
+                    isCategoryNullOrEmpty = mViewModel.category == null
+                )
                 addSpendDialog?.setCategory(it)
             }
         }
@@ -123,6 +127,10 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
             override fun setValue(value: BigDecimal) {
                 mViewModel.spendValue = value.toDouble()
                 dialog.setSpendValue(mViewModel.spendValue)
+                dialog.setupButtonSaveEnable(
+                    isValueNullOrEmpty = mViewModel.spendValue <= 0.0,
+                    isCategoryNullOrEmpty = mViewModel.category == null
+                )
             }
         })
         calcDialog.settings.isExpressionShown = true
@@ -131,9 +139,15 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
     }
 
     override fun onClickSave(dialog: AddSpendDialog) {
-        addSpendDialog = null
-        mViewModel.spendValue = 0.0
-        dialog.dismiss()
+        if (dialog.setupButtonSaveEnable(
+                isValueNullOrEmpty = mViewModel.spendValue <= 0.0,
+                isCategoryNullOrEmpty = mViewModel.category == null
+            )
+        ){
+            addSpendDialog = null
+            mViewModel.spendValue = 0.0
+            dialog.dismiss()
+        }
     }
 
     override fun onClickCategory() {
