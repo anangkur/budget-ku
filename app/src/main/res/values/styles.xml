@@ -469,6 +469,5 @@
     </style>
 
     <public name="CalcDialogButtonStyle" type="style"/>
-    <style name="CalcDialogButtonStyle"
-        parent="Widget.MaterialComponents.Button.TextButton.Dialog"/>
+    <style name="CalcDialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog"/>
 </resources>

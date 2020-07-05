@@ -5,7 +5,7 @@ import android.content.Intent
 
 object Navigation {
     private const val NEWS_ACTIVITY = "com.anangkur.budgetku.news.NewsActivity"
-    private const val SIGN_IN_ACTIVITY = "com.anangkur.budgetku.auth.view.signIn"
+    private const val SIGN_IN_ACTIVITY = "com.anangkur.budgetku.auth.view.signIn.SignInActivity"
     private const val HOME_ACTIVITY = "com.anangkur.budgetku.dashboard.view.HomeActivity"
     private const val DETAIL_PROJECT_ACTIVITY = "com.anangkur.budgetku.budget.view.detailProject.DetailProjectActivity"
     private const val DETAIL_SPEND_ACTIVITY = "com.anangkur.budgetku.budget.view.detailSpend.DetailSpendActivity"

@@ -84,23 +84,22 @@
         android:id="@+id/calc_view_number_bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="?attr/calcDigitBtnColor"
+        android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@id/calc_view_footer_divider"
         app:layout_constraintEnd_toStartOf="@id/calc_guideline_end"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calc_view_header_background"
-        tools:background="?attr/calcDigitBtnColor"
         />
 
     <View
         android:id="@+id/calc_view_op_bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/gray"
         app:layout_constraintBottom_toTopOf="@id/calc_view_footer_divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/calc_guideline_end"
         app:layout_constraintTop_toBottomOf="@id/calc_view_header_background"
-        tools:background="?calcOperationBtnColor"
         />
 
     <TextView
@@ -263,6 +262,7 @@
         style="?calcOperationBtnStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/gray"
         app:layout_constraintBottom_toTopOf="@id/calc_btn_mul"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -276,6 +276,7 @@
         style="?calcOperationBtnStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/gray"
         app:layout_constraintBottom_toTopOf="@id/calc_btn_sub"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -289,6 +290,7 @@
         style="?calcOperationBtnStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/gray"
         app:layout_constraintBottom_toTopOf="@id/calc_btn_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -302,6 +304,7 @@
         style="?calcOperationBtnStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/gray"
         app:layout_constraintBottom_toTopOf="@id/calc_btn_equal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -315,6 +318,7 @@
         style="?calcOperationBtnStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/gray"
         app:layout_constraintBottom_toTopOf="@id/calc_view_footer_divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -345,7 +349,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calc_btn_decimal"
-        tools:background="?attr/calcDividerColor"
+        android:background="@color/gray"
         />
 
     <Button
@@ -358,6 +362,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:text="?calcButtonTextClear"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calc_view_footer_divider"
@@ -373,6 +378,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:text="?calcButtonTextCancel"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/calc_btn_ok"
         app:layout_constraintTop_toBottomOf="@id/calc_view_footer_divider"
@@ -389,6 +395,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:text="?calcButtonTextOk"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calc_view_footer_divider"

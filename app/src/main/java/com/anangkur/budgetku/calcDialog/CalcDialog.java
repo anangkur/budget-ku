@@ -240,7 +240,7 @@ public class CalcDialog extends AppCompatDialogFragment {
 
         // Divider
         final View footerDividerView = view.findViewById(R.id.calc_view_footer_divider);
-        footerDividerView.setBackgroundColor(separatorColor);
+        // footerDividerView.setBackgroundColor(separatorColor);
 
         // Dialog buttons
         Button clearBtn = view.findViewById(R.id.calc_btn_clear);
