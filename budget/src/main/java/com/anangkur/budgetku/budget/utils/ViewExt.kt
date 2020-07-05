@@ -33,13 +33,16 @@ fun Activity.showAddCategoryDialog() {
 
 fun AppCompatActivity.showAddSpendDialog(
     dialog: AddSpendDialog?,
-    listener: AddSpendDialogActionListener
+    listener: AddSpendDialogActionListener,
+    defaultValue: Double
 ): AddSpendDialog {
     return if (dialog == null) {
-        val newDialog = AddSpendDialog(this, listener)
+        val newDialog = AddSpendDialog(this, listener, defaultValue)
+        newDialog.setCancelable(true)
         newDialog.show()
         newDialog
     } else {
+        dialog.setCancelable(true)
         dialog.show()
         dialog
     }

@@ -4,9 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anangkur.budgetku.presentation.model.budget.BudgetView
+import com.anangkur.budgetku.presentation.model.budget.CategoryView
 import com.anangkur.budgetku.presentation.model.budget.SpendCategoryView
 
 class DetailProjectViewModel : ViewModel() {
+
+    var category: CategoryView? = null
+    var spendValue: Double = 0.0
 
     private val listSpendCategoryInternalSetter = MutableLiveData<List<SpendCategoryView>>()
     val listSpendCategoryPublicObserver: LiveData<List<SpendCategoryView>> = listSpendCategoryInternalSetter
