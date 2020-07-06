@@ -58,13 +58,29 @@
             android:layout_marginTop="10dp"
             tools:text="@string/app_name"
             android:visibility="gone"/>
-        <com.anangkur.materialloadingbutton.MaterialLoadingButton
-            android:id="@+id/btn_save"
-            style="@style/ButtonDefault"
-            app:mlb_cornerRadius="100dp"
-            app:mlb_textColor="@color/white"
-            app:mlb_defaultColor="@color/colorPrimary"
-            app:mlb_textButton="@string/btn_save"
-            android:layout_marginTop="20dp"/>
+        <LinearLayout
+            style="@style/LinearHorizontalWrap"
+            android:layout_marginTop="20dp">
+            <com.anangkur.materialloadingbutton.MaterialLoadingButton
+                android:id="@+id/btn_cancel"
+                style="@style/ButtonDefault"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                app:mlb_textColor="@color/colorPrimary"
+                app:mlb_defaultColor="@color/white"
+                app:mlb_strokeColor="@color/colorPrimary"
+                app:mlb_strokeWidth="1dp"
+                app:mlb_cornerRadius="100dp"
+                app:mlb_textButton="@string/btn_cancel"/>
+            <com.anangkur.materialloadingbutton.MaterialLoadingButton
+                android:id="@+id/btn_save"
+                style="@style/ButtonDefault"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                app:mlb_cornerRadius="100dp"
+                app:mlb_defaultColor="@color/colorPrimary"
+                app:mlb_textColor="@color/white"
+                app:mlb_textButton="@string/btn_save"/>
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

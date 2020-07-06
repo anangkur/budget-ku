@@ -150,6 +150,10 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
         }
     }
 
+    override fun onClickCancel(dialog: AddSpendDialog) {
+        dialog.dismiss()
+    }
+
     override fun onClickCategory() {
         SelectCategoryActivity.startActivity(this)
     }

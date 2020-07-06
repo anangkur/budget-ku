@@ -33,9 +33,18 @@ class AddSpendDialog(
         setSpendValue(defaultValue)
         setCategoryNull()
 
-        mLayout.etSpend.setOnClickListener { addSpendDialogActionListener.onClickSpend(this, defaultValue) }
-        mLayout.cardSelectedCategory.setOnClickListener { addSpendDialogActionListener.onClickCategory() }
-        mLayout.btnSave.setOnClickListener { addSpendDialogActionListener.onClickSave(this@AddSpendDialog) }
+        mLayout.etSpend.setOnClickListener {
+            addSpendDialogActionListener.onClickSpend(this, defaultValue)
+        }
+        mLayout.cardSelectedCategory.setOnClickListener {
+            addSpendDialogActionListener.onClickCategory()
+        }
+        mLayout.btnSave.setOnClickListener {
+            addSpendDialogActionListener.onClickSave(this@AddSpendDialog)
+        }
+        mLayout.btnCancel.setOnClickListener {
+            addSpendDialogActionListener.onClickCancel(this@AddSpendDialog)
+        }
     }
 
     fun setSpendValue(value: Double) {

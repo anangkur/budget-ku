@@ -38,11 +38,9 @@ fun AppCompatActivity.showAddSpendDialog(
 ): AddSpendDialog {
     return if (dialog == null) {
         val newDialog = AddSpendDialog(this, listener, defaultValue)
-        newDialog.setCancelable(true)
         newDialog.show()
         newDialog
     } else {
-        dialog.setCancelable(true)
         dialog.show()
         dialog
     }
