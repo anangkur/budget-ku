@@ -22,7 +22,7 @@ android {
         }
     }
     
-    dynamicFeatures = [":news", ':auth', ':budget', ':dashboard']
+    dynamicFeatures = [":features:news", ':features:auth', ':features:budget', ':features:dashboard']
 }
 
 dependencies {
