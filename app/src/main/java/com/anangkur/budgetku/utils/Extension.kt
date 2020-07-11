@@ -33,6 +33,7 @@ import com.anangkur.budgetku.R
 import com.anangkur.budgetku.injection.ViewModelFactory
 import com.anangkur.budgetku.base.BaseSpinnerListener
 import com.anangkur.budgetku.base.DialogImagePickerActionListener
+import com.anangkur.budgetku.presentation.model.budget.CategoryView
 import com.esafirm.imagepicker.features.ImagePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -81,10 +82,10 @@ fun ImageView.setImageUrl(url: String){
     }
 }
 
-fun hideSoftKeyboard(activity: Activity) {
-    val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+fun Activity.hideSoftKeyboard() {
+    val inputMethodManager = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(
-        activity.currentFocus!!.windowToken, 0
+        this.currentFocus?.windowToken, 0
     )
 }
 
@@ -199,8 +200,13 @@ fun SwipeRefreshLayout.stopLoading(){
     this.isRefreshing = false
 }
 
-fun Spinner.setupSpinner(data: ArrayList<String>, listener: BaseSpinnerListener){
-    val arrayAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, data)
+fun Spinner.setupSpinner(data: List<String>, itemAtZero: String? = null, listener: BaseSpinnerListener){
+    val listItem = ArrayList<String>()
+    if (itemAtZero != null) {
+        listItem.add(itemAtZero)
+    }
+    listItem.addAll(data)
+    val arrayAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, listItem)
     arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
     this.apply {
         adapter = arrayAdapter

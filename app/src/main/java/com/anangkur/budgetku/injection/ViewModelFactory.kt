@@ -8,6 +8,7 @@ import com.anangkur.budgetku.domain.model.Article
 import com.anangkur.budgetku.domain.repository.AuthRepository
 import com.anangkur.budgetku.presentation.features.app.SplashViewModel
 import com.anangkur.budgetku.presentation.features.auth.*
+import com.anangkur.budgetku.presentation.features.budget.AddProjectViewModel
 import com.anangkur.budgetku.presentation.features.budget.DetailProjectViewModel
 import com.anangkur.budgetku.presentation.features.budget.DetailSpendViewModel
 import com.anangkur.budgetku.presentation.features.budget.SelectCategoryViewModel
@@ -42,6 +43,7 @@ class ViewModelFactory(
                 isAssignableFrom(DetailProjectViewModel::class.java) -> DetailProjectViewModel()
                 isAssignableFrom(DetailSpendViewModel::class.java) -> DetailSpendViewModel()
                 isAssignableFrom(SelectCategoryViewModel::class.java) -> SelectCategoryViewModel()
+                isAssignableFrom(AddProjectViewModel::class.java) -> AddProjectViewModel()
 
                 else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }

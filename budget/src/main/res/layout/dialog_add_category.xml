@@ -49,11 +49,21 @@
             android:id="@+id/til_budget"
             style="@style/TextInputLayoutDefault"
             android:layout_marginTop="10dp">
-            <EditText
+            <com.anangkur.budgetku.currencyEditText.CurrencyEditText
                 android:id="@+id/et_budget"
                 style="@style/EditTextDefault"
-                android:hint="@string/hint_budget"/>
+                android:hint="@string/hint_budget"
+                android:inputType="number"
+                android:imeOptions="actionDone"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_error"
+            style="@style/TextRegularNormal"
+            android:textColor="@color/red"
+            android:layout_marginTop="10dp"
+            tools:text="@string/app_name"
+            android:visibility="gone"/>
 
         <LinearLayout
             style="@style/LinearHorizontalWrap"
