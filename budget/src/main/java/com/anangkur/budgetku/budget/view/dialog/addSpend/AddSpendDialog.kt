@@ -1,19 +1,23 @@
-package com.anangkur.budgetku.budget.utils
+package com.anangkur.budgetku.budget.view.dialog.addSpend
 
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import androidx.appcompat.app.AlertDialog
+import com.anangkur.budgetku.base.BaseSpinnerListener
 import com.anangkur.budgetku.budget.R as BUDGET_R
-import com.anangkur.budgetku.R as APP_R
 import com.anangkur.budgetku.budget.databinding.DialogAddSpendBinding
 import com.anangkur.budgetku.budget.model.CategoryUiModel
 import com.anangkur.budgetku.utils.*
 
 class AddSpendDialog(
     context: Context,
-    private val addSpendDialogActionListener: AddSpendDialogActionListener,
+    private val itemAtZero: String?,
+    private val data: List<String>,
+    private val listener: AddSpendDialogActionListener,
     private var defaultValue : Double = 0.0
 ): AlertDialog(context) {
 
@@ -32,10 +36,20 @@ class AddSpendDialog(
         
         setSpendValue(defaultValue)
         setCategoryNull()
+        setupSpinner(data, itemAtZero)
 
-        mLayout.etSpend.setOnClickListener { addSpendDialogActionListener.onClickSpend(this, defaultValue) }
-        mLayout.cardSelectedCategory.setOnClickListener { addSpendDialogActionListener.onClickCategory() }
-        mLayout.btnSave.setOnClickListener { addSpendDialogActionListener.onClickSave(this@AddSpendDialog) }
+        mLayout.etSpend.setOnClickListener {
+            listener.onClickSpend(this, defaultValue)
+        }
+        mLayout.btnSave.setOnClickListener {
+            listener.onClickSave(this@AddSpendDialog)
+        }
+        mLayout.btnCancel.setOnClickListener {
+            listener.onClickCancel(this@AddSpendDialog)
+        }
+        mLayout.cardSelectedCategory.setOnClickListener {
+            mLayout.spinnerCategory.performClick()
+        }
     }
 
     fun setSpendValue(value: Double) {
@@ -87,10 +101,26 @@ class AddSpendDialog(
         }
     }
     
-    private fun setCategoryNull() {
+    fun setCategoryNull() {
         mLayout.apply { 
             ivCategory.gone()
             tvCategory.text = context.getString(BUDGET_R.string.label_select_category)
+        }
+    }
+
+    private fun setupSpinner(data: List<String>, itemAtZero: String? = null, selectedCategoryPosition: Int = 0) {
+        mLayout.spinnerCategory.apply {
+            setSelection(selectedCategoryPosition)
+            setupSpinner(data, itemAtZero, object:
+                BaseSpinnerListener {
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    if (itemAtZero != null) {
+                        listener.onSelectCategory(this@AddSpendDialog, position-1)
+                    } else {
+                        listener.onSelectCategory(this@AddSpendDialog, position)
+                    }
+                }
+            })
         }
     }
 }

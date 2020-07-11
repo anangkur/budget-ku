@@ -24,4 +24,9 @@
     <string name="toolbar_select_category">Select Category</string>
     <string name="error_value_null_or_empty">Value must not null or empty</string>
     <string name="error_category_null_or_empty">Category must not null or empty</string>
+    <string name="error_budget_value_null_or_empty">Budget value must not null or empty</string>
+    <string name="error_projecttitle_null_or_empty">Project title must not null or empty</string>
+    <string name="error_startdate_null_or_empty">Start date must not null or empty</string>
+    <string name="error_enddate_null_or_empty">End date must not null or empty</string>
+    <string name="error_startdate_not_selected">Please select start date first</string>
 </resources>

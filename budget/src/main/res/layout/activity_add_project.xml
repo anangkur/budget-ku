@@ -30,7 +30,9 @@
                         android:id="@+id/et_title"
                         style="@style/EditTextDefault"
                         android:layout_marginTop="10dp"
-                        android:hint="@string/hint_project_title"/>
+                        android:hint="@string/hint_project_title"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -48,7 +50,10 @@
                         android:id="@+id/et_start_date"
                         style="@style/EditTextDefault"
                         android:layout_marginTop="10dp"
-                        android:hint="@string/hint_start_date"/>
+                        android:hint="@string/hint_start_date"
+                        android:inputType="none"
+                        android:clickable="true"
+                        android:focusable="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -58,7 +63,10 @@
                         android:id="@+id/et_end_date"
                         style="@style/EditTextDefault"
                         android:layout_marginTop="20dp"
-                        android:hint="@string/hint_end_date"/>
+                        android:hint="@string/hint_end_date"
+                        android:inputType="none"
+                        android:clickable="true"
+                        android:focusable="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -67,11 +75,18 @@
                 android:layout_width="match_parent"/>
 
             <LinearLayout
-                style="@style/LinearVerticalWrap"
-                android:layout_marginTop="20dp">
+                style="@style/LinearVerticalWrap">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_category"
                     style="@style/RecyclerWrapHeight"/>
+                <TextView
+                    android:id="@+id/tv_error_category"
+                    style="@style/TextRegularNormal"
+                    android:textColor="@color/red"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    tools:text="@string/app_name"
+                    android:visibility="gone"/>
                 <com.anangkur.materialloadingbutton.MaterialLoadingButton
                     android:id="@+id/btn_add_category"
                     style="@style/ButtonDefault"
@@ -83,7 +98,6 @@
                     app:mlb_defaultColor="@color/white"
                     app:mlb_strokeWidth="1dp"/>
             </LinearLayout>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

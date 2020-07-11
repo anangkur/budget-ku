@@ -1,6 +1,5 @@
 package com.anangkur.budgetku.budget.view.detailProject
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
@@ -12,13 +11,10 @@ import com.anangkur.budgetku.budget.mapper.BudgetMapper
 import com.anangkur.budgetku.budget.mapper.CategoryMapper
 import com.anangkur.budgetku.budget.mapper.SpendCategoryMapper
 import com.anangkur.budgetku.budget.model.BudgetUiModel
-import com.anangkur.budgetku.budget.model.CategoryUiModel
 import com.anangkur.budgetku.budget.model.SpendCategoryUiModel
-import com.anangkur.budgetku.budget.utils.AddSpendDialogActionListener
-import com.anangkur.budgetku.budget.utils.AddSpendDialog
-import com.anangkur.budgetku.budget.utils.showAddSpendDialog
+import com.anangkur.budgetku.budget.view.dialog.addSpend.AddSpendDialogActionListener
+import com.anangkur.budgetku.budget.view.dialog.addSpend.AddSpendDialog
 import com.anangkur.budgetku.budget.view.detailSpend.DetailSpendActivity
-import com.anangkur.budgetku.budget.view.selectCategory.SelectCategoryActivity
 import com.anangkur.budgetku.calcDialog.AddSpendValueListener
 import com.anangkur.budgetku.calcDialog.CalcDialog
 import com.anangkur.budgetku.presentation.features.budget.DetailProjectViewModel
@@ -29,7 +25,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.math.BigDecimal
 
 class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailProjectViewModel>(),
-    DetailProjectActionListener, AddSpendDialogActionListener {
+    DetailProjectActionListener,
+    AddSpendDialogActionListener {
 
     override val mViewModel: DetailProjectViewModel
         get() = obtainViewModel(DetailProjectViewModel::class.java)
@@ -50,7 +47,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
     }
 
     override fun onClickAddSpend() {
-        addSpendDialog = showAddSpendDialog(addSpendDialog, this, mViewModel.spendValue)
+        addSpendDialog?.show()
     }
 
     override fun onClickSpendCategory(data: SpendCategoryUiModel) {
@@ -65,24 +62,8 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
         observeViewModel()
         mViewModel.createDummyBudget()
         mViewModel.createDummyListSpendCategory()
+        mViewModel.createDummyListCategory()
         mLayout.btnAddSpend.setOnClickListener { this.onClickAddSpend() }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == SelectCategoryActivity.SELECT_CATEGORY_REQ_CODE
-            && resultCode == SelectCategoryActivity.SELECT_CATEGORY_RES_CODE) {
-            val category = data?.getParcelableExtra<CategoryUiModel>(SelectCategoryActivity.EXTRA_CATEGORY)
-            category?.let {
-                mViewModel.category = categoryMapper.mapFromIntent(it)
-                addSpendDialog?.setupButtonSaveEnable(
-                    isValueNullOrEmpty = mViewModel.spendValue <= 0.0,
-                    isCategoryNullOrEmpty = mViewModel.category == null
-                )
-                addSpendDialog?.setCategory(it)
-            }
-        }
     }
 
     private fun observeViewModel() {
@@ -92,6 +73,9 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
             })
             budgetPublicObserver.observe(this@DetailProjectActivity, Observer {
                 setupBudgetView(budgetMapper.mapToIntent(it))
+            })
+            listCategoryPublicObserver.observe(this@DetailProjectActivity, Observer {
+                setupAddSpendDialog(it.map { item -> item.title })
             })
         }
     }
@@ -129,7 +113,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
                 dialog.setSpendValue(mViewModel.spendValue)
                 dialog.setupButtonSaveEnable(
                     isValueNullOrEmpty = mViewModel.spendValue <= 0.0,
-                    isCategoryNullOrEmpty = mViewModel.category == null
+                    isCategoryNullOrEmpty = mViewModel.categorySelectedValue == null
                 )
             }
         })
@@ -141,7 +125,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
     override fun onClickSave(dialog: AddSpendDialog) {
         if (dialog.setupButtonSaveEnable(
                 isValueNullOrEmpty = mViewModel.spendValue <= 0.0,
-                isCategoryNullOrEmpty = mViewModel.category == null
+                isCategoryNullOrEmpty = mViewModel.categorySelectedValue == null
             )
         ){
             addSpendDialog = null
@@ -150,7 +134,24 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
         }
     }
 
-    override fun onClickCategory() {
-        SelectCategoryActivity.startActivity(this)
+    override fun onClickCancel(dialog: AddSpendDialog) {
+        dialog.dismiss()
+    }
+
+    override fun onSelectCategory(dialog: AddSpendDialog, position: Int) {
+        mViewModel.apply {
+            categorySelectedPosition = position
+            if (position >= 0) {
+                categorySelectedValue = listCategory[categorySelectedPosition]
+                dialog.setCategory(categoryMapper.mapToIntent(categorySelectedValue!!))
+            } else {
+                categorySelectedValue = null
+                dialog.setCategoryNull()
+            }
+        }
+    }
+
+    private fun setupAddSpendDialog(data: List<String>) {
+        addSpendDialog = AddSpendDialog(this, getString(R.string.label_select_category), data,this)
     }
 }
