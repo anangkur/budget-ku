@@ -50,6 +50,7 @@ object Versions {
     const val calculatorDialogVersion = "2.2.0"
     const val expandableViewVersion = "2.9.2"
     const val currencyEditTextVersion = "1.1"
+    const val materialCalendarVersion = "1.5.1"
 
     const val chuckVersion= "1.1.0"
 
@@ -124,6 +125,7 @@ object Deps {
     const val calculatorDialog = "com.maltaisn:calcdialog:${Versions.calculatorDialogVersion}"
     const val expandableView = "net.cachapa.expandablelayout:expandablelayout:${Versions.expandableViewVersion}"
     const val currencyEditText = "me.abhinay.input:currency-edittext:${Versions.currencyEditTextVersion}"
+    const val materialCalendar = "com.applandeo:material-calendar-view:${Versions.materialCalendarVersion}"
 
     // chuck
     const val chuck = "com.readystatesoftware.chuck:library:${Versions.chuckVersion}"

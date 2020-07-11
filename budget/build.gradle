@@ -6,4 +6,5 @@ dependencies {
     implementation project(':app')
     implementation project(':presentation')
     implementation Deps.expandableView
+    implementation Deps.materialCalendar
 }
