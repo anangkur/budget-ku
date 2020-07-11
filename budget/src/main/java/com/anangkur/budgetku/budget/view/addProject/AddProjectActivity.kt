@@ -16,8 +16,10 @@ import com.anangkur.budgetku.budget.databinding.ActivityAddProjectBinding
 import com.anangkur.budgetku.budget.mapper.CategoryMapper
 import com.anangkur.budgetku.budget.mapper.CategoryProjectMapper
 import com.anangkur.budgetku.budget.model.CategoryProjectUiModel
-import com.anangkur.budgetku.budget.utils.AddCategoryDialog
-import com.anangkur.budgetku.budget.utils.AddCategoryDialogListener
+import com.anangkur.budgetku.budget.model.CategoryUiModel
+import com.anangkur.budgetku.budget.view.dialog.addCategory.AddCategoryDialog
+import com.anangkur.budgetku.budget.view.dialog.addCategory.AddCategoryDialogListener
+import com.anangkur.budgetku.budget.view.selectCategory.SelectCategoryActivity
 import com.anangkur.budgetku.presentation.features.budget.AddProjectViewModel
 import com.anangkur.budgetku.utils.gone
 import com.anangkur.budgetku.utils.obtainViewModel
@@ -64,64 +66,74 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setupAddCategoryDialog()
         setupCategoryProjectAdapter()
         setupTextWatcher()
         observeViewModel()
-        mViewModel.createDummyListCategory()
         mLayout.btnAddCategory.setOnClickListener { this.onClickAddCategory() }
         mLayout.btnSave.setOnClickListener { this.onClickSave() }
         mLayout.etStartDate.setOnClickListener { this.onClickDate(TYPE_START_DATE) }
         mLayout.etEndDate.setOnClickListener { this.onClickDate(TYPE_END_DATE) }
     }
 
-    private fun setupAddCategoryDialog(data: List<String>) {
-        addCategoryDialog = AddCategoryDialog(
-            context = this,
-            data = data,
-            listener = object: AddCategoryDialogListener{
-            override fun onClickCancel(dialog: AddCategoryDialog) {
-                dialog.dismiss()
-            }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-            override fun onClickSave(dialog: AddCategoryDialog) {
-                if (dialog.setupButtonSaveEnable(
-                        mViewModel.categorySelectedValue == null,
-                        mViewModel.budgetValue <= 0
-                    )
-                ) {
-                    mViewModel.addCategoryProject(categoryProjectMapper.mapFromIntent(
-                        CategoryProjectUiModel(
-                            title = mViewModel.categorySelectedValue?.title ?: "",
-                            value = mViewModel.budgetValue,
-                            image = mViewModel.categorySelectedValue?.image ?: ""
-                        )
-                    ))
-                    mViewModel.categorySelectedValue = null
-                    mViewModel.categorySelectedPosition = 0
-                    mViewModel.budgetValue = 0.0
-                    dialog.clearInputtedValue()
-                    dialog.dismiss()
-                    mLayout.tvErrorCategory.gone()
-                }
+        if (requestCode == SelectCategoryActivity.SELECT_CATEGORY_REQ_CODE
+            && resultCode == SelectCategoryActivity.SELECT_CATEGORY_RES_CODE) {
+            val category = data?.getParcelableExtra<CategoryUiModel>(SelectCategoryActivity.EXTRA_CATEGORY)
+            category?.let {
+                mViewModel.categorySelectedValue = categoryMapper.mapFromIntent(it)
+                addCategoryDialog?.setupButtonSaveEnable(
+                    isValueNullOrEmpty = mViewModel.budgetValue <= 0.0,
+                    isCategoryNullOrEmpty = mViewModel.categorySelectedValue == null
+                )
+                addCategoryDialog?.setCategory(it)
             }
+        }
+    }
 
-            override fun onSelectCategory(dialog: AddCategoryDialog, position: Int) {
-                mViewModel.apply {
-                    categorySelectedPosition = position
-                    if (position > 0) {
-                        categorySelectedValue = listCategory[categorySelectedPosition]
-                        dialog.setCategory(categoryMapper.mapToIntent(categorySelectedValue!!))
-                    } else {
-                        categorySelectedValue = null
-                        dialog.setCategoryNull()
+    private fun setupAddCategoryDialog() {
+        addCategoryDialog =
+            AddCategoryDialog(
+                context = this,
+                listener = object :
+                    AddCategoryDialogListener {
+                    override fun onClickCancel(dialog: AddCategoryDialog) {
+                        dialog.dismiss()
                     }
-                }
-            }
 
-            override fun onValueInputted(value: Double) {
-                mViewModel.budgetValue = value
-            }
-        })
+                    override fun onClickSave(dialog: AddCategoryDialog) {
+                        if (dialog.setupButtonSaveEnable(
+                                mViewModel.categorySelectedValue == null,
+                                mViewModel.budgetValue <= 0
+                            )
+                        ) {
+                            mViewModel.addCategoryProject(
+                                categoryProjectMapper.mapFromIntent(
+                                    CategoryProjectUiModel(
+                                        title = mViewModel.categorySelectedValue?.title ?: "",
+                                        value = mViewModel.budgetValue,
+                                        image = mViewModel.categorySelectedValue?.image ?: ""
+                                    )
+                                )
+                            )
+                            mViewModel.categorySelectedValue = null
+                            mViewModel.budgetValue = 0.0
+                            dialog.clearInputtedValue()
+                            dialog.dismiss()
+                            mLayout.tvErrorCategory.gone()
+                        }
+                    }
+
+                    override fun onClickCategory() {
+                        SelectCategoryActivity.startActivity(this@AddProjectActivity)
+                    }
+
+                    override fun onValueInputted(value: Double) {
+                        mViewModel.budgetValue = value
+                    }
+                })
     }
 
     override fun onClickAddCategory() {
@@ -155,7 +167,7 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
     }
 
     override fun onClickDate(type: Int) {
-        var minimumDate: Calendar?
+        val minimumDate: Calendar?
         if (type == TYPE_START_DATE) {
             minimumDate = Calendar.getInstance()
             minimumDate.add(Calendar.DAY_OF_MONTH, -1)
@@ -196,9 +208,6 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
 
     private fun observeViewModel() {
         mViewModel.apply {
-            listCategoryPublicObserver.observe(this@AddProjectActivity, Observer {
-                setupAddCategoryDialog(it.map { listCategory -> listCategory.title })
-            })
             listCategoryProjectPublicObserver.observe(this@AddProjectActivity, Observer {
                 categoryProjectAdapter.setRecyclerData(it.map { item -> categoryProjectMapper.mapToIntent(item) })
             })

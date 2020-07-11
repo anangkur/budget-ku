@@ -16,7 +16,8 @@
             style="@style/CardWrapHeight"
             android:layout_marginTop="10dp"
             app:cardUseCompatPadding="true"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="10dp"
+            android:foreground="?selectableItemBackground">
             <RelativeLayout
                 style="@style/RelativeWrapH"
                 android:padding="10dp">
@@ -35,16 +36,11 @@
                     android:layout_centerVertical="true"/>
                 <ImageView
                     style="@style/ImageViewWrapAll"
-                    android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                    android:src="@drawable/ic_baseline_navigate_next_24"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"/>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
-        <Spinner
-            android:id="@+id/spinner_category"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/white"/>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_budget"
             style="@style/TextInputLayoutDefault"

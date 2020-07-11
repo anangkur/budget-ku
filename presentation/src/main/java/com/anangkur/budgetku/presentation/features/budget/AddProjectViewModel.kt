@@ -10,31 +10,13 @@ import kotlin.collections.ArrayList
 
 class AddProjectViewModel : ViewModel() {
 
-    var categorySelectedPosition = 0
-    var categorySelectedValue: CategoryView? = null
     var budgetValue = 0.0
     var startDate: Calendar? = null
     var endDate: Calendar? = null
 
-    val listCategory = ArrayList<CategoryView>()
+    var categorySelectedValue: CategoryView? = null
+
     private val listCategoryProject = ArrayList<CategoryProjectView>()
-
-    private val listCategoryInternalSetter = MutableLiveData<List<CategoryView>>()
-    val listCategoryPublicObserver: LiveData<List<CategoryView>> = listCategoryInternalSetter
-    fun createDummyListCategory() {
-        listCategory.clear()
-        for ( i in 0 until 10 ) {
-            listCategory.add(
-                CategoryView(
-                    title = "Category $i",
-                    image = "",
-                    child = listOf()
-                )
-            )
-        }
-        listCategoryInternalSetter.postValue(listCategory)
-    }
-
     private val listCategoryProjectInternalSetter = MutableLiveData<List<CategoryProjectView>>()
     val listCategoryProjectPublicObserver: LiveData<List<CategoryProjectView>> = listCategoryProjectInternalSetter
     fun addCategoryProject(data: CategoryProjectView) {
