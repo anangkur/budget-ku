@@ -2,7 +2,7 @@ package com.anangkur.budgetku.data.repository.auth
 
 import android.net.Uri
 import com.anangkur.budgetku.data.BaseFirebaseListener
-import com.anangkur.budgetku.data.model.UserEntity
+import com.anangkur.budgetku.data.model.auth.UserEntity
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
 

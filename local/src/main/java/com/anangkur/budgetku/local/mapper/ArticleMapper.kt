@@ -1,6 +1,6 @@
 package com.anangkur.budgetku.local.mapper
 
-import com.anangkur.budgetku.data.model.ArticleEntity
+import com.anangkur.budgetku.data.model.news.ArticleEntity
 import com.anangkur.budgetku.local.model.ArticleCached
 
 class ArticleMapper : Mapper<ArticleCached, ArticleEntity> {

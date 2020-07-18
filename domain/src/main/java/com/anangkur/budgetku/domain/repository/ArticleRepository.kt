@@ -1,6 +1,6 @@
 package com.anangkur.budgetku.domain.repository
 
-import com.anangkur.budgetku.domain.model.Article
+import com.anangkur.budgetku.domain.model.news.Article
 import com.anangkur.budgetku.domain.model.BaseResult
 
 interface ArticleRepository {

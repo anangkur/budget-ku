@@ -1,14 +1,17 @@
-package com.anangkur.budgetku.remote.mapper
+package com.anangkur.budgetku.remote.mapper.news
 
-import com.anangkur.budgetku.data.model.ArticleEntity
+import com.anangkur.budgetku.data.model.news.ArticleEntity
+import com.anangkur.budgetku.remote.mapper.Mapper
 import com.anangkur.budgetku.remote.model.news.ArticleModel
 import java.lang.UnsupportedOperationException
 
-class ArticleMapper: Mapper<ArticleModel, ArticleEntity> {
+class ArticleMapper:
+    Mapper<ArticleModel, ArticleEntity> {
 
     companion object{
         private var INSTANCE: ArticleMapper? = null
-        fun getInstance() = INSTANCE ?: ArticleMapper()
+        fun getInstance() = INSTANCE
+            ?: ArticleMapper()
     }
 
     override fun mapFromRemote(type: ArticleModel): ArticleEntity {

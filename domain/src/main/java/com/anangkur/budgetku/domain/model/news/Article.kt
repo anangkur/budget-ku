@@ -1,4 +1,4 @@
-package com.anangkur.budgetku.domain.model
+package com.anangkur.budgetku.domain.model.news
 
 data class Article(
     val id: Int = 0,

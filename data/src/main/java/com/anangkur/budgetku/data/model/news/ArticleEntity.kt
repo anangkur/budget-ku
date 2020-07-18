@@ -1,4 +1,4 @@
-package com.anangkur.budgetku.data.model
+package com.anangkur.budgetku.data.model.news
 
 data class ArticleEntity(
     val id: Int = 0,

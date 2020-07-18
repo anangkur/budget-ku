@@ -4,7 +4,7 @@ import android.net.Uri
 import com.anangkur.budgetku.data.BaseFirebaseListener
 import com.anangkur.budgetku.data.repository.auth.AuthDataSource
 import com.anangkur.budgetku.data.repository.auth.AuthLocal
-import com.anangkur.budgetku.domain.model.User
+import com.anangkur.budgetku.domain.model.auth.User
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
 import java.lang.UnsupportedOperationException

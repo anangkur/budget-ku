@@ -21,10 +21,7 @@ import com.anangkur.budgetku.budget.view.dialog.addCategory.AddCategoryDialog
 import com.anangkur.budgetku.budget.view.dialog.addCategory.AddCategoryDialogListener
 import com.anangkur.budgetku.budget.view.selectCategory.SelectCategoryActivity
 import com.anangkur.budgetku.presentation.features.budget.AddProjectViewModel
-import com.anangkur.budgetku.utils.gone
-import com.anangkur.budgetku.utils.obtainViewModel
-import com.anangkur.budgetku.utils.setupRecyclerViewLinear
-import com.anangkur.budgetku.utils.visible
+import com.anangkur.budgetku.utils.*
 import com.annimon.stream.Stream
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder
@@ -166,7 +163,12 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
                 mLayout.tvErrorCategory.text = getString(R.string.error_category_null_or_empty)
             }
             else -> {
-                finish()
+                mViewModel.createProject(
+                    title = mLayout.etTitle.text.toString(),
+                    category = mViewModel.getCategoryProject(),
+                    endDate = mLayout.etEndDate.text.toString(),
+                    startDate = mLayout.etStartDate.text.toString()
+                )
             }
         }
     }
@@ -216,6 +218,19 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
         mViewModel.apply {
             listCategoryProjectPublicObserver.observe(this@AddProjectActivity, Observer {
                 categoryProjectAdapter.setRecyclerData(it.map { item -> categoryProjectMapper.mapToIntent(item) })
+            })
+            loadingCreateProject.observe(this@AddProjectActivity, Observer {
+                if (it)
+                    mLayout.btnSave.showProgress()
+                else
+                    mLayout.btnSave.hideProgress()
+            })
+            successCreateProject.observe(this@AddProjectActivity, Observer {
+                showToastShort(getString(R.string.message_success_create_project))
+                finish()
+            })
+            errorCreateProject.observe(this@AddProjectActivity, Observer {
+                showSnackbarShort(it)
             })
         }
     }

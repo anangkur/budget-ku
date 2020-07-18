@@ -4,7 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anangkur.budgetku.domain.BaseFirebaseListener
-import com.anangkur.budgetku.domain.model.User
+import com.anangkur.budgetku.domain.model.auth.User
 import com.anangkur.budgetku.domain.repository.AuthRepository
 import com.anangkur.budgetku.presentation.mapper.UserMapper
 import com.anangkur.budgetku.presentation.model.auth.UserView

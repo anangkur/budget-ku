@@ -1,17 +1,19 @@
-package com.anangkur.budgetku.remote.mapper
+package com.anangkur.budgetku.data.mapper.auth
 
-import com.anangkur.budgetku.data.model.UserEntity
-import com.anangkur.budgetku.remote.model.auth.UserRemoteModel
+import com.anangkur.budgetku.data.mapper.Mapper
+import com.anangkur.budgetku.data.model.auth.UserEntity
+import com.anangkur.budgetku.domain.model.auth.User
 
-class UserMapper: Mapper<UserRemoteModel, UserEntity> {
+class UserMapper: Mapper<UserEntity, User> {
 
     companion object{
         private var INSTANCE: UserMapper? = null
-        fun getInstance() = INSTANCE ?: UserMapper()
+        fun getInstance() = INSTANCE
+            ?: UserMapper()
     }
 
-    override fun mapFromRemote(type: UserRemoteModel): UserEntity {
-        return UserEntity(
+    override fun mapFromEntity(type: UserEntity): User {
+        return User(
             userId = type.userId,
             name = type.name,
             firebaseToken = type.firebaseToken,
@@ -23,8 +25,8 @@ class UserMapper: Mapper<UserRemoteModel, UserEntity> {
         )
     }
 
-    override fun mapToRemote(type: UserEntity): UserRemoteModel {
-        return UserRemoteModel(
+    override fun mapToEntity(type: User): UserEntity {
+        return UserEntity(
             userId = type.userId,
             name = type.name,
             firebaseToken = type.firebaseToken,

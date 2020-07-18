@@ -1,13 +1,16 @@
-package com.anangkur.budgetku.data.mapper
+package com.anangkur.budgetku.data.mapper.news
 
-import com.anangkur.budgetku.data.model.ArticleEntity
-import com.anangkur.budgetku.domain.model.Article
+import com.anangkur.budgetku.data.mapper.Mapper
+import com.anangkur.budgetku.data.model.news.ArticleEntity
+import com.anangkur.budgetku.domain.model.news.Article
 
-class ArticleMapper: Mapper<ArticleEntity, Article> {
+class ArticleMapper:
+    Mapper<ArticleEntity, Article> {
 
     companion object{
         private var INSTANCE: ArticleMapper? = null
-        fun getInstance() = INSTANCE ?:ArticleMapper()
+        fun getInstance() = INSTANCE
+            ?: ArticleMapper()
     }
 
     override fun mapToEntity(type: Article): ArticleEntity {

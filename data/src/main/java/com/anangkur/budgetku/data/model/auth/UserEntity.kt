@@ -1,6 +1,6 @@
-package com.anangkur.budgetku.domain.model
+package com.anangkur.budgetku.data.model.auth
 
-data class User(
+data class UserEntity(
     var userId: String = "",
     var email: String = "",
     var name: String = "",

@@ -1,11 +1,11 @@
 package com.anangkur.budgetku.remote.repository
 
-import com.anangkur.budgetku.data.model.ArticleEntity
+import com.anangkur.budgetku.data.model.news.ArticleEntity
 import com.anangkur.budgetku.data.model.BaseResultEntity
 import com.anangkur.budgetku.data.repository.news.ArticleRemote
 import com.anangkur.budgetku.remote.ApiService
 import com.anangkur.budgetku.remote.BaseDataSource
-import com.anangkur.budgetku.remote.mapper.ArticleMapper
+import com.anangkur.budgetku.remote.mapper.news.ArticleMapper
 import com.anangkur.budgetku.remote.mapper.BaseResultMapper
 import com.anangkur.budgetku.remote.model.base.BaseResultModel
 

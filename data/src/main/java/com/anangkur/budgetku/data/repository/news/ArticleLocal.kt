@@ -1,6 +1,6 @@
 package com.anangkur.budgetku.data.repository.news
 
-import com.anangkur.budgetku.data.model.ArticleEntity
+import com.anangkur.budgetku.data.model.news.ArticleEntity
 
 interface ArticleLocal {
     suspend fun insertData(data: List<ArticleEntity>)
