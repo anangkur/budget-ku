@@ -15,7 +15,8 @@ class CategoryProjectMapper: Mapper<CategoryProjectUiModel, CategoryProjectView>
         return CategoryProjectUiModel(
             title = type.title,
             image = type.image,
-            value = type.value
+            value = type.value,
+            spend = type.spend
         )
     }
 
@@ -23,7 +24,8 @@ class CategoryProjectMapper: Mapper<CategoryProjectUiModel, CategoryProjectView>
         return CategoryProjectView(
             title = type.title,
             image = type.image,
-            value = type.value
+            value = type.value,
+            spend = type.spend
         )
     }
 }

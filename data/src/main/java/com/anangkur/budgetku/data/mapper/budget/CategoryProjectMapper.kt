@@ -16,7 +16,8 @@ class CategoryProjectMapper:
         return CategoryProjectEntity(
             title = type.title,
             image = type.image,
-            value = type.value
+            value = type.value,
+            spend = type.spend
         )
     }
 
@@ -24,7 +25,8 @@ class CategoryProjectMapper:
         return CategoryProject(
             title = type.title,
             image = type.image,
-            value = type.value
+            value = type.value,
+            spend = type.spend
         )
     }
 }

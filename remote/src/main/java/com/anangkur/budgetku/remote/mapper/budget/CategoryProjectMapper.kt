@@ -16,7 +16,8 @@ class CategoryProjectMapper: Mapper<CategoryProjectRemote, CategoryProjectEntity
         return CategoryProjectEntity(
             title = type.title,
             value = type.value,
-            image = type.image
+            image = type.image,
+            spend = type.spend
         )
     }
 
@@ -24,7 +25,8 @@ class CategoryProjectMapper: Mapper<CategoryProjectRemote, CategoryProjectEntity
         return CategoryProjectRemote(
             title = type.title,
             value = type.value,
-            image = type.image
+            image = type.image,
+            spend = type.spend
         )
     }
 }

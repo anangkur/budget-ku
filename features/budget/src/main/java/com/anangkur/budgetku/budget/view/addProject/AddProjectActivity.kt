@@ -111,7 +111,8 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
                                     CategoryProjectUiModel(
                                         title = mViewModel.categorySelectedValue?.title ?: "",
                                         value = mViewModel.budgetValue,
-                                        image = mViewModel.categorySelectedValue?.image ?: ""
+                                        image = mViewModel.categorySelectedValue?.image ?: "",
+                                        spend = 0.0
                                     )
                                 )
                             )

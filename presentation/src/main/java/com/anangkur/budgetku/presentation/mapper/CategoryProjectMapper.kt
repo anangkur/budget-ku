@@ -14,7 +14,8 @@ class CategoryProjectMapper : Mapper<CategoryProjectView, CategoryProject> {
         return CategoryProjectView(
             title = type.title,
             image = type.image,
-            value = type.value
+            value = type.value,
+            spend = type.spend
         )
     }
 
@@ -22,7 +23,8 @@ class CategoryProjectMapper : Mapper<CategoryProjectView, CategoryProject> {
         return CategoryProject(
             title = type.title,
             image = type.image,
-            value = type.value
+            value = type.value,
+            spend = type.spend
         )
     }
 }

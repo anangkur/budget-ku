@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anangkur.budgetku.base.BaseActivity
 import com.anangkur.budgetku.dashboard.R
 import com.anangkur.budgetku.dashboard.databinding.ActivityHomeBinding
-import com.anangkur.budgetku.dashboard.mapper.ItemProjectMapper
+import com.anangkur.budgetku.dashboard.mapper.ProjectMapper
 import com.anangkur.budgetku.dashboard.mapper.UserMapper
 import com.anangkur.budgetku.dashboard.model.ProjectIntent
 import com.anangkur.budgetku.dashboard.model.UserIntent
@@ -34,7 +34,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
 
     private lateinit var projectAdapter: ProjectAdapter
 
-    private val projectMapper = ItemProjectMapper.getInstance()
+    private val projectMapper = ProjectMapper.getInstance()
     private val userMapper = UserMapper.getInstance()
 
     override fun setupView(): ActivityHomeBinding {
