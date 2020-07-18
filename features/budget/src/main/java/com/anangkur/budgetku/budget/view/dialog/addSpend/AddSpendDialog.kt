@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import com.anangkur.budgetku.base.BaseSpinnerListener
 import com.anangkur.budgetku.budget.R as BUDGET_R
 import com.anangkur.budgetku.budget.databinding.DialogAddSpendBinding
-import com.anangkur.budgetku.budget.model.CategoryUiModel
+import com.anangkur.budgetku.model.CategoryProjectIntent
 import com.anangkur.budgetku.utils.*
 
 class AddSpendDialog(
@@ -57,7 +57,7 @@ class AddSpendDialog(
         mLayout.etSpend.setText(defaultValue.currencyFormatToRupiah())
     }
 
-    fun setCategory(data: CategoryUiModel) {
+    fun setCategory(data: CategoryProjectIntent) {
         mLayout.apply {
             ivCategory.visible()
             ivCategory.setImageUrl(data.image)

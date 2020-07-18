@@ -1,8 +1,8 @@
 package com.anangkur.budgetku.budget.view.detailProject
 
-import com.anangkur.budgetku.budget.model.SpendCategoryUiModel
+import com.anangkur.budgetku.model.CategoryProjectIntent
 
 interface DetailProjectActionListener {
     fun onClickAddSpend()
-    fun onClickSpendCategory(data: SpendCategoryUiModel)
+    fun onClickSpendCategory(data: CategoryProjectIntent)
 }

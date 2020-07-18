@@ -16,6 +16,7 @@ class ProjectMapper(
 
     override fun mapFromRemote(type: ProjectRemote): ProjectEntity {
         return ProjectEntity(
+            id = type.id,
             title = type.title,
             startDate = type.startDate,
             endDate = type.endDate,
@@ -27,6 +28,7 @@ class ProjectMapper(
 
     override fun mapToRemote(type: ProjectEntity): ProjectRemote {
         return ProjectRemote(
+            id = type.id,
             title = type.title,
             startDate = type.startDate,
             endDate = type.endDate,

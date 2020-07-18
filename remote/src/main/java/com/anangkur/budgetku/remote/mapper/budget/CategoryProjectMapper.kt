@@ -14,6 +14,7 @@ class CategoryProjectMapper: Mapper<CategoryProjectRemote, CategoryProjectEntity
 
     override fun mapFromRemote(type: CategoryProjectRemote): CategoryProjectEntity {
         return CategoryProjectEntity(
+            id = type.id,
             title = type.title,
             value = type.value,
             image = type.image,
@@ -23,6 +24,7 @@ class CategoryProjectMapper: Mapper<CategoryProjectRemote, CategoryProjectEntity
 
     override fun mapToRemote(type: CategoryProjectEntity): CategoryProjectRemote {
         return CategoryProjectRemote(
+            id = type.id,
             title = type.title,
             value = type.value,
             image = type.image,

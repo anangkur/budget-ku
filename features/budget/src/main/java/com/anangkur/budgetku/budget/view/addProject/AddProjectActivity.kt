@@ -14,12 +14,12 @@ import com.anangkur.budgetku.budget.R
 import com.anangkur.budgetku.R as appR
 import com.anangkur.budgetku.budget.databinding.ActivityAddProjectBinding
 import com.anangkur.budgetku.budget.mapper.CategoryMapper
-import com.anangkur.budgetku.budget.mapper.CategoryProjectMapper
-import com.anangkur.budgetku.budget.model.CategoryProjectUiModel
 import com.anangkur.budgetku.budget.model.CategoryUiModel
 import com.anangkur.budgetku.budget.view.dialog.addCategory.AddCategoryDialog
 import com.anangkur.budgetku.budget.view.dialog.addCategory.AddCategoryDialogListener
 import com.anangkur.budgetku.budget.view.selectCategory.SelectCategoryActivity
+import com.anangkur.budgetku.mapper.CategoryProjectMapper
+import com.anangkur.budgetku.model.CategoryProjectIntent
 import com.anangkur.budgetku.presentation.features.budget.AddProjectViewModel
 import com.anangkur.budgetku.utils.*
 import com.annimon.stream.Stream
@@ -108,11 +108,13 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
                         ) {
                             mViewModel.addCategoryProject(
                                 categoryProjectMapper.mapFromIntent(
-                                    CategoryProjectUiModel(
+                                    CategoryProjectIntent(
+                                        id = "",
                                         title = mViewModel.categorySelectedValue?.title ?: "",
                                         value = mViewModel.budgetValue,
                                         image = mViewModel.categorySelectedValue?.image ?: "",
-                                        spend = 0.0
+                                        spend = 0.0,
+                                        remaining = 0.0
                                     )
                                 )
                             )

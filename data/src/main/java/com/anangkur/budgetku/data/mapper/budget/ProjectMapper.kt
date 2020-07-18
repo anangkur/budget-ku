@@ -15,6 +15,7 @@ class ProjectMapper(
 
     override fun mapToEntity(type: Project): ProjectEntity {
         return ProjectEntity(
+            id = type.id,
             title = type.title,
             listCategory = type.listCategory.map { categoryProjectMapper.mapToEntity(it) },
             endDate = type.endDate,
@@ -24,6 +25,7 @@ class ProjectMapper(
 
     override fun mapFromEntity(type: ProjectEntity): Project {
         return Project(
+            id = type.id,
             title = type.title,
             listCategory = type.listCategory.map { categoryProjectMapper.mapFromEntity(it) },
             endDate = type.endDate,

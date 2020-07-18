@@ -14,6 +14,7 @@ class ProjectMapper(
 
     override fun mapToView(type: Project): ProjectView {
         return ProjectView(
+            id = type.id,
             title = type.title,
             startDate = type.startDate,
             endDate = type.endDate,
@@ -25,6 +26,7 @@ class ProjectMapper(
 
     override fun mapFromView(type: ProjectView): Project {
         return Project(
+            id = type.id,
             title = type.title,
             startDate = type.startDate,
             endDate = type.endDate,

@@ -67,9 +67,15 @@ class BudgetRemoteRepository(
                 .collection(COLLECTION_PROJECT)
                 .document(getCreatedAt())
                 .set(ProjectRemote(
+                    id = getCreatedAt(),
                     title = title,
                     endDate = endDate,
-                    listCategory = category.map { categoryProjectMapper.mapToRemote(it) },
+                    listCategory = category.map {
+                        val categoryProject = it.apply {
+                            id = getCreatedAt()
+                        }
+                        categoryProjectMapper.mapToRemote(categoryProject)
+                    },
                     startDate = startDate
                 ))
                 .addOnSuccessListener {

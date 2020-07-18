@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.anangkur.budgetku.base.BaseAdapter
 import com.anangkur.budgetku.dashboard.databinding.ItemProjectBinding
-import com.anangkur.budgetku.dashboard.model.ProjectIntent
+import com.anangkur.budgetku.model.ProjectIntent
 
 class ProjectAdapter(
     private val listener: HomeActivityActionListener

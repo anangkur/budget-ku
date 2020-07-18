@@ -14,6 +14,7 @@ class CategoryProjectMapper:
 
     override fun mapToEntity(type: CategoryProject): CategoryProjectEntity {
         return CategoryProjectEntity(
+            id = type.id,
             title = type.title,
             image = type.image,
             value = type.value,
@@ -23,6 +24,7 @@ class CategoryProjectMapper:
 
     override fun mapFromEntity(type: CategoryProjectEntity): CategoryProject {
         return CategoryProject(
+            id = type.id,
             title = type.title,
             image = type.image,
             value = type.value,

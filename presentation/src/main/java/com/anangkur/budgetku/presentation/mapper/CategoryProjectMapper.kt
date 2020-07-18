@@ -12,6 +12,7 @@ class CategoryProjectMapper : Mapper<CategoryProjectView, CategoryProject> {
 
     override fun mapToView(type: CategoryProject): CategoryProjectView {
         return CategoryProjectView(
+            id = type.id,
             title = type.title,
             image = type.image,
             value = type.value,
@@ -21,6 +22,7 @@ class CategoryProjectMapper : Mapper<CategoryProjectView, CategoryProject> {
 
     override fun mapFromView(type: CategoryProjectView): CategoryProject {
         return CategoryProject(
+            id = type.id,
             title = type.title,
             image = type.image,
             value = type.value,
