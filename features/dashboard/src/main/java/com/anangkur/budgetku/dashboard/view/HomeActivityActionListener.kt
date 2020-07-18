@@ -1,9 +1,9 @@
 package com.anangkur.budgetku.dashboard.view
 
-import com.anangkur.budgetku.dashboard.model.ItemProjectIntent
+import com.anangkur.budgetku.dashboard.model.ProjectIntent
 
 interface HomeActivityActionListener {
     fun onClickAddProject()
     fun onClickEditProfile()
-    fun onClickItem(data: ItemProjectIntent)
+    fun onClickItem(data: ProjectIntent)
 }

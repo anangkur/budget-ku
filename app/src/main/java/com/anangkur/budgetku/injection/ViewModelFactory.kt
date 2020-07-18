@@ -35,7 +35,7 @@ class ViewModelFactory(
                 isAssignableFrom(SignInViewModel::class.java) -> SignInViewModel(authRepository)
                 isAssignableFrom(SignUpViewModel::class.java) -> SignUpViewModel(authRepository)
 
-                isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel()
+                isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(budgetRepository, authRepository)
 
                 isAssignableFrom(DetailProjectViewModel::class.java) -> DetailProjectViewModel()
                 isAssignableFrom(DetailSpendViewModel::class.java) -> DetailSpendViewModel()

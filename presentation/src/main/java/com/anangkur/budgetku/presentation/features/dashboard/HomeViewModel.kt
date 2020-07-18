@@ -3,25 +3,41 @@ package com.anangkur.budgetku.presentation.features.dashboard
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.anangkur.budgetku.presentation.model.dashboard.ItemProjectView
+import com.anangkur.budgetku.domain.BaseFirebaseListener
+import com.anangkur.budgetku.domain.model.budget.Project
+import com.anangkur.budgetku.domain.repository.AuthRepository
+import com.anangkur.budgetku.domain.repository.BudgetRepository
+import com.anangkur.budgetku.presentation.mapper.ProjectMapper
 import com.anangkur.budgetku.presentation.model.auth.UserView
+import com.anangkur.budgetku.presentation.model.dashboard.ProjectView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class HomeViewModel: ViewModel() {
-    private val listProjectInternalSetter = MutableLiveData<List<ItemProjectView>>()
-    val listProjectPublicObserver: LiveData<List<ItemProjectView>> = listProjectInternalSetter
-    fun createDummyListProject() {
-        val listProject = ArrayList<ItemProjectView>()
-        for (i in 0 until 10) {
-            listProject.add(
-                ItemProjectView(
-                    title = "Dummy Project",
-                    period = "20 Jun 2020 - 20 Jul 2020",
-                    progress = 50,
-                    spendPercentage = "Spend 50%"
-                )
-            )
+class HomeViewModel(
+    private val budgetRepository: BudgetRepository,
+    private val authRepository: AuthRepository
+): ViewModel() {
+
+    private val projectMapper = ProjectMapper.getInstance()
+
+    val loadingGetProject = MutableLiveData<Boolean>()
+    val successGetProject = MutableLiveData<List<ProjectView>>()
+    val errorGetProject = MutableLiveData<String>()
+    fun getProject() {
+        CoroutineScope(Dispatchers.IO).launch {
+            budgetRepository.getProject(object : BaseFirebaseListener<List<Project>> {
+                override fun onLoading(isLoading: Boolean) {
+                    loadingGetProject.postValue(isLoading)
+                }
+                override fun onSuccess(data: List<Project>) {
+                    successGetProject.postValue(data.map { projectMapper.mapToView(it) })
+                }
+                override fun onFailed(errorMessage: String) {
+                    errorGetProject.postValue(errorMessage)
+                }
+            })
         }
-        listProjectInternalSetter.postValue(listProject)
     }
 
     private val userInternalSetter = MutableLiveData<UserView>()

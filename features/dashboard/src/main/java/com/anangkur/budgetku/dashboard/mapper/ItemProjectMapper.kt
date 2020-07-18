@@ -1,31 +1,31 @@
 package com.anangkur.budgetku.dashboard.mapper
 
-import com.anangkur.budgetku.dashboard.model.ItemProjectIntent
+import com.anangkur.budgetku.dashboard.model.ProjectIntent
 import com.anangkur.budgetku.mapper.Mapper
-import com.anangkur.budgetku.presentation.model.dashboard.ItemProjectView
+import com.anangkur.budgetku.presentation.model.dashboard.ProjectView
 
-class ItemProjectMapper: Mapper<ItemProjectIntent, ItemProjectView> {
+class ItemProjectMapper: Mapper<ProjectIntent, ProjectView> {
 
     companion object{
         private var INSTANCE: ItemProjectMapper? = null
         fun getInstance() = INSTANCE ?: ItemProjectMapper()
     }
 
-    override fun mapToIntent(type: ItemProjectView): ItemProjectIntent {
-        return ItemProjectIntent(
+    override fun mapToIntent(type: ProjectView): ProjectIntent {
+        return ProjectIntent(
             title = type.title,
-            spendPercentage = type.spendPercentage,
-            progress = type.progress,
-            period = type.period
+            spendPercentage = "",
+            progress = 0,
+            period = "${type.startDate} - ${type.endDate}"
         )
     }
 
-    override fun mapFromIntent(type: ItemProjectIntent): ItemProjectView {
-        return ItemProjectView(
-            title = type.title,
-            spendPercentage = type.spendPercentage,
-            progress = type.progress,
-            period = type.period
+    override fun mapFromIntent(type: ProjectIntent): ProjectView {
+        return ProjectView(
+            title = type.title ?: "",
+            endDate = "",
+            listCategory = emptyList(),
+            startDate = ""
         )
     }
 }

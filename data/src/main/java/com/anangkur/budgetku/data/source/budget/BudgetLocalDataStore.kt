@@ -5,6 +5,7 @@ import com.anangkur.budgetku.data.repository.budget.BudgetLocal
 import com.anangkur.budgetku.domain.BaseFirebaseListener
 import com.anangkur.budgetku.domain.model.budget.Category
 import com.anangkur.budgetku.domain.model.budget.CategoryProject
+import com.anangkur.budgetku.domain.model.budget.Project
 
 class BudgetLocalDataStore(
     private val budgetLocal: BudgetLocal
@@ -29,6 +30,10 @@ class BudgetLocalDataStore(
     }
 
     override fun getCategory(listener: BaseFirebaseListener<List<Category>>) {
+        throw UnsupportedOperationException()
+    }
+
+    override fun getProject(listener: BaseFirebaseListener<List<Project>>) {
         throw UnsupportedOperationException()
     }
 }

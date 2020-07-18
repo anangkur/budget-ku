@@ -1,6 +1,6 @@
 package com.anangkur.budgetku.dashboard.model
 
-data class ItemProjectIntent(
+data class ProjectIntent(
     val title: String? = "",
     val spendPercentage: String? = "",
     val period: String? = "",

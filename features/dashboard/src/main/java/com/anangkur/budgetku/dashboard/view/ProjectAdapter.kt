@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.anangkur.budgetku.base.BaseAdapter
 import com.anangkur.budgetku.dashboard.databinding.ItemProjectBinding
-import com.anangkur.budgetku.dashboard.model.ItemProjectIntent
+import com.anangkur.budgetku.dashboard.model.ProjectIntent
 
 class ProjectAdapter(
     private val listener: HomeActivityActionListener
-): BaseAdapter<ItemProjectBinding, ItemProjectIntent>() {
+): BaseAdapter<ItemProjectBinding, ProjectIntent>() {
     override fun bindView(parent: ViewGroup): ItemProjectBinding {
         return ItemProjectBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     }
 
-    override fun bind(data: ItemProjectIntent, itemView: ItemProjectBinding, position: Int) {
+    override fun bind(data: ProjectIntent, itemView: ItemProjectBinding, position: Int) {
         itemView.apply {
             tvProjectName.text = data.title
             tvSpendPercentage.text = data.spendPercentage

@@ -2,12 +2,15 @@ package com.anangkur.budgetku.data.source.budget
 
 import com.anangkur.budgetku.data.mapper.budget.CategoryMapper
 import com.anangkur.budgetku.data.mapper.budget.CategoryProjectMapper
+import com.anangkur.budgetku.data.mapper.budget.ProjectMapper
 import com.anangkur.budgetku.data.model.budget.CategoryEntity
+import com.anangkur.budgetku.data.model.budget.ProjectEntity
 import com.anangkur.budgetku.data.repository.budget.BudgetDataStore
 import com.anangkur.budgetku.data.repository.budget.BudgetRemote
 import com.anangkur.budgetku.domain.BaseFirebaseListener
 import com.anangkur.budgetku.domain.model.budget.Category
 import com.anangkur.budgetku.domain.model.budget.CategoryProject
+import com.anangkur.budgetku.domain.model.budget.Project
 
 class BudgetRemoteDataStore(
     private val budgetRemote: BudgetRemote
@@ -15,6 +18,7 @@ class BudgetRemoteDataStore(
 
     private val categoryProjectMapper = CategoryProjectMapper.getInstance()
     private val categoryMapper = CategoryMapper.getInstance()
+    private val projectMapper = ProjectMapper.getInstance()
 
     companion object{
         private var INSTANCE: BudgetRemoteDataStore? = null
@@ -56,6 +60,20 @@ class BudgetRemoteDataStore(
             }
             override fun onSuccess(data: List<CategoryEntity>) {
                 listener.onSuccess(data.map { categoryMapper.mapFromEntity(it) })
+            }
+            override fun onFailed(errorMessage: String) {
+                listener.onFailed(errorMessage)
+            }
+        })
+    }
+
+    override fun getProject(listener: BaseFirebaseListener<List<Project>>) {
+        budgetRemote.getProject(object : com.anangkur.budgetku.data.BaseFirebaseListener<List<ProjectEntity>> {
+            override fun onLoading(isLoading: Boolean) {
+                listener.onLoading(isLoading)
+            }
+            override fun onSuccess(data: List<ProjectEntity>) {
+                listener.onSuccess(data.map { projectMapper.mapFromEntity(it) })
             }
             override fun onFailed(errorMessage: String) {
                 listener.onFailed(errorMessage)
