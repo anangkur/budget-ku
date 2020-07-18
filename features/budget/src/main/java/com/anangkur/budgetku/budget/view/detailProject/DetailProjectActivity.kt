@@ -7,16 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anangkur.budgetku.base.BaseActivity
 import com.anangkur.budgetku.budget.R
 import com.anangkur.budgetku.budget.databinding.ActivityDetailProjectBinding
-import com.anangkur.budgetku.budget.mapper.BudgetMapper
-import com.anangkur.budgetku.budget.mapper.CategoryMapper
-import com.anangkur.budgetku.budget.mapper.SpendCategoryMapper
-import com.anangkur.budgetku.budget.model.BudgetUiModel
-import com.anangkur.budgetku.budget.model.SpendCategoryUiModel
 import com.anangkur.budgetku.budget.view.dialog.addSpend.AddSpendDialogActionListener
 import com.anangkur.budgetku.budget.view.dialog.addSpend.AddSpendDialog
 import com.anangkur.budgetku.budget.view.detailSpend.DetailSpendActivity
 import com.anangkur.budgetku.calcDialog.AddSpendValueListener
 import com.anangkur.budgetku.calcDialog.CalcDialog
+import com.anangkur.budgetku.mapper.CategoryProjectMapper
+import com.anangkur.budgetku.mapper.ProjectMapper
+import com.anangkur.budgetku.model.CategoryProjectIntent
+import com.anangkur.budgetku.model.ProjectIntent
 import com.anangkur.budgetku.presentation.features.budget.DetailProjectViewModel
 import com.anangkur.budgetku.utils.currencyFormatToRupiah
 import com.anangkur.budgetku.utils.obtainViewModel
@@ -28,6 +27,10 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
     DetailProjectActionListener,
     AddSpendDialogActionListener {
 
+    companion object {
+        const val EXTRA_DETAIL_PROJECT = "extra-detail-project"
+    }
+
     override val mViewModel: DetailProjectViewModel
         get() = obtainViewModel(DetailProjectViewModel::class.java)
     override val mToolbar: Toolbar?
@@ -38,9 +41,8 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
     private lateinit var spendCategoryAdapter: SpendCategoryAdapter
     private var addSpendDialog: AddSpendDialog? = null
 
-    private val budgetMapper = BudgetMapper.getInstance()
-    private val spendCategoryMapper = SpendCategoryMapper.getInstance()
-    private val categoryMapper = CategoryMapper.getInstance()
+    private val projectMapper = ProjectMapper.getInstance()
+    private val categoryProjectMapper = CategoryProjectMapper.getInstance()
 
     override fun setupView(): ActivityDetailProjectBinding {
         return ActivityDetailProjectBinding.inflate(layoutInflater)
@@ -50,7 +52,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
         addSpendDialog?.show()
     }
 
-    override fun onClickSpendCategory(data: SpendCategoryUiModel) {
+    override fun onClickSpendCategory(data: CategoryProjectIntent) {
         DetailSpendActivity.startActivity(this)
     }
 
@@ -60,31 +62,32 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
         setupBottomSheetHeight()
         setupSpendCategoryAdapter()
         observeViewModel()
-        mViewModel.createDummyBudget()
-        mViewModel.createDummyListSpendCategory()
-        mViewModel.createDummyListCategory()
+        getDetailProject()
         mLayout.btnAddSpend.setOnClickListener { this.onClickAddSpend() }
     }
 
     private fun observeViewModel() {
         mViewModel.apply {
-            listSpendCategoryPublicObserver.observe(this@DetailProjectActivity, Observer {
-                spendCategoryAdapter.setRecyclerData(it.map { item -> spendCategoryMapper.mapToIntent(item) })
-            })
             budgetPublicObserver.observe(this@DetailProjectActivity, Observer {
-                setupBudgetView(budgetMapper.mapToIntent(it))
+                setupBudgetView(projectMapper.mapToIntent(it))
             })
-            listCategoryPublicObserver.observe(this@DetailProjectActivity, Observer {
-                setupAddSpendDialog(it.map { item -> item.title })
+            listCategoryPublicObserver.observe(this@DetailProjectActivity, Observer { list ->
+                spendCategoryAdapter.setRecyclerData(list.map { categoryProjectMapper.mapToIntent(it) })
+                setupAddSpendDialog(list.map { item -> item.title })
             })
         }
     }
 
-    private fun setupBudgetView(data: BudgetUiModel) {
+    private fun getDetailProject() {
+        val detailProject = intent.getParcelableExtra<ProjectIntent>(EXTRA_DETAIL_PROJECT)
+        detailProject?.let { mViewModel.setProjectDetail(projectMapper.mapFromIntent(detailProject)) }
+    }
+
+    private fun setupBudgetView(data: ProjectIntent) {
         mLayout.apply {
-            tvTotalBudget.text = data.totalBudget.toDouble().currencyFormatToRupiah()
-            tvTotalSpend.text = data.totalSpend.toDouble().currencyFormatToRupiah()
-            tvTotalRemaining.text = data.totalRemaining.toDouble().currencyFormatToRupiah()
+            tvTotalBudget.text = data.totalBudget.currencyFormatToRupiah()
+            tvTotalSpend.text = data.totalSpend.currencyFormatToRupiah()
+            tvTotalRemaining.text = data.totalRemaining.currencyFormatToRupiah()
         }
     }
 
@@ -143,7 +146,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
             categorySelectedPosition = position
             if (position >= 0) {
                 categorySelectedValue = listCategory[categorySelectedPosition]
-                dialog.setCategory(categoryMapper.mapToIntent(categorySelectedValue!!))
+                dialog.setCategory(categoryProjectMapper.mapToIntent(categorySelectedValue!!))
             } else {
                 categorySelectedValue = null
                 dialog.setCategoryNull()

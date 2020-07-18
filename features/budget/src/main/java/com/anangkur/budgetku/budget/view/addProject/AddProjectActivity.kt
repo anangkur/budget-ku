@@ -14,17 +14,14 @@ import com.anangkur.budgetku.budget.R
 import com.anangkur.budgetku.R as appR
 import com.anangkur.budgetku.budget.databinding.ActivityAddProjectBinding
 import com.anangkur.budgetku.budget.mapper.CategoryMapper
-import com.anangkur.budgetku.budget.mapper.CategoryProjectMapper
-import com.anangkur.budgetku.budget.model.CategoryProjectUiModel
 import com.anangkur.budgetku.budget.model.CategoryUiModel
 import com.anangkur.budgetku.budget.view.dialog.addCategory.AddCategoryDialog
 import com.anangkur.budgetku.budget.view.dialog.addCategory.AddCategoryDialogListener
 import com.anangkur.budgetku.budget.view.selectCategory.SelectCategoryActivity
+import com.anangkur.budgetku.mapper.CategoryProjectMapper
+import com.anangkur.budgetku.model.CategoryProjectIntent
 import com.anangkur.budgetku.presentation.features.budget.AddProjectViewModel
-import com.anangkur.budgetku.utils.gone
-import com.anangkur.budgetku.utils.obtainViewModel
-import com.anangkur.budgetku.utils.setupRecyclerViewLinear
-import com.anangkur.budgetku.utils.visible
+import com.anangkur.budgetku.utils.*
 import com.annimon.stream.Stream
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder
@@ -111,10 +108,13 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
                         ) {
                             mViewModel.addCategoryProject(
                                 categoryProjectMapper.mapFromIntent(
-                                    CategoryProjectUiModel(
+                                    CategoryProjectIntent(
+                                        id = "",
                                         title = mViewModel.categorySelectedValue?.title ?: "",
                                         value = mViewModel.budgetValue,
-                                        image = mViewModel.categorySelectedValue?.image ?: ""
+                                        image = mViewModel.categorySelectedValue?.image ?: "",
+                                        spend = 0.0,
+                                        remaining = 0.0
                                     )
                                 )
                             )
@@ -156,12 +156,22 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
                 mLayout.tilEndDate.isErrorEnabled = true
                 mLayout.tilEndDate.error = getString(R.string.error_enddate_null_or_empty)
             }
+            mViewModel.startDate?.after(mViewModel.endDate) ?: false -> {
+                mLayout.tilStartDate.isErrorEnabled = true
+                mLayout.tilStartDate.error = getString(R.string.error_startdate_after_enddate)
+            }
             mViewModel.getCategoryProject().isEmpty() -> {
+                mLayout.tilStartDate.isErrorEnabled = false
                 mLayout.tvErrorCategory.visible()
                 mLayout.tvErrorCategory.text = getString(R.string.error_category_null_or_empty)
             }
             else -> {
-                finish()
+                mViewModel.createProject(
+                    title = mLayout.etTitle.text.toString(),
+                    category = mViewModel.getCategoryProject(),
+                    endDate = mLayout.etEndDate.text.toString(),
+                    startDate = mLayout.etStartDate.text.toString()
+                )
             }
         }
     }
@@ -174,6 +184,7 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
         } else {
             if (mViewModel.startDate != null) {
                 minimumDate = mViewModel.startDate
+                minimumDate?.add(Calendar.DAY_OF_MONTH, 1)
             } else {
                 til_start_date.isErrorEnabled = true
                 til_start_date.error = getString(R.string.error_startdate_not_selected)
@@ -206,16 +217,33 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
         datePicker.show()
     }
 
+    override fun onClickDeleteCategory(position: Int) {
+        mViewModel.deleteCategoryProject(position)
+    }
+
     private fun observeViewModel() {
         mViewModel.apply {
             listCategoryProjectPublicObserver.observe(this@AddProjectActivity, Observer {
                 categoryProjectAdapter.setRecyclerData(it.map { item -> categoryProjectMapper.mapToIntent(item) })
             })
+            loadingCreateProject.observe(this@AddProjectActivity, Observer {
+                if (it)
+                    mLayout.btnSave.showProgress()
+                else
+                    mLayout.btnSave.hideProgress()
+            })
+            successCreateProject.observe(this@AddProjectActivity, Observer {
+                showToastShort(getString(R.string.message_success_create_project))
+                finish()
+            })
+            errorCreateProject.observe(this@AddProjectActivity, Observer {
+                showSnackbarShort(it)
+            })
         }
     }
 
     private fun setupCategoryProjectAdapter() {
-        categoryProjectAdapter = CategoryProjectAdapter()
+        categoryProjectAdapter = CategoryProjectAdapter(this)
         mLayout.recyclerCategory.apply {
             adapter = categoryProjectAdapter
             setupRecyclerViewLinear(this@AddProjectActivity, RecyclerView.VERTICAL)

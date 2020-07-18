@@ -1,10 +1,10 @@
 package com.anangkur.budgetku.data
 
-import com.anangkur.budgetku.data.mapper.ArticleMapper
+import com.anangkur.budgetku.data.mapper.news.ArticleMapper
 import com.anangkur.budgetku.data.repository.news.ArticleLocal
 import com.anangkur.budgetku.data.repository.news.ArticleRemote
 import com.anangkur.budgetku.data.source.news.ArticleDataStoreFactory
-import com.anangkur.budgetku.domain.model.Article
+import com.anangkur.budgetku.domain.model.news.Article
 import com.anangkur.budgetku.domain.model.BaseResult
 import com.anangkur.budgetku.domain.repository.ArticleRepository
 

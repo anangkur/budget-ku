@@ -38,8 +38,19 @@
             android:ellipsize="end"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/btn_delete"
             app:layout_constraintLeft_toRightOf="@id/tv_spend_category"/>
+
+        <ImageView
+            android:id="@+id/btn_delete"
+            style="@style/ImageViewWrapAll"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:padding="10dp"
+            android:foreground="?selectableItemBackground"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tv_budget"
+            app:layout_constraintRight_toRightOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

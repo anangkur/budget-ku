@@ -2,13 +2,10 @@ package com.anangkur.budgetku.remote.repository
 
 import android.net.Uri
 import com.anangkur.budgetku.data.BaseFirebaseListener
-import com.anangkur.budgetku.data.model.UserEntity
+import com.anangkur.budgetku.data.model.auth.UserEntity
 import com.anangkur.budgetku.data.repository.auth.AuthRemote
-import com.anangkur.budgetku.remote.ApiService
 import com.anangkur.budgetku.remote.Consts
-import com.anangkur.budgetku.remote.mapper.ArticleMapper
-import com.anangkur.budgetku.remote.mapper.BaseResultMapper
-import com.anangkur.budgetku.remote.mapper.UserMapper
+import com.anangkur.budgetku.remote.mapper.auth.UserMapper
 import com.anangkur.budgetku.remote.model.auth.UserRemoteModel
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore

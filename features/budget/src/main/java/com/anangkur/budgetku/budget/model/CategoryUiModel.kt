@@ -7,5 +7,5 @@ import kotlinx.android.parcel.Parcelize
 data class CategoryUiModel(
     val title: String,
     val image: String,
-    val child: List<CategoryUiModel>
+    val child: List<CategoryUiModel> = emptyList()
 ): Parcelable

@@ -49,6 +49,7 @@
                 android:id="@+id/et_budget"
                 style="@style/EditTextDefault"
                 android:hint="@string/hint_budget"
+                android:text="@string/dummy_remaining"
                 android:inputType="number"
                 android:imeOptions="actionDone"/>
         </com.google.android.material.textfield.TextInputLayout>

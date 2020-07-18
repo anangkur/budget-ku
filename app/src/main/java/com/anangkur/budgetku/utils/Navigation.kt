@@ -2,6 +2,7 @@ package com.anangkur.budgetku.utils
 
 import android.app.Activity
 import android.content.Intent
+import com.anangkur.budgetku.model.ProjectIntent
 
 object Navigation {
     private const val NEWS_ACTIVITY = "com.anangkur.budgetku.news.NewsActivity"
@@ -11,6 +12,8 @@ object Navigation {
     private const val DETAIL_SPEND_ACTIVITY = "com.anangkur.budgetku.budget.view.detailSpend.DetailSpendActivity"
     private const val ADD_PROJECT_ACTIVITY = "com.anangkur.budgetku.budget.view.addProject.AddProjectActivity"
     private const val PROFILE_ACTIVITY = "com.anangkur.budgetku.auth.view.userProfile.ProfileActivity"
+
+    private const val EXTRA_DETAIL_PROJECT = "extra-detail-project"
 
     fun Activity.goToHomeActivity() {
         startActivity(Intent(this, Class.forName(HOME_ACTIVITY)))
@@ -24,8 +27,10 @@ object Navigation {
         startActivity(Intent(this, Class.forName(NEWS_ACTIVITY)))
     }
 
-    fun Activity.goToDetailProjectActivity() {
-        startActivity(Intent(this, Class.forName(DETAIL_PROJECT_ACTIVITY)))
+    fun Activity.goToDetailProjectActivity(data: ProjectIntent) {
+        startActivity(Intent(this, Class.forName(DETAIL_PROJECT_ACTIVITY)).apply {
+            putExtra(EXTRA_DETAIL_PROJECT, data)
+        })
     }
 
     fun Activity.goToDetailSpendActivity() {

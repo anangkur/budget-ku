@@ -17,9 +17,8 @@ class CategoryMapper : Mapper<CategoryUiModel, CategoryView> {
             image = type.image,
             child = type.child.map {
                 CategoryUiModel(
-                    title = type.title,
-                    image = type.image,
-                    child = listOf()
+                    title = it.title,
+                    image = it.image
                 )
             }
         )
@@ -31,9 +30,8 @@ class CategoryMapper : Mapper<CategoryUiModel, CategoryView> {
             image = type.image,
             child = type.child.map {
                 CategoryView(
-                    title = type.title,
-                    image = type.image,
-                    child = listOf()
+                    title = it.title,
+                    image = it.image
                 )
             }
         )

@@ -5,7 +5,7 @@ import com.anangkur.budgetku.data.repository.auth.AuthLocal
 import com.anangkur.budgetku.data.repository.auth.AuthRemote
 import com.anangkur.budgetku.data.source.auth.AuthDataStoreFactory
 import com.anangkur.budgetku.domain.BaseFirebaseListener
-import com.anangkur.budgetku.domain.model.User
+import com.anangkur.budgetku.domain.model.auth.User
 import com.anangkur.budgetku.domain.repository.AuthRepository
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser

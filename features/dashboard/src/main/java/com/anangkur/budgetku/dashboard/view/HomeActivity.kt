@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anangkur.budgetku.base.BaseActivity
 import com.anangkur.budgetku.dashboard.R
 import com.anangkur.budgetku.dashboard.databinding.ActivityHomeBinding
-import com.anangkur.budgetku.dashboard.mapper.ItemProjectMapper
+import com.anangkur.budgetku.mapper.ProjectMapper
 import com.anangkur.budgetku.dashboard.mapper.UserMapper
-import com.anangkur.budgetku.dashboard.model.ItemProjectIntent
 import com.anangkur.budgetku.dashboard.model.UserIntent
+import com.anangkur.budgetku.model.ProjectIntent
 import com.anangkur.budgetku.presentation.features.dashboard.HomeViewModel
 import com.anangkur.budgetku.utils.Navigation.goToAddProjectActivity
 import com.anangkur.budgetku.utils.Navigation.goToDetailProjectActivity
@@ -18,13 +18,14 @@ import com.anangkur.budgetku.utils.Navigation.goToProfileActivity
 import com.anangkur.budgetku.utils.obtainViewModel
 import com.anangkur.budgetku.utils.setImageUrl
 import com.anangkur.budgetku.utils.setupRecyclerViewLinear
+import com.anangkur.budgetku.utils.showToastShort
 import java.text.SimpleDateFormat
 import java.util.*
 import com.anangkur.budgetku.R as appR
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeActivityActionListener {
 
-    override val mViewModel: HomeViewModel?
+    override val mViewModel: HomeViewModel
         get() = obtainViewModel(HomeViewModel::class.java)
     override val mToolbar: Toolbar?
         get() = findViewById(R.id.toolbar)
@@ -33,7 +34,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
 
     private lateinit var projectAdapter: ProjectAdapter
 
-    private val itemProjectMapper = ItemProjectMapper.getInstance()
+    private val projectMapper = ProjectMapper.getInstance()
     private val userMapper = UserMapper.getInstance()
 
     override fun setupView(): ActivityHomeBinding {
@@ -47,8 +48,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
         setupRecyclerProject()
         setupClickListener()
         observeViewModel()
-        mViewModel?.createDummyListProject()
-        mViewModel?.createDummyUser()
+        mViewModel.createDummyUser()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mViewModel.getProject()
     }
 
     override fun onClickAddProject() {
@@ -59,14 +64,20 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
         goToProfileActivity()
     }
 
-    override fun onClickItem(data: ItemProjectIntent) {
-        goToDetailProjectActivity()
+    override fun onClickItem(data: ProjectIntent) {
+        goToDetailProjectActivity(data)
     }
 
     private fun observeViewModel() {
-        mViewModel?.apply {
-            listProjectPublicObserver.observe(this@HomeActivity, Observer {
-                projectAdapter.setRecyclerData(it.map { list -> itemProjectMapper.mapToIntent(list) })
+        mViewModel.apply {
+            loadingGetProject.observe(this@HomeActivity, Observer {
+
+            })
+            successGetProject.observe(this@HomeActivity, Observer { list ->
+                projectAdapter.setRecyclerData(list.map { projectMapper.mapToIntent(it) })
+            })
+            errorGetProject.observe(this@HomeActivity, Observer {
+                showToastShort(it)
             })
             userPublicObserver.observe(this@HomeActivity, Observer {
                 setupUserView(userMapper.mapToIntent(it))

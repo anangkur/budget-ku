@@ -1,6 +1,6 @@
 package com.anangkur.budgetku.data.source.news
 
-import com.anangkur.budgetku.data.model.ArticleEntity
+import com.anangkur.budgetku.data.model.news.ArticleEntity
 import com.anangkur.budgetku.data.model.BaseResultEntity
 import com.anangkur.budgetku.data.repository.news.ArticleDataStore
 import com.anangkur.budgetku.data.repository.news.ArticleLocal

@@ -4,16 +4,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.anangkur.budgetku.domain.impl.ArticlesSource
-import com.anangkur.budgetku.domain.model.Article
+import com.anangkur.budgetku.domain.model.news.Article
 import com.anangkur.budgetku.presentation.mapper.ArticleMapper
 import com.anangkur.budgetku.presentation.mapper.BaseResultMapper
 import com.anangkur.budgetku.presentation.model.news.ArticleView
 
 class NewsViewModel (
-    private val articlesSource: ArticlesSource,
-    private val mapper: ArticleMapper,
-    private val baseResultMapper: BaseResultMapper<List<Article>>
+    private val articlesSource: ArticlesSource
 ): ViewModel(){
+
+    private val mapper = ArticleMapper.getInstance()
+    private val baseResultMapper = BaseResultMapper.getInstance<List<Article>>()
 
     var selectedNews: ArticleView? = null
     var originalNewsUrl = ""

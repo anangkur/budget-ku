@@ -2,7 +2,7 @@ package com.anangkur.budgetku.local.repository
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.anangkur.budgetku.data.model.ArticleEntity
+import com.anangkur.budgetku.data.model.news.ArticleEntity
 import com.anangkur.budgetku.data.repository.news.ArticleLocal
 import com.anangkur.budgetku.local.Const
 import com.anangkur.budgetku.local.db.AppDatabase
