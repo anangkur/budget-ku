@@ -32,6 +32,11 @@ class AddProjectViewModel(private val budgetRepository: BudgetRepository) : View
         listCategoryProjectInternalSetter.postValue(listCategoryProject)
     }
 
+    fun deleteCategoryProject(position: Int) {
+        listCategoryProject.removeAt(position)
+        listCategoryProjectInternalSetter.postValue(listCategoryProject)
+    }
+
     fun getCategoryProject(): List<CategoryProjectView> = listCategoryProject
 
     val loadingCreateProject = MutableLiveData<Boolean>()

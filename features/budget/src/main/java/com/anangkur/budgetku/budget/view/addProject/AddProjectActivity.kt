@@ -214,6 +214,10 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
         datePicker.show()
     }
 
+    override fun onClickDeleteCategory(position: Int) {
+        mViewModel.deleteCategoryProject(position)
+    }
+
     private fun observeViewModel() {
         mViewModel.apply {
             listCategoryProjectPublicObserver.observe(this@AddProjectActivity, Observer {
@@ -236,7 +240,7 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
     }
 
     private fun setupCategoryProjectAdapter() {
-        categoryProjectAdapter = CategoryProjectAdapter()
+        categoryProjectAdapter = CategoryProjectAdapter(this)
         mLayout.recyclerCategory.apply {
             adapter = categoryProjectAdapter
             setupRecyclerViewLinear(this@AddProjectActivity, RecyclerView.VERTICAL)

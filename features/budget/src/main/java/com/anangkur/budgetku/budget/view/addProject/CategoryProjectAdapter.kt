@@ -8,7 +8,9 @@ import com.anangkur.budgetku.budget.model.CategoryProjectUiModel
 import com.anangkur.budgetku.utils.currencyFormatToRupiah
 import com.anangkur.budgetku.utils.setImageUrl
 
-class CategoryProjectAdapter : BaseAdapter<ItemCategoryProjectBinding, CategoryProjectUiModel>() {
+class CategoryProjectAdapter(
+    private val listener: AddProjectActionListener
+) : BaseAdapter<ItemCategoryProjectBinding, CategoryProjectUiModel>() {
 
     override fun bindView(parent: ViewGroup): ItemCategoryProjectBinding {
         return ItemCategoryProjectBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,6 +25,7 @@ class CategoryProjectAdapter : BaseAdapter<ItemCategoryProjectBinding, CategoryP
             tvSpendCategory.text = data.title
             ivSpend.setImageUrl(data.image)
             tvBudget.text = data.value.currencyFormatToRupiah()
+            btnDelete.setOnClickListener { listener.onClickDeleteCategory(position) }
         }
     }
 
