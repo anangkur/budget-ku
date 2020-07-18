@@ -156,7 +156,12 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
                 mLayout.tilEndDate.isErrorEnabled = true
                 mLayout.tilEndDate.error = getString(R.string.error_enddate_null_or_empty)
             }
+            mViewModel.startDate?.after(mViewModel.endDate) ?: false -> {
+                mLayout.tilStartDate.isErrorEnabled = true
+                mLayout.tilStartDate.error = getString(R.string.error_startdate_after_enddate)
+            }
             mViewModel.getCategoryProject().isEmpty() -> {
+                mLayout.tilStartDate.isErrorEnabled = false
                 mLayout.tvErrorCategory.visible()
                 mLayout.tvErrorCategory.text = getString(R.string.error_category_null_or_empty)
             }
@@ -174,6 +179,7 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
         } else {
             if (mViewModel.startDate != null) {
                 minimumDate = mViewModel.startDate
+                minimumDate?.add(Calendar.DAY_OF_MONTH, 1)
             } else {
                 til_start_date.isErrorEnabled = true
                 til_start_date.error = getString(R.string.error_startdate_not_selected)
