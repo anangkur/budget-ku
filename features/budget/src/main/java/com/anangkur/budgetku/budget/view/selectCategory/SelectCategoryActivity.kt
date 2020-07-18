@@ -1,6 +1,5 @@
 package com.anangkur.budgetku.budget.view.selectCategory
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +14,7 @@ import com.anangkur.budgetku.budget.model.CategoryUiModel
 import com.anangkur.budgetku.presentation.features.budget.SelectCategoryViewModel
 import com.anangkur.budgetku.utils.obtainViewModel
 import com.anangkur.budgetku.utils.setupRecyclerViewLinear
+import com.anangkur.budgetku.utils.showSnackbarShort
 
 class SelectCategoryActivity : BaseActivity<ActivitySelectCategoryBinding, SelectCategoryViewModel>(),
     SelectCategoryActionListener {
@@ -24,7 +24,9 @@ class SelectCategoryActivity : BaseActivity<ActivitySelectCategoryBinding, Selec
         const val SELECT_CATEGORY_REQ_CODE = 102
         const val EXTRA_CATEGORY = "category"
         fun startActivity(activity: AppCompatActivity) {
-            activity.startActivityForResult(Intent(activity, SelectCategoryActivity::class.java), SELECT_CATEGORY_REQ_CODE)
+            activity.startActivityForResult(
+                Intent(activity, SelectCategoryActivity::class.java), SELECT_CATEGORY_REQ_CODE
+            )
         }
     }
 
@@ -47,13 +49,20 @@ class SelectCategoryActivity : BaseActivity<ActivitySelectCategoryBinding, Selec
 
         setupAdapter()
         observeViewModel()
-        mViewModel.createDummyListCategory()
+        mViewModel.getCategory()
+        mLayout.swipeCategory.setOnRefreshListener { mViewModel.getCategory() }
     }
 
     private fun observeViewModel() {
         mViewModel.apply {
-            listCategoryPublicObserver.observe(this@SelectCategoryActivity, Observer {
-                categoryAdapter.setRecyclerData(it.map { item -> categoryMapper.mapToIntent(item) })
+            loadingGetCategory.observe(this@SelectCategoryActivity, Observer {
+                mLayout.swipeCategory.isRefreshing = it
+            })
+            successGetCategory.observe(this@SelectCategoryActivity, Observer { list ->
+                categoryAdapter.setRecyclerData(list.map { categoryMapper.mapToIntent(it) })
+            })
+            errorGetCategory.observe(this@SelectCategoryActivity, Observer {
+                showSnackbarShort(it)
             })
         }
     }

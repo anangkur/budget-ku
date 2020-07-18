@@ -4,6 +4,7 @@ import com.anangkur.budgetku.data.repository.budget.BudgetLocal
 import com.anangkur.budgetku.data.repository.budget.BudgetRemote
 import com.anangkur.budgetku.data.source.budget.BudgetDataStoreFactory
 import com.anangkur.budgetku.domain.BaseFirebaseListener
+import com.anangkur.budgetku.domain.model.budget.Category
 import com.anangkur.budgetku.domain.model.budget.CategoryProject
 import com.anangkur.budgetku.domain.repository.BudgetRepository
 
@@ -29,5 +30,9 @@ class BudgetDataRepository(
         listener: BaseFirebaseListener<Boolean>
     ) {
         factory.retrieveRemoteDataStore().createProject(title, startDate, endDate, category, listener)
+    }
+
+    override fun getCategory(listener: BaseFirebaseListener<List<Category>>) {
+        factory.retrieveRemoteDataStore().getCategory(listener)
     }
 }

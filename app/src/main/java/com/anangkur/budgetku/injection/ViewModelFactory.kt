@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.anangkur.budgetku.domain.impl.ArticlesSource
-import com.anangkur.budgetku.domain.model.news.Article
 import com.anangkur.budgetku.domain.repository.AuthRepository
 import com.anangkur.budgetku.domain.repository.BudgetRepository
 import com.anangkur.budgetku.presentation.features.app.SplashViewModel
@@ -15,8 +14,6 @@ import com.anangkur.budgetku.presentation.features.budget.DetailSpendViewModel
 import com.anangkur.budgetku.presentation.features.budget.SelectCategoryViewModel
 import com.anangkur.budgetku.presentation.features.dashboard.HomeViewModel
 import com.anangkur.budgetku.presentation.features.news.NewsViewModel
-import com.anangkur.budgetku.presentation.mapper.ArticleMapper
-import com.anangkur.budgetku.presentation.mapper.BaseResultMapper
 
 class ViewModelFactory(
     private val authRepository: AuthRepository,
@@ -42,7 +39,7 @@ class ViewModelFactory(
 
                 isAssignableFrom(DetailProjectViewModel::class.java) -> DetailProjectViewModel()
                 isAssignableFrom(DetailSpendViewModel::class.java) -> DetailSpendViewModel()
-                isAssignableFrom(SelectCategoryViewModel::class.java) -> SelectCategoryViewModel()
+                isAssignableFrom(SelectCategoryViewModel::class.java) -> SelectCategoryViewModel(budgetRepository)
                 isAssignableFrom(AddProjectViewModel::class.java) -> AddProjectViewModel(budgetRepository)
 
                 else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

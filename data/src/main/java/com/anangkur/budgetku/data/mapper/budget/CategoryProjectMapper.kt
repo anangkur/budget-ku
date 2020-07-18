@@ -1,6 +1,5 @@
 package com.anangkur.budgetku.data.mapper.budget
 
-import com.anangkur.budgetku.data.mapper.BaseResultMapper
 import com.anangkur.budgetku.data.mapper.Mapper
 import com.anangkur.budgetku.data.model.budget.CategoryProjectEntity
 import com.anangkur.budgetku.domain.model.budget.CategoryProject

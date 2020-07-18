@@ -5,12 +5,12 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
 import androidx.appcompat.app.AlertDialog
-import com.anangkur.budgetku.base.BaseSpinnerListener
 import com.anangkur.budgetku.budget.R
 import com.anangkur.budgetku.budget.databinding.DialogAddCategoryBinding
 import com.anangkur.budgetku.budget.model.CategoryUiModel
@@ -18,7 +18,6 @@ import com.anangkur.budgetku.currencyEditText.CurrencySymbols
 import com.anangkur.budgetku.utils.gone
 import com.anangkur.budgetku.utils.setImageUrl
 import com.anangkur.budgetku.utils.visible
-
 
 class AddCategoryDialog(
     context: Context,
@@ -40,6 +39,7 @@ class AddCategoryDialog(
 
         clearInputtedValue()
         setupEditTextBudget()
+        setupTextWatcher()
 
         mLayout.btnSave.setOnClickListener { listener.onClickSave(this) }
         mLayout.btnCancel.setOnClickListener { listener.onClickCancel(this) }
@@ -90,7 +90,7 @@ class AddCategoryDialog(
         }
     }
 
-    fun setCategoryNull() {
+    private fun setCategoryNull() {
         mLayout.apply {
             ivCategory.gone()
             tvCategory.text = context.getString(R.string.label_select_category)
@@ -115,6 +115,22 @@ class AddCategoryDialog(
                     false
                 }
             }
+        }
+    }
+
+    private fun setupTextWatcher() {
+        mLayout.etBudget.apply {
+            addTextChangedListener(object : TextWatcher{
+                override fun afterTextChanged(s: Editable?) {
+                    try {
+                        listener.onValueInputted(this@apply.cleanDoubleValue)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            })
         }
     }
 

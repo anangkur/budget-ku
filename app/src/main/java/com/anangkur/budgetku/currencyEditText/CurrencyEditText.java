@@ -125,7 +125,8 @@ public class CurrencyEditText extends AppCompatEditText {
             try {
                 value = Double.parseDouble(cleanString);
             } catch (NumberFormatException e) {
-
+                e.printStackTrace();
+                value = 0.0;
             }
         }
         return value;

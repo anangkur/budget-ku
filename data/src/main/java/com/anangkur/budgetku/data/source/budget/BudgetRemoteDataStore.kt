@@ -1,17 +1,20 @@
 package com.anangkur.budgetku.data.source.budget
 
+import com.anangkur.budgetku.data.mapper.budget.CategoryMapper
 import com.anangkur.budgetku.data.mapper.budget.CategoryProjectMapper
-import com.anangkur.budgetku.data.model.budget.CategoryProjectEntity
-import com.anangkur.budgetku.data.repository.budget.BudgetDataSource
+import com.anangkur.budgetku.data.model.budget.CategoryEntity
+import com.anangkur.budgetku.data.repository.budget.BudgetDataStore
 import com.anangkur.budgetku.data.repository.budget.BudgetRemote
 import com.anangkur.budgetku.domain.BaseFirebaseListener
+import com.anangkur.budgetku.domain.model.budget.Category
 import com.anangkur.budgetku.domain.model.budget.CategoryProject
 
 class BudgetRemoteDataStore(
     private val budgetRemote: BudgetRemote
-): BudgetDataSource {
+): BudgetDataStore {
 
     private val categoryProjectMapper = CategoryProjectMapper.getInstance()
+    private val categoryMapper = CategoryMapper.getInstance()
 
     companion object{
         private var INSTANCE: BudgetRemoteDataStore? = null
@@ -43,6 +46,20 @@ class BudgetRemoteDataStore(
                 listener.onFailed(errorMessage)
             }
 
+        })
+    }
+
+    override fun getCategory(listener: BaseFirebaseListener<List<Category>>) {
+        budgetRemote.getCategory(object: com.anangkur.budgetku.data.BaseFirebaseListener<List<CategoryEntity>>{
+            override fun onLoading(isLoading: Boolean) {
+                listener.onLoading(isLoading)
+            }
+            override fun onSuccess(data: List<CategoryEntity>) {
+                listener.onSuccess(data.map { categoryMapper.mapFromEntity(it) })
+            }
+            override fun onFailed(errorMessage: String) {
+                listener.onFailed(errorMessage)
+            }
         })
     }
 }

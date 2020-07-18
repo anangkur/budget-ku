@@ -1,22 +1,22 @@
-package com.anangkur.budgetku.budget.mapper
+package com.anangkur.budgetku.data.mapper.budget
 
-import com.anangkur.budgetku.budget.model.CategoryUiModel
-import com.anangkur.budgetku.mapper.Mapper
-import com.anangkur.budgetku.presentation.model.budget.CategoryView
+import com.anangkur.budgetku.data.mapper.Mapper
+import com.anangkur.budgetku.data.model.budget.CategoryEntity
+import com.anangkur.budgetku.domain.model.budget.Category
 
-class CategoryMapper : Mapper<CategoryUiModel, CategoryView> {
+class CategoryMapper : Mapper<CategoryEntity, Category> {
 
-    companion object{
+    companion object {
         private var INSTANCE: CategoryMapper? = null
         fun getInstance() = INSTANCE ?: CategoryMapper()
     }
 
-    override fun mapToIntent(type: CategoryView): CategoryUiModel {
-        return CategoryUiModel(
+    override fun mapToEntity(type: Category): CategoryEntity {
+        return CategoryEntity(
             title = type.title,
             image = type.image,
             child = type.child.map {
-                CategoryUiModel(
+                CategoryEntity(
                     title = it.title,
                     image = it.image
                 )
@@ -24,12 +24,12 @@ class CategoryMapper : Mapper<CategoryUiModel, CategoryView> {
         )
     }
 
-    override fun mapFromIntent(type: CategoryUiModel): CategoryView {
-        return CategoryView(
+    override fun mapFromEntity(type: CategoryEntity): Category {
+        return Category(
             title = type.title,
             image = type.image,
             child = type.child.map {
-                CategoryView(
+                Category(
                     title = it.title,
                     image = it.image
                 )

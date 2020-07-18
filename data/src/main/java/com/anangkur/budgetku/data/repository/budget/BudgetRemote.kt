@@ -1,6 +1,7 @@
 package com.anangkur.budgetku.data.repository.budget
 
 import com.anangkur.budgetku.data.BaseFirebaseListener
+import com.anangkur.budgetku.data.model.budget.CategoryEntity
 import com.anangkur.budgetku.data.model.budget.CategoryProjectEntity
 
 interface BudgetRemote {
@@ -10,5 +11,9 @@ interface BudgetRemote {
         endDate: String,
         category: List<CategoryProjectEntity>,
         listener: BaseFirebaseListener<Boolean>
+    )
+
+    fun getCategory(
+        listener: BaseFirebaseListener<List<CategoryEntity>>
     )
 }
