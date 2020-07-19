@@ -22,6 +22,7 @@ class DetailProjectViewModel(private val budgetRepository: BudgetRepository) : V
     var categorySelectedPosition = 0
     var categorySelectedValue: CategoryProjectView? = null
     var spendValue: Double = 0.0
+    var note = ""
 
     var listCategory: List<CategoryProjectView> = emptyList()
     private val listCategoryInternalSetter = MutableLiveData<List<CategoryProjectView>>()

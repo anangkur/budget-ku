@@ -1,6 +1,7 @@
 package com.anangkur.budgetku.budget.view.detailProject
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -123,6 +124,8 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
 
     override fun onClickAddSpend() {
         addSpendDialog?.show()
+        addSpendDialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+        addSpendDialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     }
 
     override fun onClickSpendCategory(data: CategoryProjectIntent) {
@@ -170,7 +173,8 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
                     title = mViewModel.categorySelectedValue?.title ?: "",
                     spend = mViewModel.spendValue.toInt(),
                     idProject = mViewModel.projectPublicObserver.value?.id ?: "",
-                    idCategory = mViewModel.categorySelectedValue?.id ?: ""
+                    idCategory = mViewModel.categorySelectedValue?.id ?: "",
+                    note = mViewModel.note
                 )
             ))
         }
@@ -195,6 +199,10 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
                 dialog.setCategoryNull()
             }
         }
+    }
+
+    override fun onEditNote(note: String) {
+        mViewModel.note = note
     }
 
     private fun setupAddSpendDialog(data: List<String>) {

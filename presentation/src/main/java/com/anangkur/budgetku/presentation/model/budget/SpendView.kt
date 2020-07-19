@@ -6,5 +6,6 @@ data class SpendView(
     val image: String,
     val title: String,
     val date: String,
-    val spend: Int
+    val spend: Int,
+    val note: String
 )

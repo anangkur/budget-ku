@@ -6,5 +6,6 @@ data class Spend(
     val date: String,
     val spend: Int,
     val idProject: String,
-    val idCategory: String
+    val idCategory: String,
+    val note: String
 )

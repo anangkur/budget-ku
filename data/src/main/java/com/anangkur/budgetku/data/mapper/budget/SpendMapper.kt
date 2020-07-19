@@ -18,7 +18,8 @@ class SpendMapper : Mapper<SpendEntity, Spend> {
             title = type.title,
             date = type.date,
             idProject = type.idProject,
-            idCategory = type.idCategory
+            idCategory = type.idCategory,
+            note = type.note
         )
     }
 
@@ -29,7 +30,8 @@ class SpendMapper : Mapper<SpendEntity, Spend> {
             title = type.title,
             date = type.date,
             idProject = type.idProject,
-            idCategory = type.idCategory
+            idCategory = type.idCategory,
+            note = type.note
         )
     }
 }
