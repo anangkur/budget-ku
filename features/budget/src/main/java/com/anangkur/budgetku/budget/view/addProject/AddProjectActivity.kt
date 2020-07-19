@@ -37,8 +37,11 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
         const val DATE_ENGLISH_YYYY_MM_DD = "yyyy-M-d"
         const val TYPE_START_DATE = 0
         const val TYPE_END_DATE = 1
-        fun startActivity(context: Context) {
-            context.startActivity(Intent(context, AddProjectActivity::class.java))
+        private const val EXTRA_PROJECT_ID = "extra-project-id"
+        fun startActivity(context: Context, projectId: String) {
+            context.startActivity(Intent(context, AddProjectActivity::class.java).apply {
+                putExtra(EXTRA_PROJECT_ID, projectId)
+            })
         }
     }
 
@@ -63,6 +66,7 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        getIntentData()
         setupAddCategoryDialog()
         setupCategoryProjectAdapter()
         setupTextWatcher()
@@ -88,6 +92,10 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
                 addCategoryDialog?.setCategory(it)
             }
         }
+    }
+
+    private fun getIntentData() {
+        mViewModel.projectId = intent.getStringExtra(EXTRA_PROJECT_ID)
     }
 
     private fun setupAddCategoryDialog() {

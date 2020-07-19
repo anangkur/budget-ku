@@ -57,7 +57,7 @@
         android:id="@+id/layout_note"
         style="@style/LinearVerticalWrap"
         android:layout_marginBottom="20dp"
-        android:visibility="">
+        android:visibility="gone">
         <TextView
             style="@style/TextRegularSmall"
             android:text="@string/label_note"

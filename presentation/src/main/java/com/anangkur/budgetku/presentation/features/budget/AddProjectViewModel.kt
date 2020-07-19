@@ -22,6 +22,8 @@ class AddProjectViewModel(private val budgetRepository: BudgetRepository) : View
     var startDate: Calendar? = null
     var endDate: Calendar? = null
 
+    var projectId: String? = null
+
     var categorySelectedValue: CategoryView? = null
 
     private val listCategoryProject = ArrayList<CategoryProjectView>()
@@ -50,7 +52,7 @@ class AddProjectViewModel(private val budgetRepository: BudgetRepository) : View
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             budgetRepository.createProject(
-                idProject = null,
+                idProject = projectId,
                 title = title,
                 startDate = startDate,
                 endDate = endDate,
