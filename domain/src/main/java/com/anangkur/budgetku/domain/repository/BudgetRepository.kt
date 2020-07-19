@@ -23,8 +23,14 @@ interface BudgetRepository {
         listener: BaseFirebaseListener<List<Project>>
     )
 
-    fun addSpend(
+    fun createSpend(
         spend: Spend,
         listener: BaseFirebaseListener<Boolean>
+    )
+
+    fun getListSpend(
+        idProject: String,
+        idCategory: String?,
+        listener: BaseFirebaseListener<List<Spend>>
     )
 }

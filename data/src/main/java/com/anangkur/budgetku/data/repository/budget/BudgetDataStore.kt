@@ -24,4 +24,9 @@ interface BudgetDataStore {
         spend: Spend,
         listener: BaseFirebaseListener<Boolean>
     )
+    fun getListSpend(
+        idProject: String,
+        idCategory: String?,
+        listener: BaseFirebaseListener<List<Spend>>
+    )
 }

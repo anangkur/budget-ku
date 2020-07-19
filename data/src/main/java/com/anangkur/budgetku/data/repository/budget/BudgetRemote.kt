@@ -26,4 +26,9 @@ interface BudgetRemote {
         spendEntity: SpendEntity,
         listener: BaseFirebaseListener<Boolean>
     )
+    fun getListSpend(
+        idProject: String,
+        idCategory: String?,
+        listener: BaseFirebaseListener<List<SpendEntity>>
+    )
 }

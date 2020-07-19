@@ -41,4 +41,12 @@ class BudgetLocalDataStore(
     override fun createSpend(spend: Spend, listener: BaseFirebaseListener<Boolean>) {
         throw UnsupportedOperationException()
     }
+
+    override fun getListSpend(
+        idProject: String,
+        idCategory: String?,
+        listener: BaseFirebaseListener<List<Spend>>
+    ) {
+        throw UnsupportedOperationException()
+    }
 }

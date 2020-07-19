@@ -6,6 +6,7 @@ import com.anangkur.budgetku.data.mapper.budget.ProjectMapper
 import com.anangkur.budgetku.data.mapper.budget.SpendMapper
 import com.anangkur.budgetku.data.model.budget.CategoryEntity
 import com.anangkur.budgetku.data.model.budget.ProjectEntity
+import com.anangkur.budgetku.data.model.budget.SpendEntity
 import com.anangkur.budgetku.data.repository.budget.BudgetDataStore
 import com.anangkur.budgetku.data.repository.budget.BudgetRemote
 import com.anangkur.budgetku.domain.BaseFirebaseListener
@@ -88,6 +89,24 @@ class BudgetRemoteDataStore(
             }
             override fun onSuccess(data: Boolean) {
                 listener.onSuccess(data)
+            }
+            override fun onFailed(errorMessage: String) {
+                listener.onFailed(errorMessage)
+            }
+        })
+    }
+
+    override fun getListSpend(
+        idProject: String,
+        idCategory: String?,
+        listener: BaseFirebaseListener<List<Spend>>
+    ) {
+        budgetRemote.getListSpend(idProject, idCategory, object : com.anangkur.budgetku.data.BaseFirebaseListener<List<SpendEntity>>{
+            override fun onLoading(isLoading: Boolean) {
+                listener.onLoading(isLoading)
+            }
+            override fun onSuccess(data: List<SpendEntity>) {
+                listener.onSuccess(data.map { spendMapper.mapFromEntity(it) })
             }
             override fun onFailed(errorMessage: String) {
                 listener.onFailed(errorMessage)

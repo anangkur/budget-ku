@@ -12,17 +12,16 @@ import com.anangkur.budgetku.remote.mapper.budget.ProjectMapper
 import com.anangkur.budgetku.remote.mapper.budget.SpendMapper
 import com.anangkur.budgetku.remote.model.budget.CategoryRemote
 import com.anangkur.budgetku.remote.model.budget.ProjectRemote
+import com.anangkur.budgetku.remote.model.budget.SpendRemote
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class BudgetRemoteRepository(
     private val firebaseAuth: FirebaseAuth,
-    private val firebaseFirestore: FirebaseFirestore,
-    private val firebaseStorage: FirebaseStorage
+    private val firebaseFirestore: FirebaseFirestore
 ): BudgetRemote {
 
     private val categoryProjectMapper = CategoryProjectMapper.getInstance()
@@ -42,8 +41,7 @@ class BudgetRemoteRepository(
         fun getInstance() = INSTANCE
             ?: BudgetRemoteRepository(
                 FirebaseAuth.getInstance(),
-                FirebaseFirestore.getInstance(),
-                FirebaseStorage.getInstance()
+                FirebaseFirestore.getInstance()
             )
     }
 
@@ -177,6 +175,44 @@ class BudgetRemoteRepository(
                 .addOnSuccessListener {
                     listener.onLoading(false)
                     listener.onSuccess(true)
+                }
+                .addOnFailureListener {
+                    listener.onLoading(false)
+                    listener.onFailed(it.message ?: "")
+                }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            listener.onLoading(false)
+            listener.onFailed(e.message ?: "")
+        }
+    }
+
+    override fun getListSpend(
+        idProject: String,
+        idCategory: String?,
+        listener: BaseFirebaseListener<List<SpendEntity>>
+    ) {
+        try {
+            val listSpendEntity = ArrayList<SpendEntity>()
+            firebaseFirestore.collection(COLLECTION_SPEND)
+                .document(getUid())
+                .collection(COLLECTION_SPEND)
+                .document(idProject)
+                .collection(COLLECTION_SPEND)
+                .get()
+                .addOnSuccessListener {
+                    for (result in it) {
+                        val spendRemote = result.toObject(SpendRemote::class.java)
+                        if (idCategory != null) {
+                            if (spendRemote.idCategory == idCategory) {
+                                listSpendEntity.add(spendMapper.mapFromRemote(spendRemote))
+                            }
+                        } else {
+                            listSpendEntity.add(spendMapper.mapFromRemote(spendRemote))
+                        }
+                    }
+                    listener.onLoading(false)
+                    listener.onSuccess(listSpendEntity)
                 }
                 .addOnFailureListener {
                     listener.onLoading(false)
