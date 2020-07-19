@@ -39,4 +39,9 @@ interface BudgetRepository {
         projectId: String,
         listener: BaseFirebaseListener<Project>
     )
+
+    fun deleteProject(
+        projectId: String,
+        listener: BaseFirebaseListener<Boolean>
+    )
 }

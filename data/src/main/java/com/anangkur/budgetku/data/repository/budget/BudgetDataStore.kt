@@ -34,4 +34,8 @@ interface BudgetDataStore {
         idProject: String,
         listener: BaseFirebaseListener<Project>
     )
+    fun deleteProject(
+        idProject: String,
+        listener: BaseFirebaseListener<Boolean>
+    )
 }

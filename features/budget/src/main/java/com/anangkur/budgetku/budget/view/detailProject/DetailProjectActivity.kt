@@ -1,7 +1,12 @@
 package com.anangkur.budgetku.budget.view.detailProject
 
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -21,10 +26,7 @@ import com.anangkur.budgetku.mapper.ProjectMapper
 import com.anangkur.budgetku.model.CategoryProjectIntent
 import com.anangkur.budgetku.model.ProjectIntent
 import com.anangkur.budgetku.presentation.features.budget.DetailProjectViewModel
-import com.anangkur.budgetku.utils.currencyFormatToRupiah
-import com.anangkur.budgetku.utils.obtainViewModel
-import com.anangkur.budgetku.utils.setupRecyclerViewLinear
-import com.anangkur.budgetku.utils.showSnackbarShort
+import com.anangkur.budgetku.utils.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.math.BigDecimal
 
@@ -50,6 +52,8 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
     private val categoryProjectMapper = CategoryProjectMapper.getInstance()
     private val spendMapper = SpendMapper.getInstance()
 
+    private lateinit var loadingDialog: ProgressDialog
+
     override fun setupView(): ActivityDetailProjectBinding {
         return ActivityDetailProjectBinding.inflate(layoutInflater)
     }
@@ -57,13 +61,38 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setupLoadingDialog()
         setupBottomSheetHeight()
         setupSpendCategoryAdapter()
         observeViewModel()
         getDetailProject()
         mLayout.btnAddSpend.setOnClickListener { this.onClickAddSpend() }
         mLayout.cardSpend.setOnClickListener { this.onClickCardSpend() }
-        mLayout.btnAddCategory.setOnClickListener { this.onClickEditProject(mViewModel.projectPublicObserver.value?.id ?: "") }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_detail_project, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_edit_project -> {
+                this.onClickEditProject(mViewModel.projectPublicObserver.value?.id ?: "")
+                true
+            }
+            R.id.menu_delete_project -> {
+                this.onClickDeleteProject(mViewModel.projectPublicObserver.value?.id ?: "")
+                true
+            }
+            else -> false
+        }
+    }
+
+    private fun setupLoadingDialog() {
+        loadingDialog = ProgressDialog(this)
+        loadingDialog.setCancelable(false)
+        loadingDialog.dismiss()
     }
 
     private fun observeViewModel() {
@@ -88,6 +117,20 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
                 addSpendDialog?.hide()
             })
             errorCreateSpend.observe(this@DetailProjectActivity, Observer {
+                showSnackbarShort(it)
+            })
+            loadingDeleteProject.observe(this@DetailProjectActivity, Observer {
+                if (it) {
+                    loadingDialog.show()
+                } else {
+                    loadingDialog.dismiss()
+                }
+            })
+            successDeleteProject.observe(this@DetailProjectActivity, Observer {
+                showToastShort(getString(R.string.message_success_delete_project))
+                finish()
+            })
+            errorDeleteProject.observe(this@DetailProjectActivity, Observer {
                 showSnackbarShort(it)
             })
         }
@@ -148,6 +191,21 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
 
     override fun onClickEditProject(idProject: String) {
         AddProjectActivity.startActivity(this, idProject)
+    }
+
+    override fun onClickDeleteProject(idProject: String) {
+        val dialog = AlertDialog.Builder(this).create().apply {
+            setTitle(getString(R.string.label_delete_project))
+            setMessage(getString(R.string.message_delete_project))
+            setCancelable(false)
+            setButton(Dialog.BUTTON_POSITIVE, getString(R.string.btn_yes)) { dialog, which ->
+                mViewModel.deleteProject(idProject)
+            }
+            setButton(Dialog.BUTTON_NEGATIVE, getString(R.string.btn_no)) { dialog, which ->
+                dialog.dismiss()
+            }
+        }
+        dialog.show()
     }
 
     override fun onClickSpend(dialog: AddSpendDialog, value: Double) {

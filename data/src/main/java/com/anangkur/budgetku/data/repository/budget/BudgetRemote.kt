@@ -5,7 +5,6 @@ import com.anangkur.budgetku.data.model.budget.CategoryEntity
 import com.anangkur.budgetku.data.model.budget.CategoryProjectEntity
 import com.anangkur.budgetku.data.model.budget.ProjectEntity
 import com.anangkur.budgetku.data.model.budget.SpendEntity
-import com.anangkur.budgetku.domain.model.budget.Project
 
 interface BudgetRemote {
     fun createProject(
@@ -36,5 +35,9 @@ interface BudgetRemote {
     fun getProjectDetail(
         idProject: String,
         listener: BaseFirebaseListener<ProjectEntity>
+    )
+    fun deleteProject(
+        idProject: String,
+        listener: BaseFirebaseListener<Boolean>
     )
 }

@@ -91,6 +91,25 @@ class DetailProjectViewModel(private val budgetRepository: BudgetRepository) : V
         )
     }
 
+    val loadingDeleteProject = MutableLiveData<Boolean>()
+    val successDeleteProject = MutableLiveData<Boolean>()
+    val errorDeleteProject = MutableLiveData<String>()
+    fun deleteProject(projectId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            budgetRepository.deleteProject(projectId, object: BaseFirebaseListener<Boolean>{
+                override fun onLoading(isLoading: Boolean) {
+                    loadingDeleteProject.postValue(isLoading)
+                }
+                override fun onSuccess(data: Boolean) {
+                    successDeleteProject.postValue(data)
+                }
+                override fun onFailed(errorMessage: String) {
+                    errorDeleteProject.postValue(errorMessage)
+                }
+            })
+        }
+    }
+
     private fun setCategorySelectedPosition(
         category: CategoryProjectView,
         listCategory: List<CategoryProjectView>,

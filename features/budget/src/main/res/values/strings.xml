@@ -35,4 +35,11 @@
     <string name="hint_note">Note (optional)</string>
     <string name="label_note">Note</string>
     <string name="btn_edit_project">Edit Project</string>
+    <string name="menu_edit_project">Edit Project</string>
+    <string name="menu_delete_project">Delete Project</string>
+    <string name="label_delete_project">Delete Project</string>
+    <string name="message_delete_project">Are You sure want to delete this project?</string>
+    <string name="btn_yes">Yes</string>
+    <string name="btn_no">No</string>
+    <string name="message_success_delete_project">Success delete project</string>
 </resources>

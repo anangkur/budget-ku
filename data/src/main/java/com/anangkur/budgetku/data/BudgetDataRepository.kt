@@ -58,4 +58,8 @@ class BudgetDataRepository(
     override fun getProjectDetail(projectId: String, listener: BaseFirebaseListener<Project>) {
         factory.retrieveRemoteDataStore().getProjectDetail(projectId, listener)
     }
+
+    override fun deleteProject(projectId: String, listener: BaseFirebaseListener<Boolean>) {
+        factory.retrieveRemoteDataStore().deleteProject(projectId, listener)
+    }
 }

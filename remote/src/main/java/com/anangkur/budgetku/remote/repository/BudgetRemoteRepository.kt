@@ -261,4 +261,28 @@ class BudgetRemoteRepository(
         }
     }
 
+    override fun deleteProject(idProject: String, listener: BaseFirebaseListener<Boolean>) {
+        try {
+            listener.onLoading(true)
+            firebaseFirestore.collection(COLLECTION_PROJECT)
+                .document(getUid())
+                .collection(COLLECTION_PROJECT)
+                .document(idProject)
+                .delete()
+                .addOnSuccessListener {
+                    listener.onLoading(false)
+                    listener.onSuccess(true)
+                }
+                .addOnFailureListener {
+                    it.printStackTrace()
+                    listener.onLoading(false)
+                    listener.onFailed(it.message ?: "")
+                }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            listener.onLoading(false)
+            listener.onFailed(e.message ?: "")
+        }
+    }
+
 }

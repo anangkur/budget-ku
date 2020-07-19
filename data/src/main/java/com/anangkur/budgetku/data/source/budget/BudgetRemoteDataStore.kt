@@ -128,4 +128,19 @@ class BudgetRemoteDataStore(
             }
         })
     }
+
+    override fun deleteProject(idProject: String, listener: BaseFirebaseListener<Boolean>) {
+        budgetRemote.deleteProject(idProject, object: com.anangkur.budgetku.data.BaseFirebaseListener<Boolean>{
+            override fun onLoading(isLoading: Boolean) {
+                listener.onLoading(isLoading)
+            }
+            override fun onSuccess(data: Boolean) {
+                listener.onSuccess(data)
+            }
+            override fun onFailed(errorMessage: String) {
+                listener.onFailed(errorMessage)
+            }
+
+        })
+    }
 }

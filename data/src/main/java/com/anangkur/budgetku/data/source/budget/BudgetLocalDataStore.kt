@@ -54,4 +54,8 @@ class BudgetLocalDataStore(
     override fun getProjectDetail(idProject: String, listener: BaseFirebaseListener<Project>) {
         throw UnsupportedOperationException()
     }
+
+    override fun deleteProject(idProject: String, listener: BaseFirebaseListener<Boolean>) {
+        throw UnsupportedOperationException()
+    }
 }
