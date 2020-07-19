@@ -8,6 +8,7 @@ import com.anangkur.budgetku.domain.model.budget.Spend
 
 interface BudgetRepository {
     fun createProject(
+        idProject: String?,
         title: String,
         startDate: String,
         endDate: String,

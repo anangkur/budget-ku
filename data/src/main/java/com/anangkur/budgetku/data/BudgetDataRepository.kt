@@ -25,13 +25,14 @@ class BudgetDataRepository(
     }
 
     override fun createProject(
+        idProject: String?,
         title: String,
         startDate: String,
         endDate: String,
         category: List<CategoryProject>,
         listener: BaseFirebaseListener<Boolean>
     ) {
-        factory.retrieveRemoteDataStore().createProject(title, startDate, endDate, category, listener)
+        factory.retrieveRemoteDataStore().createProject(idProject, title, startDate, endDate, category, listener)
     }
 
     override fun getCategory(listener: BaseFirebaseListener<List<Category>>) {

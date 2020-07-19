@@ -50,6 +50,7 @@ class AddProjectViewModel(private val budgetRepository: BudgetRepository) : View
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             budgetRepository.createProject(
+                idProject = null,
                 title = title,
                 startDate = startDate,
                 endDate = endDate,

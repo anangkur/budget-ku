@@ -33,13 +33,14 @@ class BudgetRemoteDataStore(
     }
 
     override fun createProject(
+        idProject: String?,
         title: String,
         startDate: String,
         endDate: String,
         category: List<CategoryProject>,
         listener: BaseFirebaseListener<Boolean>
     ) {
-        budgetRemote.createProject(title, startDate, endDate, category.map {
+        budgetRemote.createProject(idProject, title, startDate, endDate, category.map {
             categoryProjectMapper.mapToEntity(it)
         }, object: com.anangkur.budgetku.data.BaseFirebaseListener<Boolean>{
             override fun onLoading(isLoading: Boolean) {

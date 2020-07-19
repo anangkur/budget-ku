@@ -64,7 +64,8 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
 
     private fun observeViewModel() {
         mViewModel.apply {
-            budgetPublicObserver.observe(this@DetailProjectActivity, Observer {
+            projectPublicObserver.observe(this@DetailProjectActivity, Observer {
+                editProject(it)
                 setupBudgetView(projectMapper.mapToIntent(it))
             })
             listCategoryPublicObserver.observe(this@DetailProjectActivity, Observer { list ->
@@ -157,7 +158,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
                     date = "",
                     title = mViewModel.categorySelectedValue?.title ?: "",
                     spend = mViewModel.spendValue.toInt(),
-                    idProject = mViewModel.budgetPublicObserver.value?.id ?: "",
+                    idProject = mViewModel.projectPublicObserver.value?.id ?: "",
                     idCategory = mViewModel.categorySelectedValue?.id ?: ""
                 )
             ))

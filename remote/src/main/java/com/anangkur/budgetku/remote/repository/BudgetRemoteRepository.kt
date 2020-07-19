@@ -55,6 +55,7 @@ class BudgetRemoteRepository(
     }
 
     override fun createProject(
+        idProject: String?,
         title: String,
         startDate: String,
         endDate: String,
@@ -63,7 +64,7 @@ class BudgetRemoteRepository(
     ) {
         try {
             listener.onLoading(true)
-            val createdAt = getCreatedAt()
+            val createdAt = idProject ?: getCreatedAt()
             firebaseFirestore.collection(COLLECTION_PROJECT)
                 .document(getUid())
                 .collection(COLLECTION_PROJECT)
