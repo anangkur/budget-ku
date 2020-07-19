@@ -7,7 +7,7 @@ import com.anangkur.budgetku.domain.BaseFirebaseListener
 import com.anangkur.budgetku.domain.model.budget.Project
 import com.anangkur.budgetku.domain.repository.AuthRepository
 import com.anangkur.budgetku.domain.repository.BudgetRepository
-import com.anangkur.budgetku.presentation.mapper.ProjectMapper
+import com.anangkur.budgetku.presentation.mapper.budget.ProjectMapper
 import com.anangkur.budgetku.presentation.model.auth.UserView
 import com.anangkur.budgetku.presentation.model.dashboard.ProjectView
 import kotlinx.coroutines.CoroutineScope

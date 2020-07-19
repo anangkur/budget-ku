@@ -31,4 +31,5 @@
     <string name="error_startdate_not_selected">Please select start date first</string>
     <string name="error_startdate_after_enddate">Start date must not after the end date</string>
     <string name="message_success_create_project">Success create project</string>
+    <string name="message_success_create_spend">Success add spend</string>
 </resources>

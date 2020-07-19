@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anangkur.budgetku.base.BaseActivity
 import com.anangkur.budgetku.budget.R
 import com.anangkur.budgetku.budget.databinding.ActivityDetailProjectBinding
+import com.anangkur.budgetku.budget.mapper.SpendMapper
+import com.anangkur.budgetku.budget.model.SpendUiModel
 import com.anangkur.budgetku.budget.view.dialog.addSpend.AddSpendDialogActionListener
 import com.anangkur.budgetku.budget.view.dialog.addSpend.AddSpendDialog
 import com.anangkur.budgetku.budget.view.detailSpend.DetailSpendActivity
@@ -20,6 +22,7 @@ import com.anangkur.budgetku.presentation.features.budget.DetailProjectViewModel
 import com.anangkur.budgetku.utils.currencyFormatToRupiah
 import com.anangkur.budgetku.utils.obtainViewModel
 import com.anangkur.budgetku.utils.setupRecyclerViewLinear
+import com.anangkur.budgetku.utils.showSnackbarShort
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.math.BigDecimal
 
@@ -43,17 +46,10 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
 
     private val projectMapper = ProjectMapper.getInstance()
     private val categoryProjectMapper = CategoryProjectMapper.getInstance()
+    private val spendMapper = SpendMapper.getInstance()
 
     override fun setupView(): ActivityDetailProjectBinding {
         return ActivityDetailProjectBinding.inflate(layoutInflater)
-    }
-
-    override fun onClickAddSpend() {
-        addSpendDialog?.show()
-    }
-
-    override fun onClickSpendCategory(data: CategoryProjectIntent) {
-        DetailSpendActivity.startActivity(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +70,22 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
             listCategoryPublicObserver.observe(this@DetailProjectActivity, Observer { list ->
                 spendCategoryAdapter.setRecyclerData(list.map { categoryProjectMapper.mapToIntent(it) })
                 setupAddSpendDialog(list.map { item -> item.title })
+            })
+            loadingCreateSpend.observe(this@DetailProjectActivity, Observer {
+                if (it){
+                    mLayout.btnAddSpend.showProgress()
+                } else {
+                    mLayout.btnAddSpend.hideProgress()
+                }
+            })
+            successCreateSpend.observe(this@DetailProjectActivity, Observer {
+                categorySelectedPosition = 0
+                categorySelectedValue = null
+                spendValue = 0.0
+                showSnackbarShort(getString(R.string.message_success_create_spend))
+            })
+            errorCreateSpend.observe(this@DetailProjectActivity, Observer {
+                showSnackbarShort(it)
             })
         }
     }
@@ -109,6 +121,14 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
         }
     }
 
+    override fun onClickAddSpend() {
+        addSpendDialog?.show()
+    }
+
+    override fun onClickSpendCategory(data: CategoryProjectIntent) {
+        DetailSpendActivity.startActivity(this)
+    }
+
     override fun onClickSpend(dialog: AddSpendDialog, value: Double) {
         val calcDialog = CalcDialog(object : AddSpendValueListener {
             override fun setValue(value: BigDecimal) {
@@ -131,9 +151,15 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
                 isCategoryNullOrEmpty = mViewModel.categorySelectedValue == null
             )
         ){
-            addSpendDialog = null
-            mViewModel.spendValue = 0.0
-            dialog.dismiss()
+            mViewModel.createSpend(spendMapper.mapFromIntent(
+                SpendUiModel(
+                    image = mViewModel.categorySelectedValue?.image ?: "",
+                    date = "",
+                    title = mViewModel.categorySelectedValue?.title ?: "",
+                    spend = mViewModel.spendValue.toInt(),
+                    idProject = mViewModel.budgetPublicObserver.value?.id ?: ""
+                )
+            ))
         }
     }
 

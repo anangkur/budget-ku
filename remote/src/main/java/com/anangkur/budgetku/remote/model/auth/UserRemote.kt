@@ -1,6 +1,6 @@
 package com.anangkur.budgetku.remote.model.auth
 
-data class UserRemoteModel(
+data class UserRemote(
     var userId: String = "",
     var email: String = "",
     var name: String = "",

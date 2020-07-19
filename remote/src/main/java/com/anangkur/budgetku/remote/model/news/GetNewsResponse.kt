@@ -1,6 +1,5 @@
 package com.anangkur.budgetku.remote.model.news
 
-import com.anangkur.budgetku.remote.model.news.ArticleModel
 import com.google.gson.annotations.SerializedName
 
 data class GetNewsResponse(
@@ -9,7 +8,7 @@ data class GetNewsResponse(
     @SerializedName("totalResults")
     val totalResults: Int = 0,
     @SerializedName("articles")
-    val articles: List<ArticleModel> = listOf(),
+    val articles: List<ArticleRemote> = listOf(),
     @SerializedName("message")
     val message: String? = ""
 )

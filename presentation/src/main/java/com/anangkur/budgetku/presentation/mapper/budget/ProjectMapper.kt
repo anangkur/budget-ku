@@ -1,6 +1,7 @@
-package com.anangkur.budgetku.presentation.mapper
+package com.anangkur.budgetku.presentation.mapper.budget
 
 import com.anangkur.budgetku.domain.model.budget.Project
+import com.anangkur.budgetku.presentation.mapper.Mapper
 import com.anangkur.budgetku.presentation.model.dashboard.ProjectView
 
 class ProjectMapper(
@@ -9,7 +10,10 @@ class ProjectMapper(
 
     companion object{
         private var INSTANCE: ProjectMapper? = null
-        fun getInstance() = INSTANCE ?: ProjectMapper(CategoryProjectMapper.getInstance())
+        fun getInstance() = INSTANCE
+            ?: ProjectMapper(
+                CategoryProjectMapper.getInstance()
+            )
     }
 
     override fun mapToView(type: Project): ProjectView {

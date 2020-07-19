@@ -1,13 +1,16 @@
-package com.anangkur.budgetku.presentation.mapper
+package com.anangkur.budgetku.presentation.mapper.budget
 
 import com.anangkur.budgetku.domain.model.budget.Category
+import com.anangkur.budgetku.presentation.mapper.Mapper
 import com.anangkur.budgetku.presentation.model.budget.CategoryView
 
-class CategoryMapper : Mapper<CategoryView, Category> {
+class CategoryMapper :
+    Mapper<CategoryView, Category> {
 
     companion object{
         private var INSTANCE: CategoryMapper? = null
-        fun getInstance() = INSTANCE ?: CategoryMapper()
+        fun getInstance() = INSTANCE
+            ?: CategoryMapper()
     }
 
     override fun mapToView(type: Category): CategoryView {

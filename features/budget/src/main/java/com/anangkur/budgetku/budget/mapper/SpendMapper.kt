@@ -16,7 +16,8 @@ class SpendMapper : Mapper<SpendUiModel, SpendView> {
             image = type.image,
             title = type.title,
             date = type.date,
-            spend = type.spend
+            spend = type.spend,
+            idProject = type.idProject
         )
     }
 
@@ -25,7 +26,8 @@ class SpendMapper : Mapper<SpendUiModel, SpendView> {
             image = type.image,
             title = type.title,
             date = type.date,
-            spend = type.spend
+            spend = type.spend,
+            idProject = type.idProject
         )
     }
 }

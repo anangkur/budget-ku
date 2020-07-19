@@ -18,7 +18,8 @@ class DetailSpendViewModel : ViewModel() {
                     image = "",
                     spend = 1000000,
                     date = "Today, 10:00",
-                    title = "Food"
+                    title = "Food",
+                    idProject = ""
             ))
         }
         listSpendInternalSetter.postValue(listSpend)

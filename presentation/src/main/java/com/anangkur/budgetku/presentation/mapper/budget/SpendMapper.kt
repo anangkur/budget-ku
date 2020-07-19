@@ -1,18 +1,18 @@
-package com.anangkur.budgetku.remote.mapper.budget
+package com.anangkur.budgetku.presentation.mapper.budget
 
-import com.anangkur.budgetku.data.model.budget.SpendEntity
-import com.anangkur.budgetku.remote.mapper.Mapper
-import com.anangkur.budgetku.remote.model.budget.SpendRemote
+import com.anangkur.budgetku.domain.model.budget.Spend
+import com.anangkur.budgetku.presentation.mapper.Mapper
+import com.anangkur.budgetku.presentation.model.budget.SpendView
 
-class SpendMapper : Mapper<SpendRemote, SpendEntity> {
+class SpendMapper : Mapper<SpendView, Spend> {
 
     companion object {
         private var INSTANCE: SpendMapper? = null
         fun getInstance() = INSTANCE ?: SpendMapper()
     }
 
-    override fun mapToRemote(type: SpendEntity): SpendRemote {
-        return SpendRemote(
+    override fun mapToView(type: Spend): SpendView {
+        return SpendView(
             image = type.image,
             spend = type.spend,
             title = type.title,
@@ -21,8 +21,8 @@ class SpendMapper : Mapper<SpendRemote, SpendEntity> {
         )
     }
 
-    override fun mapFromRemote(type: SpendRemote): SpendEntity {
-        return SpendEntity(
+    override fun mapFromView(type: SpendView): Spend {
+        return Spend(
             image = type.image,
             spend = type.spend,
             title = type.title,

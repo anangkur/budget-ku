@@ -1,13 +1,16 @@
-package com.anangkur.budgetku.presentation.mapper
+package com.anangkur.budgetku.presentation.mapper.news
 
 import com.anangkur.budgetku.domain.model.news.Article
+import com.anangkur.budgetku.presentation.mapper.Mapper
 import com.anangkur.budgetku.presentation.model.news.ArticleView
 
-class ArticleMapper: Mapper<ArticleView, Article> {
+class ArticleMapper:
+    Mapper<ArticleView, Article> {
 
     companion object{
         private var INSTANCE: ArticleMapper? = null
-        fun getInstance() = INSTANCE ?: ArticleMapper()
+        fun getInstance() = INSTANCE
+            ?: ArticleMapper()
     }
 
     override fun mapToView(type: Article): ArticleView {

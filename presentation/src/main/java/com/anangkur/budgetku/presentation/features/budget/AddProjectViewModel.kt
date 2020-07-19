@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anangkur.budgetku.domain.BaseFirebaseListener
 import com.anangkur.budgetku.domain.repository.BudgetRepository
-import com.anangkur.budgetku.presentation.mapper.CategoryProjectMapper
+import com.anangkur.budgetku.presentation.mapper.budget.CategoryProjectMapper
 import com.anangkur.budgetku.presentation.model.budget.CategoryProjectView
 import com.anangkur.budgetku.presentation.model.budget.CategoryView
 import kotlinx.coroutines.CoroutineScope

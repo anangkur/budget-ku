@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.anangkur.budgetku.domain.BaseFirebaseListener
 import com.anangkur.budgetku.domain.model.budget.Category
 import com.anangkur.budgetku.domain.repository.BudgetRepository
-import com.anangkur.budgetku.presentation.mapper.CategoryMapper
+import com.anangkur.budgetku.presentation.mapper.budget.CategoryMapper
 import com.anangkur.budgetku.presentation.model.budget.CategoryView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

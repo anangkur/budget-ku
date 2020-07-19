@@ -6,7 +6,7 @@ import com.anangkur.budgetku.data.model.auth.UserEntity
 import com.anangkur.budgetku.data.repository.auth.AuthRemote
 import com.anangkur.budgetku.remote.Consts
 import com.anangkur.budgetku.remote.mapper.auth.UserMapper
-import com.anangkur.budgetku.remote.model.auth.UserRemoteModel
+import com.anangkur.budgetku.remote.model.auth.UserRemote
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
@@ -41,7 +41,7 @@ class AuthRemoteRepository(
                 .get()
                 .addOnSuccessListener {
                     listener.onLoading(false)
-                    val userFirestore = it.toObject<UserRemoteModel>()
+                    val userFirestore = it.toObject<UserRemote>()
                     if (userFirestore != null && it.contains("firebaseToken")){
                         listener.onSuccess(userMapper.mapFromRemote(userFirestore))
                     }else{
@@ -69,7 +69,7 @@ class AuthRemoteRepository(
                 .get()
                 .addOnSuccessListener {
                     listener.onLoading(false)
-                    val userFirestore = it.toObject<UserRemoteModel>()
+                    val userFirestore = it.toObject<UserRemote>()
                     if (userFirestore != null && it.contains("firebaseToken")){
                         listener.onSuccess(userMapper.mapFromRemote(userFirestore))
                     }else{
@@ -95,7 +95,7 @@ class AuthRemoteRepository(
     ) {
         try {
             listener.onLoading(true)
-            val userMap = UserRemoteModel(
+            val userMap = UserRemote(
                 userId = user.uid,
                 email = user.email?:"",
                 name = user.displayName?:"",

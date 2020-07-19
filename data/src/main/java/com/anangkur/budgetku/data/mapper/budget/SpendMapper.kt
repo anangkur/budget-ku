@@ -16,7 +16,8 @@ class SpendMapper : Mapper<SpendEntity, Spend> {
             image = type.image,
             spend = type.spend,
             title = type.title,
-            date = type.date
+            date = type.date,
+            idProject = type.idProject
         )
     }
 
@@ -25,7 +26,8 @@ class SpendMapper : Mapper<SpendEntity, Spend> {
             image = type.image,
             spend = type.spend,
             title = type.title,
-            date = type.date
+            date = type.date,
+            idProject = type.idProject
         )
     }
 }
