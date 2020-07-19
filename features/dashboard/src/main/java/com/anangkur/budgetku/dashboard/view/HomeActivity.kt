@@ -50,12 +50,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
         setupRecyclerProject()
         setupClickListener()
         observeViewModel()
-        mViewModel.createDummyUser()
     }
 
     override fun onResume() {
         super.onResume()
         mViewModel.getProject()
+        mViewModel.getUser()
     }
 
     override fun onClickAddProject() {
@@ -101,8 +101,20 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
                     buttonErrorString = getString(R.string.btn_retry),
                     errorType = BaseErrorView.ERROR_GENERAL)
             })
-            userPublicObserver.observe(this@HomeActivity, Observer {
+            loadingGetUser.observe(this@HomeActivity, Observer {
+                if (it) {
+                    mLayout.layoutProfile.invisible()
+                    mLayout.pbProfile.visible()
+                } else {
+                    mLayout.layoutProfile.visible()
+                    mLayout.pbProfile.gone()
+                }
+            })
+            successGetUser.observe(this@HomeActivity, Observer {
                 setupUserView(userMapper.mapToIntent(it))
+            })
+            errorGetUser.observe(this@HomeActivity, Observer {
+                showSnackbarShort(it)
             })
         }
     }
