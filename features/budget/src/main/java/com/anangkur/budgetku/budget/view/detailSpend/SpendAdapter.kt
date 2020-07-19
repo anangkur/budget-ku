@@ -6,7 +6,9 @@ import com.anangkur.budgetku.base.BaseAdapter
 import com.anangkur.budgetku.budget.databinding.ItemSpendBinding
 import com.anangkur.budgetku.budget.model.SpendUiModel
 import com.anangkur.budgetku.utils.currencyFormatToRupiah
+import com.anangkur.budgetku.utils.gone
 import com.anangkur.budgetku.utils.setImageUrl
+import com.anangkur.budgetku.utils.visible
 
 class SpendAdapter : BaseAdapter<ItemSpendBinding, SpendUiModel>() {
     override fun bindView(parent: ViewGroup): ItemSpendBinding {
@@ -19,6 +21,12 @@ class SpendAdapter : BaseAdapter<ItemSpendBinding, SpendUiModel>() {
             tvSpendDate.text = data.date
             tvSpendCategory.text = data.title
             tvSpend.text = data.spend.toDouble().currencyFormatToRupiah()
+            if (data.note.isNotEmpty()) {
+                layoutNote.visible()
+                tvNote.text = data.note
+            } else {
+                layoutNote.gone()
+            }
         }
     }
 }
