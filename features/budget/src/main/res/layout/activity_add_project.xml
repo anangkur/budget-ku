@@ -105,6 +105,7 @@
     <com.anangkur.budgetku.base.BaseErrorView
         android:id="@+id/ev_add_project"
         style="@style/RelativeDefault"
+        android:visibility="gone"
         android:layout_below="@id/toolbar"
         android:layout_above="@id/btn_save"/>
 
