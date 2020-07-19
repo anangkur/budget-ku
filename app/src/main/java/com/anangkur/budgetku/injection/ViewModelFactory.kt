@@ -37,8 +37,8 @@ class ViewModelFactory(
 
                 isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(budgetRepository, authRepository)
 
-                isAssignableFrom(DetailProjectViewModel::class.java) -> DetailProjectViewModel()
-                isAssignableFrom(DetailSpendViewModel::class.java) -> DetailSpendViewModel()
+                isAssignableFrom(DetailProjectViewModel::class.java) -> DetailProjectViewModel(budgetRepository)
+                isAssignableFrom(DetailSpendViewModel::class.java) -> DetailSpendViewModel(budgetRepository)
                 isAssignableFrom(SelectCategoryViewModel::class.java) -> SelectCategoryViewModel(budgetRepository)
                 isAssignableFrom(AddProjectViewModel::class.java) -> AddProjectViewModel(budgetRepository)
 

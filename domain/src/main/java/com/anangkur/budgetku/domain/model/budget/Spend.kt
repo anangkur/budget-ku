@@ -1,6 +1,6 @@
-package com.anangkur.budgetku.budget.model
+package com.anangkur.budgetku.domain.model.budget
 
-data class SpendUiModel(
+data class Spend(
     val image: String,
     val title: String,
     val date: String,

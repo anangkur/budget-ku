@@ -7,6 +7,7 @@ import com.anangkur.budgetku.domain.BaseFirebaseListener
 import com.anangkur.budgetku.domain.model.budget.Category
 import com.anangkur.budgetku.domain.model.budget.CategoryProject
 import com.anangkur.budgetku.domain.model.budget.Project
+import com.anangkur.budgetku.domain.model.budget.Spend
 import com.anangkur.budgetku.domain.repository.BudgetRepository
 
 class BudgetDataRepository(
@@ -24,13 +25,14 @@ class BudgetDataRepository(
     }
 
     override fun createProject(
+        idProject: String?,
         title: String,
         startDate: String,
         endDate: String,
         category: List<CategoryProject>,
         listener: BaseFirebaseListener<Boolean>
     ) {
-        factory.retrieveRemoteDataStore().createProject(title, startDate, endDate, category, listener)
+        factory.retrieveRemoteDataStore().createProject(idProject, title, startDate, endDate, category, listener)
     }
 
     override fun getCategory(listener: BaseFirebaseListener<List<Category>>) {
@@ -39,5 +41,25 @@ class BudgetDataRepository(
 
     override fun getProject(listener: BaseFirebaseListener<List<Project>>) {
         factory.retrieveRemoteDataStore().getProject(listener)
+    }
+
+    override fun createSpend(spend: Spend, listener: BaseFirebaseListener<Boolean>) {
+        factory.retrieveRemoteDataStore().createSpend(spend, listener)
+    }
+
+    override fun getListSpend(
+        idProject: String,
+        idCategory: String?,
+        listener: BaseFirebaseListener<List<Spend>>
+    ) {
+        factory.retrieveRemoteDataStore().getListSpend(idProject, idCategory, listener)
+    }
+
+    override fun getProjectDetail(projectId: String, listener: BaseFirebaseListener<Project>) {
+        factory.retrieveRemoteDataStore().getProjectDetail(projectId, listener)
+    }
+
+    override fun deleteProject(projectId: String, listener: BaseFirebaseListener<Boolean>) {
+        factory.retrieveRemoteDataStore().deleteProject(projectId, listener)
     }
 }

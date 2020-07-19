@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.anangkur.budgetku.base.BaseActivity
+import com.anangkur.budgetku.base.BaseErrorView
 import com.anangkur.budgetku.dashboard.R
 import com.anangkur.budgetku.dashboard.databinding.ActivityHomeBinding
 import com.anangkur.budgetku.mapper.ProjectMapper
@@ -12,18 +13,19 @@ import com.anangkur.budgetku.dashboard.mapper.UserMapper
 import com.anangkur.budgetku.dashboard.model.UserIntent
 import com.anangkur.budgetku.model.ProjectIntent
 import com.anangkur.budgetku.presentation.features.dashboard.HomeViewModel
+import com.anangkur.budgetku.utils.*
 import com.anangkur.budgetku.utils.Navigation.goToAddProjectActivity
 import com.anangkur.budgetku.utils.Navigation.goToDetailProjectActivity
 import com.anangkur.budgetku.utils.Navigation.goToProfileActivity
-import com.anangkur.budgetku.utils.obtainViewModel
-import com.anangkur.budgetku.utils.setImageUrl
-import com.anangkur.budgetku.utils.setupRecyclerViewLinear
-import com.anangkur.budgetku.utils.showToastShort
 import java.text.SimpleDateFormat
 import java.util.*
 import com.anangkur.budgetku.R as appR
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeActivityActionListener {
+
+    companion object {
+        private const val DATE_FORMAT_HOME = "EEEE, MMM dd yyyy"
+    }
 
     override val mViewModel: HomeViewModel
         get() = obtainViewModel(HomeViewModel::class.java)
@@ -48,12 +50,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
         setupRecyclerProject()
         setupClickListener()
         observeViewModel()
-        mViewModel.createDummyUser()
     }
 
     override fun onResume() {
         super.onResume()
         mViewModel.getProject()
+        mViewModel.getUser()
     }
 
     override fun onClickAddProject() {
@@ -71,16 +73,48 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
     private fun observeViewModel() {
         mViewModel.apply {
             loadingGetProject.observe(this@HomeActivity, Observer {
-
+                mLayout.evProject.visible()
+                if (it) {
+                    mLayout.evProject.showProgress()
+                } else {
+                    mLayout.evProject.endProgress()
+                }
             })
             successGetProject.observe(this@HomeActivity, Observer { list ->
-                projectAdapter.setRecyclerData(list.map { projectMapper.mapToIntent(it) })
+                if (list.isNullOrEmpty()) {
+                    mLayout.recyclerProject.gone()
+                    mLayout.evProject.visible()
+                    mLayout.evProject.showError(
+                        errorMessage = getString(R.string.error_project_empty),
+                        errorType = BaseErrorView.ERROR_NULL_DATA
+                    )
+                } else {
+                    mLayout.recyclerProject.visible()
+                    mLayout.evProject.gone()
+                    projectAdapter.setRecyclerData(list.map { projectMapper.mapToIntent(it) })
+                }
             })
             errorGetProject.observe(this@HomeActivity, Observer {
-                showToastShort(it)
+                mLayout.evProject.visible()
+                mLayout.evProject.showError(
+                    errorMessage = it,
+                    buttonErrorString = getString(R.string.btn_retry),
+                    errorType = BaseErrorView.ERROR_GENERAL)
             })
-            userPublicObserver.observe(this@HomeActivity, Observer {
+            loadingGetUser.observe(this@HomeActivity, Observer {
+                if (it) {
+                    mLayout.layoutProfile.invisible()
+                    mLayout.pbProfile.visible()
+                } else {
+                    mLayout.layoutProfile.visible()
+                    mLayout.pbProfile.gone()
+                }
+            })
+            successGetUser.observe(this@HomeActivity, Observer {
                 setupUserView(userMapper.mapToIntent(it))
+            })
+            errorGetUser.observe(this@HomeActivity, Observer {
+                showSnackbarShort(it)
             })
         }
     }
@@ -99,7 +133,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), HomeAct
     }
 
     private fun setupDateView(date: Date) {
-        val dateFormat = SimpleDateFormat("EEEE, MMM dd yyyy", Locale.getDefault())
+        val dateFormat = SimpleDateFormat(DATE_FORMAT_HOME, Locale.getDefault())
         mLayout.tvDate.text = dateFormat.format(date)
     }
 

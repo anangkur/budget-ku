@@ -2,7 +2,7 @@ package com.anangkur.budgetku.remote.model.news
 
 import com.google.gson.annotations.SerializedName
 
-data class ArticleModel(
+data class ArticleRemote(
 
     val id: Int = 0,
 

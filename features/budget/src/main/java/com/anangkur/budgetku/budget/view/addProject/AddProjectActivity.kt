@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.anangkur.budgetku.base.BaseActivity
+import com.anangkur.budgetku.base.BaseErrorView
 import com.anangkur.budgetku.budget.R
 import com.anangkur.budgetku.R as appR
 import com.anangkur.budgetku.budget.databinding.ActivityAddProjectBinding
@@ -19,7 +20,9 @@ import com.anangkur.budgetku.budget.view.dialog.addCategory.AddCategoryDialog
 import com.anangkur.budgetku.budget.view.dialog.addCategory.AddCategoryDialogListener
 import com.anangkur.budgetku.budget.view.selectCategory.SelectCategoryActivity
 import com.anangkur.budgetku.mapper.CategoryProjectMapper
+import com.anangkur.budgetku.mapper.ProjectMapper
 import com.anangkur.budgetku.model.CategoryProjectIntent
+import com.anangkur.budgetku.model.ProjectIntent
 import com.anangkur.budgetku.presentation.features.budget.AddProjectViewModel
 import com.anangkur.budgetku.utils.*
 import com.annimon.stream.Stream
@@ -37,8 +40,11 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
         const val DATE_ENGLISH_YYYY_MM_DD = "yyyy-M-d"
         const val TYPE_START_DATE = 0
         const val TYPE_END_DATE = 1
-        fun startActivity(context: Context) {
-            context.startActivity(Intent(context, AddProjectActivity::class.java))
+        private const val EXTRA_PROJECT_ID = "extra-project-id"
+        fun startActivity(context: Context, projectId: String) {
+            context.startActivity(Intent(context, AddProjectActivity::class.java).apply {
+                putExtra(EXTRA_PROJECT_ID, projectId)
+            })
         }
     }
 
@@ -53,6 +59,7 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
 
     private val categoryMapper = CategoryMapper.getInstance()
     private val categoryProjectMapper = CategoryProjectMapper.getInstance()
+    private val projectMapper = ProjectMapper.getInstance()
 
     private lateinit var categoryProjectAdapter: CategoryProjectAdapter
 
@@ -63,8 +70,12 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setupAddCategoryDialog()
         setupCategoryProjectAdapter()
+        getIntentData()
+        if (mViewModel.projectId != null) {
+            mViewModel.getProject(mViewModel.projectId ?: "")
+        }
+        setupAddCategoryDialog()
         setupTextWatcher()
         observeViewModel()
         mLayout.btnAddCategory.setOnClickListener { this.onClickAddCategory() }
@@ -90,50 +101,68 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
         }
     }
 
-    private fun setupAddCategoryDialog() {
-        addCategoryDialog =
-            AddCategoryDialog(
-                context = this,
-                listener = object :
-                    AddCategoryDialogListener {
-                    override fun onClickCancel(dialog: AddCategoryDialog) {
-                        dialog.dismiss()
-                    }
+    private fun setupProject(data: ProjectIntent) {
+        mLayout.apply {
+            etTitle.setText(data.title)
+            etStartDate.setText(data.startDate)
+            etEndDate.setText(data.endDate)
+            data.listCategory.forEach {
+                mViewModel.addCategoryProject(categoryProjectMapper.mapFromIntent(it))
+            }
+        }
+    }
 
-                    override fun onClickSave(dialog: AddCategoryDialog) {
-                        if (dialog.setupButtonSaveEnable(
-                                mViewModel.categorySelectedValue == null,
-                                mViewModel.budgetValue <= 0
-                            )
-                        ) {
-                            mViewModel.addCategoryProject(
-                                categoryProjectMapper.mapFromIntent(
-                                    CategoryProjectIntent(
-                                        id = "",
-                                        title = mViewModel.categorySelectedValue?.title ?: "",
-                                        value = mViewModel.budgetValue,
-                                        image = mViewModel.categorySelectedValue?.image ?: "",
-                                        spend = 0.0,
-                                        remaining = 0.0
+    private fun getIntentData() {
+        mViewModel.projectId = intent.getStringExtra(EXTRA_PROJECT_ID)
+    }
+
+    private fun setupAddCategoryDialog() {
+        if (addCategoryDialog == null) {
+            addCategoryDialog =
+                AddCategoryDialog(
+                    context = this,
+                    listener = object :
+                        AddCategoryDialogListener {
+                        override fun onClickCancel(dialog: AddCategoryDialog) {
+                            dialog.dismiss()
+                        }
+
+                        override fun onClickSave(dialog: AddCategoryDialog) {
+                            if (dialog.setupButtonSaveEnable(
+                                    mViewModel.categorySelectedValue == null,
+                                    mViewModel.budgetValue <= 0
+                                )
+                            ) {
+                                mViewModel.addCategoryProject(
+                                    categoryProjectMapper.mapFromIntent(
+                                        CategoryProjectIntent(
+                                            id = DateUtils.getCreatedAt(),
+                                            title = mViewModel.categorySelectedValue?.title ?: "",
+                                            value = mViewModel.budgetValue,
+                                            image = mViewModel.categorySelectedValue?.image ?: "",
+                                            spend = 0.0,
+                                            remaining = 0.0
+                                        )
                                     )
                                 )
-                            )
-                            mViewModel.categorySelectedValue = null
-                            mViewModel.budgetValue = 0.0
-                            dialog.clearInputtedValue()
-                            dialog.dismiss()
-                            mLayout.tvErrorCategory.gone()
+                                mViewModel.categorySelectedValue = null
+                                mViewModel.budgetValue = 0.0
+                                dialog.clearInputtedValue()
+                                dialog.dismiss()
+                                mLayout.tvErrorCategory.gone()
+                            }
+                        }
+
+                        override fun onClickCategory() {
+                            SelectCategoryActivity.startActivity(this@AddProjectActivity)
+                        }
+
+                        override fun onValueInputted(value: Double) {
+                            mViewModel.budgetValue = value
                         }
                     }
-
-                    override fun onClickCategory() {
-                        SelectCategoryActivity.startActivity(this@AddProjectActivity)
-                    }
-
-                    override fun onValueInputted(value: Double) {
-                        mViewModel.budgetValue = value
-                    }
-                })
+                )
+        }
     }
 
     override fun onClickAddCategory() {
@@ -238,6 +267,26 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
             })
             errorCreateProject.observe(this@AddProjectActivity, Observer {
                 showSnackbarShort(it)
+            })
+            loadingGetProject.observe(this@AddProjectActivity, Observer {
+                if (it) {
+                    mLayout.evAddProject.visible()
+                    mLayout.evAddProject.showProgress()
+                    mLayout.layoutContent.gone()
+                } else {
+                    mLayout.evAddProject.gone()
+                    mLayout.layoutContent.visible()
+                }
+            })
+            successGetProject.observe(this@AddProjectActivity, Observer {
+                mLayout.evAddProject.gone()
+                mLayout.layoutContent.visible()
+                setupProject(projectMapper.mapToIntent(it))
+            })
+            errorGetProject.observe(this@AddProjectActivity, Observer {
+                mLayout.layoutContent.gone()
+                mLayout.evAddProject.visible()
+                mLayout.evAddProject.showError(it, errorType = BaseErrorView.ERROR_NULL_DATA)
             })
         }
     }

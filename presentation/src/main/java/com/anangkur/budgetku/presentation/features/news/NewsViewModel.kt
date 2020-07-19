@@ -5,7 +5,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.anangkur.budgetku.domain.impl.ArticlesSource
 import com.anangkur.budgetku.domain.model.news.Article
-import com.anangkur.budgetku.presentation.mapper.ArticleMapper
+import com.anangkur.budgetku.presentation.mapper.news.ArticleMapper
 import com.anangkur.budgetku.presentation.mapper.BaseResultMapper
 import com.anangkur.budgetku.presentation.model.news.ArticleView
 

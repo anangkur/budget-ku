@@ -2,11 +2,11 @@ package com.anangkur.budgetku.remote.mapper.news
 
 import com.anangkur.budgetku.data.model.news.ArticleEntity
 import com.anangkur.budgetku.remote.mapper.Mapper
-import com.anangkur.budgetku.remote.model.news.ArticleModel
+import com.anangkur.budgetku.remote.model.news.ArticleRemote
 import java.lang.UnsupportedOperationException
 
 class ArticleMapper:
-    Mapper<ArticleModel, ArticleEntity> {
+    Mapper<ArticleRemote, ArticleEntity> {
 
     companion object{
         private var INSTANCE: ArticleMapper? = null
@@ -14,7 +14,7 @@ class ArticleMapper:
             ?: ArticleMapper()
     }
 
-    override fun mapFromRemote(type: ArticleModel): ArticleEntity {
+    override fun mapFromRemote(type: ArticleRemote): ArticleEntity {
         return ArticleEntity(
             id = type.id,
             title = type.title,
@@ -28,7 +28,7 @@ class ArticleMapper:
         )
     }
 
-    override fun mapToRemote(type: ArticleEntity): ArticleModel {
+    override fun mapToRemote(type: ArticleEntity): ArticleRemote {
         throw UnsupportedOperationException()
     }
 }

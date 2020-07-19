@@ -2,10 +2,10 @@ package com.anangkur.budgetku.remote.mapper.auth
 
 import com.anangkur.budgetku.data.model.auth.UserEntity
 import com.anangkur.budgetku.remote.mapper.Mapper
-import com.anangkur.budgetku.remote.model.auth.UserRemoteModel
+import com.anangkur.budgetku.remote.model.auth.UserRemote
 
 class UserMapper:
-    Mapper<UserRemoteModel, UserEntity> {
+    Mapper<UserRemote, UserEntity> {
 
     companion object{
         private var INSTANCE: UserMapper? = null
@@ -13,7 +13,7 @@ class UserMapper:
             ?: UserMapper()
     }
 
-    override fun mapFromRemote(type: UserRemoteModel): UserEntity {
+    override fun mapFromRemote(type: UserRemote): UserEntity {
         return UserEntity(
             userId = type.userId,
             name = type.name,
@@ -26,8 +26,8 @@ class UserMapper:
         )
     }
 
-    override fun mapToRemote(type: UserEntity): UserRemoteModel {
-        return UserRemoteModel(
+    override fun mapToRemote(type: UserEntity): UserRemote {
+        return UserRemote(
             userId = type.userId,
             name = type.name,
             firebaseToken = type.firebaseToken,

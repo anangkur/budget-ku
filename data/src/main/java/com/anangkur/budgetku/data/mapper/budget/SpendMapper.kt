@@ -1,34 +1,34 @@
-package com.anangkur.budgetku.budget.mapper
+package com.anangkur.budgetku.data.mapper.budget
 
-import com.anangkur.budgetku.budget.model.SpendUiModel
-import com.anangkur.budgetku.mapper.Mapper
-import com.anangkur.budgetku.presentation.model.budget.SpendView
+import com.anangkur.budgetku.data.mapper.Mapper
+import com.anangkur.budgetku.data.model.budget.SpendEntity
+import com.anangkur.budgetku.domain.model.budget.Spend
 
-class SpendMapper : Mapper<SpendUiModel, SpendView> {
+class SpendMapper : Mapper<SpendEntity, Spend> {
 
-    companion object{
+    companion object {
         private var INSTANCE: SpendMapper? = null
         fun getInstance() = INSTANCE ?: SpendMapper()
     }
 
-    override fun mapToIntent(type: SpendView): SpendUiModel {
-        return SpendUiModel(
+    override fun mapToEntity(type: Spend): SpendEntity {
+        return SpendEntity(
             image = type.image,
+            spend = type.spend,
             title = type.title,
             date = type.date,
-            spend = type.spend,
             idProject = type.idProject,
             idCategory = type.idCategory,
             note = type.note
         )
     }
 
-    override fun mapFromIntent(type: SpendUiModel): SpendView {
-        return SpendView(
+    override fun mapFromEntity(type: SpendEntity): Spend {
+        return Spend(
             image = type.image,
+            spend = type.spend,
             title = type.title,
             date = type.date,
-            spend = type.spend,
             idProject = type.idProject,
             idCategory = type.idCategory,
             note = type.note

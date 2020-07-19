@@ -5,5 +5,5 @@ data class CategoryProjectView (
     val title: String,
     val image: String,
     val value: Double,
-    val spend: Double
+    var spend: Double
 )

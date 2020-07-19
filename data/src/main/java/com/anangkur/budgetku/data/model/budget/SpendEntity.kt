@@ -1,9 +1,9 @@
-package com.anangkur.budgetku.budget.model
+package com.anangkur.budgetku.data.model.budget
 
-data class SpendUiModel(
+data class SpendEntity(
     val image: String,
     val title: String,
-    val date: String,
+    var date: String,
     val spend: Int,
     val idProject: String,
     val idCategory: String,

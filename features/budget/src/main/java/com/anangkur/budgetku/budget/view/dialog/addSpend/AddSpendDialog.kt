@@ -1,15 +1,21 @@
 package com.anangkur.budgetku.budget.view.dialog.addSpend
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import androidx.appcompat.app.AlertDialog
 import com.anangkur.budgetku.base.BaseSpinnerListener
 import com.anangkur.budgetku.budget.R as BUDGET_R
 import com.anangkur.budgetku.budget.databinding.DialogAddSpendBinding
+import com.anangkur.budgetku.currencyEditText.CurrencySymbols
 import com.anangkur.budgetku.model.CategoryProjectIntent
 import com.anangkur.budgetku.utils.*
 
@@ -37,6 +43,8 @@ class AddSpendDialog(
         setSpendValue(defaultValue)
         setCategoryNull()
         setupSpinner(data, itemAtZero)
+        setupTextWatcher()
+        setupEditTextNote()
 
         mLayout.etSpend.setOnClickListener {
             listener.onClickSpend(this, defaultValue)
@@ -76,7 +84,10 @@ class AddSpendDialog(
         }
     }
 
-    fun setupButtonSaveEnable(isCategoryNullOrEmpty: Boolean, isValueNullOrEmpty: Boolean): Boolean {
+    fun setupButtonSaveEnable(
+        isCategoryNullOrEmpty: Boolean,
+        isValueNullOrEmpty: Boolean
+    ): Boolean {
         return when {
             isValueNullOrEmpty -> {
                 setButtonSaveDisable(context.getString(BUDGET_R.string.error_value_null_or_empty))
@@ -121,6 +132,39 @@ class AddSpendDialog(
                     }
                 }
             })
+        }
+    }
+
+    private fun setupTextWatcher() {
+        mLayout.etNote.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                if (!s.isNullOrEmpty()) {
+                    listener.onEditNote(s.toString())
+                } else {
+                    listener.onEditNote("")
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
+
+    private fun hideKeyboard(view: View) {
+        val inputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+        inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun setupEditTextNote() {
+        mLayout.etNote.apply {
+            setOnEditorActionListener { v, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    hideKeyboard(v)
+                    listener.onEditNote(this.text.toString())
+                    true
+                } else {
+                    false
+                }
+            }
         }
     }
 }

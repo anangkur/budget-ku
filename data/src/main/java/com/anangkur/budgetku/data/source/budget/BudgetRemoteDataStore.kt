@@ -3,14 +3,17 @@ package com.anangkur.budgetku.data.source.budget
 import com.anangkur.budgetku.data.mapper.budget.CategoryMapper
 import com.anangkur.budgetku.data.mapper.budget.CategoryProjectMapper
 import com.anangkur.budgetku.data.mapper.budget.ProjectMapper
+import com.anangkur.budgetku.data.mapper.budget.SpendMapper
 import com.anangkur.budgetku.data.model.budget.CategoryEntity
 import com.anangkur.budgetku.data.model.budget.ProjectEntity
+import com.anangkur.budgetku.data.model.budget.SpendEntity
 import com.anangkur.budgetku.data.repository.budget.BudgetDataStore
 import com.anangkur.budgetku.data.repository.budget.BudgetRemote
 import com.anangkur.budgetku.domain.BaseFirebaseListener
 import com.anangkur.budgetku.domain.model.budget.Category
 import com.anangkur.budgetku.domain.model.budget.CategoryProject
 import com.anangkur.budgetku.domain.model.budget.Project
+import com.anangkur.budgetku.domain.model.budget.Spend
 
 class BudgetRemoteDataStore(
     private val budgetRemote: BudgetRemote
@@ -19,6 +22,7 @@ class BudgetRemoteDataStore(
     private val categoryProjectMapper = CategoryProjectMapper.getInstance()
     private val categoryMapper = CategoryMapper.getInstance()
     private val projectMapper = ProjectMapper.getInstance()
+    private val spendMapper = SpendMapper.getInstance()
 
     companion object{
         private var INSTANCE: BudgetRemoteDataStore? = null
@@ -29,27 +33,25 @@ class BudgetRemoteDataStore(
     }
 
     override fun createProject(
+        idProject: String?,
         title: String,
         startDate: String,
         endDate: String,
         category: List<CategoryProject>,
         listener: BaseFirebaseListener<Boolean>
     ) {
-        budgetRemote.createProject(title, startDate, endDate, category.map {
+        budgetRemote.createProject(idProject, title, startDate, endDate, category.map {
             categoryProjectMapper.mapToEntity(it)
         }, object: com.anangkur.budgetku.data.BaseFirebaseListener<Boolean>{
             override fun onLoading(isLoading: Boolean) {
                 listener.onLoading(isLoading)
             }
-
             override fun onSuccess(data: Boolean) {
                 listener.onSuccess(data)
             }
-
             override fun onFailed(errorMessage: String) {
                 listener.onFailed(errorMessage)
             }
-
         })
     }
 
@@ -78,6 +80,67 @@ class BudgetRemoteDataStore(
             override fun onFailed(errorMessage: String) {
                 listener.onFailed(errorMessage)
             }
+        })
+    }
+
+    override fun createSpend(spend: Spend, listener: BaseFirebaseListener<Boolean>) {
+        budgetRemote.createSpend(spendMapper.mapToEntity(spend), object : com.anangkur.budgetku.data.BaseFirebaseListener<Boolean>{
+            override fun onLoading(isLoading: Boolean) {
+                listener.onLoading(isLoading)
+            }
+            override fun onSuccess(data: Boolean) {
+                listener.onSuccess(data)
+            }
+            override fun onFailed(errorMessage: String) {
+                listener.onFailed(errorMessage)
+            }
+        })
+    }
+
+    override fun getListSpend(
+        idProject: String,
+        idCategory: String?,
+        listener: BaseFirebaseListener<List<Spend>>
+    ) {
+        budgetRemote.getListSpend(idProject, idCategory, object : com.anangkur.budgetku.data.BaseFirebaseListener<List<SpendEntity>>{
+            override fun onLoading(isLoading: Boolean) {
+                listener.onLoading(isLoading)
+            }
+            override fun onSuccess(data: List<SpendEntity>) {
+                listener.onSuccess(data.map { spendMapper.mapFromEntity(it) })
+            }
+            override fun onFailed(errorMessage: String) {
+                listener.onFailed(errorMessage)
+            }
+        })
+    }
+
+    override fun getProjectDetail(idProject: String, listener: BaseFirebaseListener<Project>) {
+        budgetRemote.getProjectDetail(idProject, object : com.anangkur.budgetku.data.BaseFirebaseListener<ProjectEntity> {
+            override fun onLoading(isLoading: Boolean) {
+                listener.onLoading(isLoading)
+            }
+            override fun onSuccess(data: ProjectEntity) {
+                listener.onSuccess(projectMapper.mapFromEntity(data))
+            }
+            override fun onFailed(errorMessage: String) {
+                listener.onFailed(errorMessage)
+            }
+        })
+    }
+
+    override fun deleteProject(idProject: String, listener: BaseFirebaseListener<Boolean>) {
+        budgetRemote.deleteProject(idProject, object: com.anangkur.budgetku.data.BaseFirebaseListener<Boolean>{
+            override fun onLoading(isLoading: Boolean) {
+                listener.onLoading(isLoading)
+            }
+            override fun onSuccess(data: Boolean) {
+                listener.onSuccess(data)
+            }
+            override fun onFailed(errorMessage: String) {
+                listener.onFailed(errorMessage)
+            }
+
         })
     }
 }

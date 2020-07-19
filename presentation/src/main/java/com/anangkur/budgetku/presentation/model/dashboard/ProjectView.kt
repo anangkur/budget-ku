@@ -7,5 +7,5 @@ data class ProjectView(
     val title: String,
     val startDate: String,
     val endDate: String,
-    val listCategory: List<CategoryProjectView>
+    var listCategory: List<CategoryProjectView>
 )

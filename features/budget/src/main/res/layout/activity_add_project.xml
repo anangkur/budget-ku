@@ -15,6 +15,7 @@
         android:elevation="4dp"/>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/layout_content"
         style="@style/NestedScrollDefault"
         android:layout_below="@id/toolbar"
         android:layout_above="@id/btn_save">
@@ -100,6 +101,13 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.anangkur.budgetku.base.BaseErrorView
+        android:id="@+id/ev_add_project"
+        style="@style/RelativeDefault"
+        android:visibility="gone"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/btn_save"/>
 
     <com.anangkur.materialloadingbutton.MaterialLoadingButton
         android:id="@+id/btn_save"
