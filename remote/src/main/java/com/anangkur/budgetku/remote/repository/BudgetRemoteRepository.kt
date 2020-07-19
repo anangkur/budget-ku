@@ -9,6 +9,7 @@ import com.anangkur.budgetku.data.repository.budget.BudgetRemote
 import com.anangkur.budgetku.remote.mapper.budget.CategoryMapper
 import com.anangkur.budgetku.remote.mapper.budget.CategoryProjectMapper
 import com.anangkur.budgetku.remote.mapper.budget.ProjectMapper
+import com.anangkur.budgetku.remote.mapper.budget.SpendMapper
 import com.anangkur.budgetku.remote.model.budget.CategoryRemote
 import com.anangkur.budgetku.remote.model.budget.ProjectRemote
 import com.google.firebase.auth.FirebaseAuth
@@ -27,11 +28,13 @@ class BudgetRemoteRepository(
     private val categoryProjectMapper = CategoryProjectMapper.getInstance()
     private val categoryMapper = CategoryMapper.getInstance()
     private val projectMapper = ProjectMapper.getInstance()
+    private val spendMapper = SpendMapper.getInstance()
 
     companion object{
 
         const val COLLECTION_PROJECT = "project"
         const val COLLECTION_CATEGORY = "categories"
+        const val COLLECTION_SPEND = "spend"
         const val DOCUMENT_GENERAL_CATEGORIES = "general_categories"
         const val DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
 
@@ -62,13 +65,13 @@ class BudgetRemoteRepository(
     ) {
         try {
             listener.onLoading(true)
-
+            val createdAt = getCreatedAt()
             firebaseFirestore.collection(COLLECTION_PROJECT)
                 .document(getUid())
                 .collection(COLLECTION_PROJECT)
-                .document(getCreatedAt())
+                .document(createdAt)
                 .set(ProjectRemote(
-                    id = getCreatedAt(),
+                    id = createdAt,
                     title = title,
                     endDate = endDate,
                     listCategory = category.map {
@@ -162,7 +165,29 @@ class BudgetRemoteRepository(
     }
 
     override fun createSpend(spendEntity: SpendEntity, listener: BaseFirebaseListener<Boolean>) {
-        
+        try {
+            val createdAt = getCreatedAt()
+            listener.onLoading(true)
+            firebaseFirestore.collection(COLLECTION_SPEND)
+                .document(getUid())
+                .collection(COLLECTION_SPEND)
+                .document(createdAt)
+                .set(spendMapper.mapToRemote(spendEntity.apply {
+                    date = createdAt
+                }))
+                .addOnSuccessListener {
+                    listener.onLoading(false)
+                    listener.onSuccess(true)
+                }
+                .addOnFailureListener {
+                    listener.onLoading(false)
+                    listener.onFailed(it.message ?: "")
+                }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            listener.onLoading(false)
+            listener.onFailed(e.message ?: "")
+        }
     }
 
 }
