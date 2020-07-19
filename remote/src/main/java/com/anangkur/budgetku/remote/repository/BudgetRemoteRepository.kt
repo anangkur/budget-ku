@@ -37,6 +37,8 @@ class BudgetRemoteRepository(
         const val DOCUMENT_GENERAL_CATEGORIES = "general_categories"
         const val DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
 
+        const val ERROR_NOT_FOUND = "data not found"
+
         private var INSTANCE: BudgetRemoteRepository? = null
         fun getInstance() = INSTANCE
             ?: BudgetRemoteRepository(
@@ -216,6 +218,39 @@ class BudgetRemoteRepository(
                     listener.onSuccess(listSpendEntity)
                 }
                 .addOnFailureListener {
+                    listener.onLoading(false)
+                    listener.onFailed(it.message ?: "")
+                }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            listener.onLoading(false)
+            listener.onFailed(e.message ?: "")
+        }
+    }
+
+    override fun getProjectDetail(
+        idProject: String,
+        listener: BaseFirebaseListener<ProjectEntity>
+    ) {
+        try {
+            listener.onLoading(true)
+            firebaseFirestore.collection(COLLECTION_PROJECT)
+                .document(getUid())
+                .collection(COLLECTION_PROJECT)
+                .document(idProject)
+                .get()
+                .addOnSuccessListener {
+                    val project = it.toObject(ProjectRemote::class.java)
+                    if (project != null) {
+                        listener.onLoading(false)
+                        listener.onSuccess(projectMapper.mapFromRemote(project))
+                    } else {
+                        listener.onLoading(false)
+                        listener.onFailed(ERROR_NOT_FOUND)
+                    }
+                }
+                .addOnFailureListener {
+                    it.printStackTrace()
                     listener.onLoading(false)
                     listener.onFailed(it.message ?: "")
                 }

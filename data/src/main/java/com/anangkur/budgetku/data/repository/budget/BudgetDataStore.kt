@@ -30,4 +30,8 @@ interface BudgetDataStore {
         idCategory: String?,
         listener: BaseFirebaseListener<List<Spend>>
     )
+    fun getProjectDetail(
+        idProject: String,
+        listener: BaseFirebaseListener<Project>
+    )
 }

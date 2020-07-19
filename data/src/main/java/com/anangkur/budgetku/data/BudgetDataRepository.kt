@@ -54,4 +54,8 @@ class BudgetDataRepository(
     ) {
         factory.retrieveRemoteDataStore().getListSpend(idProject, idCategory, listener)
     }
+
+    override fun getProjectDetail(projectId: String, listener: BaseFirebaseListener<Project>) {
+        factory.retrieveRemoteDataStore().getProjectDetail(projectId, listener)
+    }
 }

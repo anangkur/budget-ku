@@ -10,6 +10,7 @@ import com.anangkur.budgetku.budget.R
 import com.anangkur.budgetku.budget.databinding.ActivityDetailProjectBinding
 import com.anangkur.budgetku.budget.mapper.SpendMapper
 import com.anangkur.budgetku.budget.model.SpendUiModel
+import com.anangkur.budgetku.budget.view.addProject.AddProjectActivity
 import com.anangkur.budgetku.budget.view.dialog.addSpend.AddSpendDialogActionListener
 import com.anangkur.budgetku.budget.view.dialog.addSpend.AddSpendDialog
 import com.anangkur.budgetku.budget.view.detailSpend.DetailSpendActivity
@@ -62,6 +63,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
         getDetailProject()
         mLayout.btnAddSpend.setOnClickListener { this.onClickAddSpend() }
         mLayout.cardSpend.setOnClickListener { this.onClickCardSpend() }
+        mLayout.btnAddCategory.setOnClickListener { this.onClickEditProject(mViewModel.projectPublicObserver.value?.id ?: "") }
     }
 
     private fun observeViewModel() {
@@ -142,6 +144,10 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
             idProject = mViewModel.projectPublicObserver.value?.id ?: "",
             idCategory = null
         )
+    }
+
+    override fun onClickEditProject(idProject: String) {
+        AddProjectActivity.startActivity(this, idProject)
     }
 
     override fun onClickSpend(dialog: AddSpendDialog, value: Double) {

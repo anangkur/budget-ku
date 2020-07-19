@@ -34,4 +34,9 @@ interface BudgetRepository {
         idCategory: String?,
         listener: BaseFirebaseListener<List<Spend>>
     )
+
+    fun getProjectDetail(
+        projectId: String,
+        listener: BaseFirebaseListener<Project>
+    )
 }

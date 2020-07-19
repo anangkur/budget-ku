@@ -114,4 +114,18 @@ class BudgetRemoteDataStore(
             }
         })
     }
+
+    override fun getProjectDetail(idProject: String, listener: BaseFirebaseListener<Project>) {
+        budgetRemote.getProjectDetail(idProject, object : com.anangkur.budgetku.data.BaseFirebaseListener<ProjectEntity> {
+            override fun onLoading(isLoading: Boolean) {
+                listener.onLoading(isLoading)
+            }
+            override fun onSuccess(data: ProjectEntity) {
+                listener.onSuccess(projectMapper.mapFromEntity(data))
+            }
+            override fun onFailed(errorMessage: String) {
+                listener.onFailed(errorMessage)
+            }
+        })
+    }
 }

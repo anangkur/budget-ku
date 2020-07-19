@@ -4,10 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anangkur.budgetku.domain.BaseFirebaseListener
+import com.anangkur.budgetku.domain.model.budget.Project
 import com.anangkur.budgetku.domain.repository.BudgetRepository
 import com.anangkur.budgetku.presentation.mapper.budget.CategoryProjectMapper
+import com.anangkur.budgetku.presentation.mapper.budget.ProjectMapper
 import com.anangkur.budgetku.presentation.model.budget.CategoryProjectView
 import com.anangkur.budgetku.presentation.model.budget.CategoryView
+import com.anangkur.budgetku.presentation.model.dashboard.ProjectView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,6 +20,7 @@ import kotlin.collections.ArrayList
 class AddProjectViewModel(private val budgetRepository: BudgetRepository) : ViewModel() {
 
     private val categoryProjectMapper = CategoryProjectMapper.getInstance()
+    private val projectMapper = ProjectMapper.getInstance()
 
     var budgetValue = 0.0
     var startDate: Calendar? = null
@@ -69,6 +73,25 @@ class AddProjectViewModel(private val budgetRepository: BudgetRepository) : View
                     }
                 }
             )
+        }
+    }
+
+    val loadingGetProject = MutableLiveData<Boolean>()
+    val successGetProject = MutableLiveData<ProjectView>()
+    val errorGetProject = MutableLiveData<String>()
+    fun getProject(projectId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            budgetRepository.getProjectDetail(projectId, object : BaseFirebaseListener<Project>{
+                override fun onLoading(isLoading: Boolean) {
+                    loadingGetProject.postValue(isLoading)
+                }
+                override fun onSuccess(data: Project) {
+                    successGetProject.postValue(projectMapper.mapToView(data))
+                }
+                override fun onFailed(errorMessage: String) {
+                    errorGetProject.postValue(errorMessage)
+                }
+            })
         }
     }
 }
