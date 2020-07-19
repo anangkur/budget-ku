@@ -74,17 +74,25 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_date"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_project"
-                style="@style/RecyclerDefault"
-                tools:listitem="@layout/item_project"
-                tools:itemCount="20"
-                android:paddingBottom="48dp"
-                android:clipToPadding="false"
+            <RelativeLayout
+                style="@style/RelativeDefault"
                 app:layout_constraintTop_toBottomOf="@id/tv_label_on_going_project"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent">
+                <com.anangkur.budgetku.base.BaseErrorView
+                    android:id="@+id/ev_project"
+                    style="@style/RelativeDefault"
+                    android:layout_marginTop="40dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_project"
+                    style="@style/RecyclerDefault"
+                    tools:listitem="@layout/item_project"
+                    tools:itemCount="20"
+                    android:paddingBottom="48dp"
+                    android:clipToPadding="false"
+                    android:visibility="visible"/>
+            </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
