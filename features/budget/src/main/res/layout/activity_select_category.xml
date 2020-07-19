@@ -16,7 +16,8 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_category"
-        style="@style/SwipeRefreshDefault">
+        style="@style/SwipeRefreshDefault"
+        android:layout_below="@id/toolbar">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_category"
             style="@style/RecyclerDefault"

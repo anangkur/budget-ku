@@ -60,6 +60,7 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
         observeViewModel()
         getDetailProject()
         mLayout.btnAddSpend.setOnClickListener { this.onClickAddSpend() }
+        mLayout.cardSpend.setOnClickListener { this.onClickCardSpend() }
     }
 
     private fun observeViewModel() {
@@ -73,17 +74,15 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
                 setupAddSpendDialog(list.map { item -> item.title })
             })
             loadingCreateSpend.observe(this@DetailProjectActivity, Observer {
-                if (it){
-                    mLayout.btnAddSpend.showProgress()
-                } else {
-                    mLayout.btnAddSpend.hideProgress()
-                }
+                addSpendDialog?.setupButtonSaveLoading(it)
             })
             successCreateSpend.observe(this@DetailProjectActivity, Observer {
                 categorySelectedPosition = 0
                 categorySelectedValue = null
                 spendValue = 0.0
                 showSnackbarShort(getString(R.string.message_success_create_spend))
+                addSpendDialog?.dismiss()
+                addSpendDialog?.hide()
             })
             errorCreateSpend.observe(this@DetailProjectActivity, Observer {
                 showSnackbarShort(it)
@@ -127,7 +126,19 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
     }
 
     override fun onClickSpendCategory(data: CategoryProjectIntent) {
-        DetailSpendActivity.startActivity(this)
+        DetailSpendActivity.startActivity(
+            context = this,
+            idProject = mViewModel.projectPublicObserver.value?.id ?: "",
+            idCategory = data.id
+        )
+    }
+
+    override fun onClickCardSpend() {
+        DetailSpendActivity.startActivity(
+            context = this,
+            idProject = mViewModel.projectPublicObserver.value?.id ?: "",
+            idCategory = null
+        )
     }
 
     override fun onClickSpend(dialog: AddSpendDialog, value: Double) {
@@ -175,6 +186,10 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
             if (position >= 0) {
                 categorySelectedValue = listCategory[categorySelectedPosition]
                 dialog.setCategory(categoryProjectMapper.mapToIntent(categorySelectedValue!!))
+                dialog.setupButtonSaveEnable(
+                    isValueNullOrEmpty = spendValue <= 0.0,
+                    isCategoryNullOrEmpty = categorySelectedValue == null
+                )
             } else {
                 categorySelectedValue = null
                 dialog.setCategoryNull()
@@ -183,6 +198,13 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
     }
 
     private fun setupAddSpendDialog(data: List<String>) {
-        addSpendDialog = AddSpendDialog(this, getString(R.string.label_select_category), data,this)
+        if (addSpendDialog == null) {
+            addSpendDialog = AddSpendDialog(
+                context = this,
+                itemAtZero = getString(R.string.label_select_category),
+                data = data,
+                listener = this
+            )
+        }
     }
 }

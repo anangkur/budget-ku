@@ -91,49 +91,52 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
     }
 
     private fun setupAddCategoryDialog() {
-        addCategoryDialog =
-            AddCategoryDialog(
-                context = this,
-                listener = object :
-                    AddCategoryDialogListener {
-                    override fun onClickCancel(dialog: AddCategoryDialog) {
-                        dialog.dismiss()
-                    }
+        if (addCategoryDialog == null) {
+            addCategoryDialog =
+                AddCategoryDialog(
+                    context = this,
+                    listener = object :
+                        AddCategoryDialogListener {
+                        override fun onClickCancel(dialog: AddCategoryDialog) {
+                            dialog.dismiss()
+                        }
 
-                    override fun onClickSave(dialog: AddCategoryDialog) {
-                        if (dialog.setupButtonSaveEnable(
-                                mViewModel.categorySelectedValue == null,
-                                mViewModel.budgetValue <= 0
-                            )
-                        ) {
-                            mViewModel.addCategoryProject(
-                                categoryProjectMapper.mapFromIntent(
-                                    CategoryProjectIntent(
-                                        id = DateUtils.getCreatedAt(),
-                                        title = mViewModel.categorySelectedValue?.title ?: "",
-                                        value = mViewModel.budgetValue,
-                                        image = mViewModel.categorySelectedValue?.image ?: "",
-                                        spend = 0.0,
-                                        remaining = 0.0
+                        override fun onClickSave(dialog: AddCategoryDialog) {
+                            if (dialog.setupButtonSaveEnable(
+                                    mViewModel.categorySelectedValue == null,
+                                    mViewModel.budgetValue <= 0
+                                )
+                            ) {
+                                mViewModel.addCategoryProject(
+                                    categoryProjectMapper.mapFromIntent(
+                                        CategoryProjectIntent(
+                                            id = DateUtils.getCreatedAt(),
+                                            title = mViewModel.categorySelectedValue?.title ?: "",
+                                            value = mViewModel.budgetValue,
+                                            image = mViewModel.categorySelectedValue?.image ?: "",
+                                            spend = 0.0,
+                                            remaining = 0.0
+                                        )
                                     )
                                 )
-                            )
-                            mViewModel.categorySelectedValue = null
-                            mViewModel.budgetValue = 0.0
-                            dialog.clearInputtedValue()
-                            dialog.dismiss()
-                            mLayout.tvErrorCategory.gone()
+                                mViewModel.categorySelectedValue = null
+                                mViewModel.budgetValue = 0.0
+                                dialog.clearInputtedValue()
+                                dialog.dismiss()
+                                mLayout.tvErrorCategory.gone()
+                            }
+                        }
+
+                        override fun onClickCategory() {
+                            SelectCategoryActivity.startActivity(this@AddProjectActivity)
+                        }
+
+                        override fun onValueInputted(value: Double) {
+                            mViewModel.budgetValue = value
                         }
                     }
-
-                    override fun onClickCategory() {
-                        SelectCategoryActivity.startActivity(this@AddProjectActivity)
-                    }
-
-                    override fun onValueInputted(value: Double) {
-                        mViewModel.budgetValue = value
-                    }
-                })
+                )
+        }
     }
 
     override fun onClickAddCategory() {

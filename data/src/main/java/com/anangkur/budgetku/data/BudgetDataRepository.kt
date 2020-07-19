@@ -52,6 +52,6 @@ class BudgetDataRepository(
         idCategory: String?,
         listener: BaseFirebaseListener<List<Spend>>
     ) {
-
+        factory.retrieveRemoteDataStore().getListSpend(idProject, idCategory, listener)
     }
 }

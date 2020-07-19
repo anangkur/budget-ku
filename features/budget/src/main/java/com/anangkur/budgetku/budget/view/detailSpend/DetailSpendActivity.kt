@@ -13,12 +13,18 @@ import com.anangkur.budgetku.budget.mapper.SpendMapper
 import com.anangkur.budgetku.presentation.features.budget.DetailSpendViewModel
 import com.anangkur.budgetku.utils.obtainViewModel
 import com.anangkur.budgetku.utils.setupRecyclerViewLinear
+import com.anangkur.budgetku.utils.showSnackbarShort
 
 class DetailSpendActivity : BaseActivity<ActivityDetailSpendBinding, DetailSpendViewModel>() {
 
     companion object{
-        fun startActivity(context: Context){
-            context.startActivity(Intent(context, DetailSpendActivity::class.java))
+        private const val EXTRA_ID_PROJECT = "extra-id-project"
+        private const val EXTRA_ID_CATEGORY = "extra-id-category"
+        fun startActivity(context: Context, idProject: String, idCategory: String?){
+            context.startActivity(Intent(context, DetailSpendActivity::class.java).apply {
+                putExtra(EXTRA_ID_PROJECT, idProject)
+                putExtra(EXTRA_ID_CATEGORY, idCategory)
+            })
         }
     }
 
@@ -42,13 +48,28 @@ class DetailSpendActivity : BaseActivity<ActivityDetailSpendBinding, DetailSpend
 
         setupAdapter()
         observeViewModel()
-        mViewModel.createDummyListSpend()
+        getIntentData()
+        mViewModel.getListSpend(mViewModel.idProject, mViewModel.idCategory)
+        mLayout.swipeSpend.setOnRefreshListener {
+            mViewModel.getListSpend(mViewModel.idProject, mViewModel.idCategory)
+        }
+    }
+
+    private fun getIntentData() {
+        mViewModel.idProject = intent.getStringExtra(EXTRA_ID_PROJECT) ?: ""
+        mViewModel.idCategory = intent.getStringExtra(EXTRA_ID_CATEGORY)
     }
 
     private fun observeViewModel() {
         mViewModel.apply {
-            listSpendPublicObserver.observe(this@DetailSpendActivity, Observer {
+            loadingGetListSpend.observe(this@DetailSpendActivity, Observer {
+                mLayout.swipeSpend.isRefreshing = it
+            })
+            successGetListSpend.observe(this@DetailSpendActivity, Observer {
                 spendAdapter.setRecyclerData(it.map { item -> spendMapper.mapToIntent(item) })
+            })
+            errorGetListSpend.observe(this@DetailSpendActivity, Observer {
+                showSnackbarShort(it)
             })
         }
     }

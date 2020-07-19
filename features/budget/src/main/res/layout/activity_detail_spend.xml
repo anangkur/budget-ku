@@ -14,10 +14,15 @@
         android:elevation="4dp"
         android:background="@color/white"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_spend"
-        style="@style/RecyclerDefault"
-        android:layout_below="@id/toolbar"
-        tools:listitem="@layout/item_spend"/>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_spend"
+        style="@style/SwipeRefreshDefault"
+        android:layout_below="@id/toolbar">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_spend"
+            style="@style/RecyclerDefault"
+            android:layout_below="@id/toolbar"
+            tools:listitem="@layout/item_spend"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
