@@ -3,6 +3,7 @@ package com.anangkur.budgetku.data.source.budget
 import com.anangkur.budgetku.data.mapper.budget.CategoryMapper
 import com.anangkur.budgetku.data.mapper.budget.CategoryProjectMapper
 import com.anangkur.budgetku.data.mapper.budget.ProjectMapper
+import com.anangkur.budgetku.data.mapper.budget.SpendMapper
 import com.anangkur.budgetku.data.model.budget.CategoryEntity
 import com.anangkur.budgetku.data.model.budget.ProjectEntity
 import com.anangkur.budgetku.data.repository.budget.BudgetDataStore
@@ -11,6 +12,7 @@ import com.anangkur.budgetku.domain.BaseFirebaseListener
 import com.anangkur.budgetku.domain.model.budget.Category
 import com.anangkur.budgetku.domain.model.budget.CategoryProject
 import com.anangkur.budgetku.domain.model.budget.Project
+import com.anangkur.budgetku.domain.model.budget.Spend
 
 class BudgetRemoteDataStore(
     private val budgetRemote: BudgetRemote
@@ -19,6 +21,7 @@ class BudgetRemoteDataStore(
     private val categoryProjectMapper = CategoryProjectMapper.getInstance()
     private val categoryMapper = CategoryMapper.getInstance()
     private val projectMapper = ProjectMapper.getInstance()
+    private val spendMapper = SpendMapper.getInstance()
 
     companion object{
         private var INSTANCE: BudgetRemoteDataStore? = null
@@ -41,15 +44,12 @@ class BudgetRemoteDataStore(
             override fun onLoading(isLoading: Boolean) {
                 listener.onLoading(isLoading)
             }
-
             override fun onSuccess(data: Boolean) {
                 listener.onSuccess(data)
             }
-
             override fun onFailed(errorMessage: String) {
                 listener.onFailed(errorMessage)
             }
-
         })
     }
 
@@ -74,6 +74,20 @@ class BudgetRemoteDataStore(
             }
             override fun onSuccess(data: List<ProjectEntity>) {
                 listener.onSuccess(data.map { projectMapper.mapFromEntity(it) })
+            }
+            override fun onFailed(errorMessage: String) {
+                listener.onFailed(errorMessage)
+            }
+        })
+    }
+
+    override fun createSpend(spend: Spend, listener: BaseFirebaseListener<Boolean>) {
+        budgetRemote.createSpend(spendMapper.mapToEntity(spend), object : com.anangkur.budgetku.data.BaseFirebaseListener<Boolean>{
+            override fun onLoading(isLoading: Boolean) {
+                listener.onLoading(isLoading)
+            }
+            override fun onSuccess(data: Boolean) {
+                listener.onSuccess(data)
             }
             override fun onFailed(errorMessage: String) {
                 listener.onFailed(errorMessage)

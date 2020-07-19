@@ -4,6 +4,7 @@ import com.anangkur.budgetku.data.BaseFirebaseListener
 import com.anangkur.budgetku.data.model.budget.CategoryEntity
 import com.anangkur.budgetku.data.model.budget.CategoryProjectEntity
 import com.anangkur.budgetku.data.model.budget.ProjectEntity
+import com.anangkur.budgetku.data.model.budget.SpendEntity
 
 interface BudgetRemote {
     fun createProject(
@@ -20,5 +21,9 @@ interface BudgetRemote {
 
     fun getProject(
         listener: BaseFirebaseListener<List<ProjectEntity>>
+    )
+    fun createSpend(
+        spendEntity: SpendEntity,
+        listener: BaseFirebaseListener<Boolean>
     )
 }

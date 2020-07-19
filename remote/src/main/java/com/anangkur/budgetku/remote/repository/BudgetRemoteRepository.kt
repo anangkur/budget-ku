@@ -4,6 +4,7 @@ import com.anangkur.budgetku.data.BaseFirebaseListener
 import com.anangkur.budgetku.data.model.budget.CategoryEntity
 import com.anangkur.budgetku.data.model.budget.CategoryProjectEntity
 import com.anangkur.budgetku.data.model.budget.ProjectEntity
+import com.anangkur.budgetku.data.model.budget.SpendEntity
 import com.anangkur.budgetku.data.repository.budget.BudgetRemote
 import com.anangkur.budgetku.remote.mapper.budget.CategoryMapper
 import com.anangkur.budgetku.remote.mapper.budget.CategoryProjectMapper
@@ -158,6 +159,10 @@ class BudgetRemoteRepository(
             listener.onLoading(false)
             listener.onFailed(e.message ?: "")
         }
+    }
+
+    override fun createSpend(spendEntity: SpendEntity, listener: BaseFirebaseListener<Boolean>) {
+        
     }
 
 }

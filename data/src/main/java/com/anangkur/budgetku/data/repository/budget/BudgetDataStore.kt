@@ -4,6 +4,7 @@ import com.anangkur.budgetku.domain.BaseFirebaseListener
 import com.anangkur.budgetku.domain.model.budget.Category
 import com.anangkur.budgetku.domain.model.budget.CategoryProject
 import com.anangkur.budgetku.domain.model.budget.Project
+import com.anangkur.budgetku.domain.model.budget.Spend
 
 interface BudgetDataStore {
     fun createProject(
@@ -18,5 +19,9 @@ interface BudgetDataStore {
     )
     fun getProject(
         listener: BaseFirebaseListener<List<Project>>
+    )
+    fun createSpend(
+        spend: Spend,
+        listener: BaseFirebaseListener<Boolean>
     )
 }
