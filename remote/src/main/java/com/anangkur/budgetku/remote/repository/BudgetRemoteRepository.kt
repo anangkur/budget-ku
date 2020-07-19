@@ -75,10 +75,7 @@ class BudgetRemoteRepository(
                     title = title,
                     endDate = endDate,
                     listCategory = category.map {
-                        val categoryProject = it.apply {
-                            id = getCreatedAt()
-                        }
-                        categoryProjectMapper.mapToRemote(categoryProject)
+                        categoryProjectMapper.mapToRemote(it)
                     },
                     startDate = startDate
                 ))
@@ -170,6 +167,8 @@ class BudgetRemoteRepository(
             listener.onLoading(true)
             firebaseFirestore.collection(COLLECTION_SPEND)
                 .document(getUid())
+                .collection(COLLECTION_SPEND)
+                .document(spendEntity.idProject)
                 .collection(COLLECTION_SPEND)
                 .document(createdAt)
                 .set(spendMapper.mapToRemote(spendEntity.apply {

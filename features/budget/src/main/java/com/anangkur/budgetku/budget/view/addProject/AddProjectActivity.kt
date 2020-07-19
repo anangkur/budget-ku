@@ -109,7 +109,7 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding, AddProjectVie
                             mViewModel.addCategoryProject(
                                 categoryProjectMapper.mapFromIntent(
                                     CategoryProjectIntent(
-                                        id = "",
+                                        id = DateUtils.getCreatedAt(),
                                         title = mViewModel.categorySelectedValue?.title ?: "",
                                         value = mViewModel.budgetValue,
                                         image = mViewModel.categorySelectedValue?.image ?: "",

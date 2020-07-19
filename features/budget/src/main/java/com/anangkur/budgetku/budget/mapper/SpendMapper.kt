@@ -17,7 +17,8 @@ class SpendMapper : Mapper<SpendUiModel, SpendView> {
             title = type.title,
             date = type.date,
             spend = type.spend,
-            idProject = type.idProject
+            idProject = type.idProject,
+            idCategory = type.idCategory
         )
     }
 
@@ -27,7 +28,8 @@ class SpendMapper : Mapper<SpendUiModel, SpendView> {
             title = type.title,
             date = type.date,
             spend = type.spend,
-            idProject = type.idProject
+            idProject = type.idProject,
+            idCategory = type.idCategory
         )
     }
 }

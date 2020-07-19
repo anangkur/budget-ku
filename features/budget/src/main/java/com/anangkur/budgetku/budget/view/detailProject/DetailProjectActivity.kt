@@ -157,7 +157,8 @@ class DetailProjectActivity : BaseActivity<ActivityDetailProjectBinding, DetailP
                     date = "",
                     title = mViewModel.categorySelectedValue?.title ?: "",
                     spend = mViewModel.spendValue.toInt(),
-                    idProject = mViewModel.budgetPublicObserver.value?.id ?: ""
+                    idProject = mViewModel.budgetPublicObserver.value?.id ?: "",
+                    idCategory = mViewModel.categorySelectedValue?.id ?: ""
                 )
             ))
         }

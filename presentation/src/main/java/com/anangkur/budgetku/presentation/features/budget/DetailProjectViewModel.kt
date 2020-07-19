@@ -41,7 +41,7 @@ class DetailProjectViewModel(private val budgetRepository: BudgetRepository) : V
     val errorCreateSpend = MutableLiveData<String>()
     fun createSpend(spendView: SpendView) {
         CoroutineScope(Dispatchers.IO).launch {
-            budgetRepository.addSpend(spendMapper.mapFromView(spendView), object : BaseFirebaseListener<Boolean>{
+            budgetRepository.createSpend(spendMapper.mapFromView(spendView), object : BaseFirebaseListener<Boolean>{
                 override fun onLoading(isLoading: Boolean) {
                     loadingCreateSpend.postValue(isLoading)
                 }

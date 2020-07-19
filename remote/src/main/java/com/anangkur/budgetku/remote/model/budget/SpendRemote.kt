@@ -5,5 +5,6 @@ data class SpendRemote(
     val title: String,
     val date: String,
     val spend: Int,
-    val idProject: String
+    val idProject: String,
+    val idCategory: String
 )

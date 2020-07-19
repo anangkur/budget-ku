@@ -17,7 +17,8 @@ class SpendMapper : Mapper<SpendRemote, SpendEntity> {
             spend = type.spend,
             title = type.title,
             date = type.date,
-            idProject = type.idProject
+            idProject = type.idProject,
+            idCategory = type.idCategory
         )
     }
 
@@ -27,7 +28,8 @@ class SpendMapper : Mapper<SpendRemote, SpendEntity> {
             spend = type.spend,
             title = type.title,
             date = type.date,
-            idProject = type.idProject
+            idProject = type.idProject,
+            idCategory = type.idCategory
         )
     }
 }

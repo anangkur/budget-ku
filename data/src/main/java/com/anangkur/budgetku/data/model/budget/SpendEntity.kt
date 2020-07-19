@@ -5,5 +5,6 @@ data class SpendEntity(
     val title: String,
     var date: String,
     val spend: Int,
-    val idProject: String
+    val idProject: String,
+    val idCategory: String
 )
