@@ -11,10 +11,7 @@ dependencies {
     implementation Deps.okhttp
     implementation Deps.okhttpLoggingInterceptor
 
-    implementation Deps.firebaseAnalytics
     implementation Deps.firebaseAuth
-    implementation Deps.firebaseConfig
     implementation Deps.firebaseFirestore
-    implementation Deps.firebaseMessaging
     implementation Deps.firebaseStorage
 }

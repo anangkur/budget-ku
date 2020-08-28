@@ -61,6 +61,7 @@ object Versions {
     const val firebaseStorageVersion = "19.1.1"
     const val firebaseInAppMessagingVersion = "19.0.4"
     const val firebaseRemoteConfigVersion = "19.1.3"
+    const val firebaseCrashlyticsVersion = "17.2.1"
 }
 
 object Deps {
@@ -143,4 +144,5 @@ object Deps {
     const val firebaseStorage = "com.google.firebase:firebase-storage:${Versions.firebaseStorageVersion}"
     const val firebaseInAppMessaging = "com.google.firebase:firebase-inappmessaging-display:${Versions.firebaseInAppMessagingVersion}"
     const val firebaseConfig = "com.google.firebase:firebase-config:${Versions.firebaseRemoteConfigVersion}"
+    const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics:${Versions.firebaseCrashlyticsVersion}"
 }
