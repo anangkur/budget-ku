@@ -11,10 +11,8 @@ dependencies {
     implementation Deps.coroutineCore
     implementation Deps.coroutineAndroid
 
-    implementation Deps.firebaseAnalytics
     implementation Deps.firebaseAuth
-    implementation Deps.firebaseConfig
     implementation Deps.firebaseFirestore
-    implementation Deps.firebaseMessaging
     implementation Deps.firebaseStorage
+    implementation Deps.firebaseConfig
 }

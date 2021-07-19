@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: 'https://raw.githubusercontent.com/JakeWharton/SdkSearch/master/gradle/projectDependencyGraph.gradle'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     defaultConfig {
@@ -47,4 +48,8 @@ dependencies {
 
     implementation Deps.androidxLifeCycleExtension
     implementation Deps.androidxSwipeRefresh
+
+    implementation Deps.firebaseAnalytics
+    implementation Deps.firebaseMessaging
+    implementation Deps.firebaseConfig
 }

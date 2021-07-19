@@ -11,10 +11,7 @@ android{
 dependencies {
     implementation(project(':domain'))
 
-    implementation Deps.firebaseAnalytics
     implementation Deps.firebaseAuth
-    implementation Deps.firebaseConfig
     implementation Deps.firebaseFirestore
-    implementation Deps.firebaseMessaging
     implementation Deps.firebaseStorage
 }
